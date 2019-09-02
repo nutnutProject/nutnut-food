@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Cocur\Slugify\Slugify;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\RecetteRepository")
@@ -64,6 +65,9 @@ class Recette
     public function setTitle(string $title): self
     {
         $this->title = $title;
+        $slugify = new Slugify();
+        $slug = $slugify->slugify($this->title);
+        $this->setSlug($slug);      
 
         return $this;
     }

@@ -27,7 +27,7 @@ class User
     private $lastname;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date")
      */
     private $birthdate;
 
