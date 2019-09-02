@@ -56,6 +56,15 @@ class AppFixtures extends Fixture
             $manager->persist($category);
         }
 
+        $diet = [];
+        for($i = 0 ; $i < 4 ; $i++)
+        {
+            $diet = new Diet();
+            $diet->setName('Régime '. $i);
+            $manager->persist($diet);
+        }
+
+
 
 
         $manager->flush();
