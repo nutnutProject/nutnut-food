@@ -15,9 +15,10 @@ class AppFixtures extends Fixture
         // $product = new Product();
         // $manager->persist($product);
 
+        $date = new DateTime('now');
+
         for($i=0; $i<10;$i++)
-        {
-            $date = new DateTime('now');
+        {           
             $user = new User();
             $user->setFirstname('Firstname '.$i);
             $user->setLastname('Lastname '.$i);
