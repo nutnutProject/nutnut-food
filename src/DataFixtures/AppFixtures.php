@@ -4,6 +4,11 @@ namespace App\DataFixtures;
 
 use App\Entity\Recette;
 use App\Entity\User;
+use App\Entity\Category;
+use App\Entity\Diet;
+use App\Entity\Note;
+
+
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -63,6 +68,17 @@ class AppFixtures extends Fixture
             $diet->setName('Régime '. $i);
             $manager->persist($diet);
         }
+
+
+        for($i = 0 ; $i < 10 ; $i++)
+        {
+            $note = new Note();
+            $note->setNote(rand(0,10));
+            $note->setCommentaire('Mon commentaire super commentaire de foufou numéro' . $i);
+            $manager->persist($note);
+        }
+
+
 
 
 
