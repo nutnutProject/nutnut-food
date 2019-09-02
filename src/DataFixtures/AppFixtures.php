@@ -47,6 +47,17 @@ class AppFixtures extends Fixture
             $manager->persist($recette);
         }
 
+
+        $categories = [];
+        for($i=0; $i<4; $i++)
+        {
+            $category = new Category();
+            $category->setName('Categorie '. $i);
+            $manager->persist($category);
+        }
+
+
+
         $manager->flush();
     }
 }
