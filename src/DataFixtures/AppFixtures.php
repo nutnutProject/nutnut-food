@@ -74,7 +74,8 @@ class AppFixtures extends Fixture
         {
             $note = new Note();
             $note->setNote(rand(0,10));
-            $note->setCommentaire('Mon commentaire super commentaire de foufou numéro' . $i);
+            $note->setCommentaire('Mon commentaire super commentaire de foufou numéro ' . $i);
+            $note->setValidate(true);
             $manager->persist($note);
         }
 
