@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Recette;
 use App\Entity\User;
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -13,8 +14,6 @@ class AppFixtures extends Fixture
     {
         // $product = new Product();
         // $manager->persist($product);
-
-        $manager->flush();
 
         for($i=0; $i<10;$i++)
         {
@@ -33,6 +32,20 @@ class AppFixtures extends Fixture
             $user->setEmail('email'.$i.'@email.fr');
             $manager->persist($user);
         }
+
+
+        for($i=0; $i<10;$i++)
+        {
+            $recette = new Recette();
+            $recette->setTitle('Titre '.$i);
+            $recette->setPhoto('no-photo.jpg');
+            $recette->setDescription('Description de la recette '.$i);
+            $recette->setOnline(false);
+            $recette->setValidate(false);
+            $recette->setCreationDate($date);
+            $manager->persist($recette);
+        }
+
         $manager->flush();
     }
 }
