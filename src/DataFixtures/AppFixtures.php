@@ -6,6 +6,7 @@ use App\Entity\Recette;
 use App\Entity\User;
 use App\Entity\Category;
 use App\Entity\Diet;
+use App\Entity\Ingredient;
 use App\Entity\Note;
 
 
@@ -77,6 +78,14 @@ class AppFixtures extends Fixture
             $note->setCommentaire('Mon commentaire super commentaire de foufou numéro ' . $i);
             $note->setValidate(true);
             $manager->persist($note);
+        }
+
+        for($i = 0 ; $i < 10 ; $i++)
+        {
+            $ingredient = new Ingredient();
+            $ingredient->setName('Poireau n° ' . $i);
+            $ingredient->setQuantity(rand(0,10) . 'Litre(s)'); 
+            $manager->persist($ingredient);
         }
 
 
