@@ -6,8 +6,6 @@ use App\Entity\Category;
 use App\Entity\Diet;
 use App\Entity\Recette;
 use App\Entity\User;
-use App\Entity\Category;
-use App\Entity\Diet;
 use App\Entity\Ingredient;
 use App\Entity\Note;
 
@@ -20,9 +18,6 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        // $product = new Product();
-        // $manager->persist($product);
-
         $date = new DateTime('now');
 
         for($i=0; $i<10;$i++)
@@ -42,7 +37,6 @@ class AppFixtures extends Fixture
             $manager->persist($user);
         }
 
-
         for($i=0; $i<10;$i++)
         {
             $recette = new Recette();
@@ -55,8 +49,6 @@ class AppFixtures extends Fixture
             $manager->persist($recette);
         }
 
-
-        $categories = [];
         for($i=0; $i<4; $i++)
         {
             $category = new Category();
@@ -64,14 +56,12 @@ class AppFixtures extends Fixture
             $manager->persist($category);
         }
 
-        $diet = [];
         for($i = 0 ; $i < 4 ; $i++)
         {
             $diet = new Diet();
             $diet->setName('Régime '. $i);
             $manager->persist($diet);
         }
-
 
         for($i = 0 ; $i < 10 ; $i++)
         {
