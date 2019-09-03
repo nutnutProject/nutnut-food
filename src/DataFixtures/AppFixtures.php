@@ -2,6 +2,8 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Category;
+use App\Entity\Diet;
 use App\Entity\Recette;
 use App\Entity\User;
 use DateTime;
