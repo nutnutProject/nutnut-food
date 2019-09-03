@@ -91,6 +91,10 @@ class User implements UserInterface
     private $pwd_token;
 
     /**
+     * @ORM\Column(type="text")
+     */
+    private $activateToken;
+    /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
      * @Assert\length(min=10)
@@ -239,6 +243,18 @@ class User implements UserInterface
     public function setPwdToken(string $pwd_token): self
     {
         $this->pwd_token = $pwd_token;
+
+        return $this;
+    }
+
+    public function getActivateToken(): ?string
+    {
+        return $this->activateToken;
+    }
+
+    public function setActivateToken(string $activateToken): self
+    {
+        $this->activateToken = $activateToken;
 
         return $this;
     }
