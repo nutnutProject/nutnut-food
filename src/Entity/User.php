@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -18,46 +20,67 @@ class User
 
     /**
      * @ORM\Column(type="string", length=45)
+     * @Assert\NotBlank()
+     * @Assert\Lenght(min=3)
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=45)
+     * @Assert\NotBlank()
+     * @Assert\Lenght(min=3)
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotBlank()
+     * @Assert\Date
+     * @var string A "d-m-Y" formatted value
      */
     private $birthdate;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank()
+     * @Assert\Lenght(min=8)
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Lenght(min=5)
      */
     private $adresse;
 
     /**
      * @ORM\Column(type="string", length=60)
+     * @Assert\NotBlank()
+     * @Assert\Lenght(min=2)
      */
     private $city;
 
     /**
      * @ORM\Column(type="string", length=5)
+     * @Assert\NotBlank()
+     * @Assert\Positive
+     * @Assert\Lenght(min=5)
      */
     private $cp;
 
     /**
      * @ORM\Column(type="string", length=15)
+     * @Assert\NotBlank()
+     * @Assert\Positive
+     * @Assert\Lenght(min=10)
      */
     private $telephone;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank()
+     * @Assert\Lenght(min=10)
      */
     private $description;
 
@@ -68,6 +91,8 @@ class User
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Email
      */
     private $email;
 
