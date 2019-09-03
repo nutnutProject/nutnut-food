@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -36,7 +36,6 @@ class User
      * @ORM\Column(type="date")
      * @Assert\NotBlank()
      * @Assert\Date
-     * @var string A "d-m-Y" formatted value
      */
     private $birthdate;
 
@@ -92,7 +91,7 @@ class User
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
-     * @Assert\Email
+     * @Assert\Lenght(min=10)
      */
     private $email;
 
