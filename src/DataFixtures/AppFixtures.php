@@ -47,7 +47,8 @@ class AppFixtures extends Fixture
             $user->setCp('59000');
             $user->setTelephone('0320400000');
             $user->setDescription('Description'. $i);            
-            $user->setPwdToken('xxxxxxxx');            
+            $user->setPwdToken('xxxxxxxx');
+            $user->setActivateToken('xxxxxxxxx');
             $users[] = $user;
             $manager->persist($user);
         }
