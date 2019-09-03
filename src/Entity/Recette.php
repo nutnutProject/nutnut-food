@@ -21,7 +21,7 @@ class Recette
     /**
      * @ORM\Column(type="string", length=60)
      * @Assert\NotBlank()
-     * @Assert\Lenght(min=8)
+     * @Assert\Length(min=8)
      */
     private $title;
 
@@ -38,7 +38,7 @@ class Recette
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank()
-     * @Assert\Lenght(min=15)
+     * @Assert\Length(min=15)
      */
     private $description;
 

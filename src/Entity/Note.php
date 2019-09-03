@@ -27,7 +27,7 @@ class Note
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank()
-     * @Assert\Lenght(min=12)
+     * @Assert\Length(min=12)
      */
     private $commentaire;
 

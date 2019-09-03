@@ -21,7 +21,7 @@ class Diet
     /**
      * @ORM\Column(type="string", length=45)
      * @Assert\NotBlank()
-     * @Assert\Lenght(min=5)
+     * @Assert\Length(min=5)
      */
     private $name;
 
