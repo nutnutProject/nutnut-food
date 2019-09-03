@@ -20,14 +20,14 @@ class Ingredient
     /**
      * @ORM\Column(type="string", length=60)
      * @Assert\NotBlank()
-     * @Assert\Lenght(min=3)
+     * @Assert\Length(min=3)
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=60)
      * @Assert\NotBlank()
-     * @Assert\Lenght(min=2)
+     * @Assert\Length(min=2)
      */
     private $quantity;
 

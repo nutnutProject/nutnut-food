@@ -21,14 +21,14 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=45)
      * @Assert\NotBlank()
-     * @Assert\Lenght(min=3)
+     * @Assert\length(min=3)
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=45)
      * @Assert\NotBlank()
-     * @Assert\Lenght(min=3)
+     * @Assert\length(min=3)
      */
     private $lastname;
 
@@ -42,21 +42,21 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank()
-     * @Assert\Lenght(min=8)
+     * @Assert\length(min=8)
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
-     * @Assert\Lenght(min=5)
+     * @Assert\length(min=5)
      */
     private $adresse;
 
     /**
      * @ORM\Column(type="string", length=60)
      * @Assert\NotBlank()
-     * @Assert\Lenght(min=2)
+     * @Assert\length(min=2)
      */
     private $city;
 
@@ -64,7 +64,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=5)
      * @Assert\NotBlank()
      * @Assert\Positive
-     * @Assert\Lenght(min=5)
+     * @Assert\length(min=5)
      */
     private $cp;
 
@@ -72,14 +72,14 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=15)
      * @Assert\NotBlank()
      * @Assert\Positive
-     * @Assert\Lenght(min=10)
+     * @Assert\length(min=10)
      */
     private $telephone;
 
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank()
-     * @Assert\Lenght(min=10)
+     * @Assert\length(min=10)
      */
     private $description;
 
@@ -91,9 +91,14 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
-     * @Assert\Lenght(min=10)
+     * @Assert\length(min=10)
      */
-    private $email;
+    private $username;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles;
 
     public function getId(): ?int
     {
@@ -220,15 +225,45 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function getUsername(): ?string
     {
-        return $this->email;
+        return $this->username;
     }
 
-    public function setEmail(string $email): self
+    public function setUsername(string $username): self
     {
-        $this->email = $email;
+        $this->username = $username;
 
         return $this;
+    }
+
+    public function getRoles(): array
+    {
+        if (empty($this->roles)) {
+            $this->roles[] = 'ROLE_USER';
+        }
+
+        return $this->roles;
+    }
+
+    public function setRoles($roles)
+    {
+        if (!is_array($roles)) {
+            $this->roles[] = $roles;
+
+            return;
+        }
+
+        $this->roles = $roles;
+    }
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function eraseCredentials()
+    {
+        return null;
     }
 }

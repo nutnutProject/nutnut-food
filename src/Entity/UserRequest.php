@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRequestRepository")
@@ -19,14 +20,14 @@ class UserRequest
     /**
      * @ORM\Column(type="string", length=60)
      * @Assert\NotBlank()
-     * @Assert\Lenght(min=5)
+     * @Assert\length(min=5)
      */
     private $object;
 
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank()
-     * @Assert\Lenght(min=15)
+     * @Assert\length(min=15)
      */
     private $message;
 

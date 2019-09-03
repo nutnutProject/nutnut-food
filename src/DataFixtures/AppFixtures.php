@@ -31,6 +31,10 @@ class AppFixtures extends Fixture
         for($i=0; $i<10;$i++)
         {           
             $user = new User();
+            $username = (1 === $i) ? 'matthieu' : 'user-'.$i;
+            $roles = (1 === $i) ? ['ROLE_ADMIN'] : ['ROLE_USER'];
+            $user->setUsername($username);
+            $user->setRoles($roles);
             $user->setFirstname('Firstname '.$i);
             $user->setLastname('Lastname '.$i);
             $user->setBirthdate($date);
@@ -43,7 +47,6 @@ class AppFixtures extends Fixture
             $user->setTelephone('0320400000');
             $user->setDescription('Description'. $i);            
             $user->setPwdToken('xxxxxxxx');            
-            $user->setEmail('email'.$i.'@email.fr');
             $manager->persist($user);
         }
 
