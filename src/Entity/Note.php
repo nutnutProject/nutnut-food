@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\NoteRepository")
@@ -18,11 +19,15 @@ class Note
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Assert\NotBlank()
+     * @Assert\Positive
      */
     private $note;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank()
+     * @Assert\Lenght(min=12)
      */
     private $commentaire;
 

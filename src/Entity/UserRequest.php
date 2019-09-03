@@ -18,11 +18,15 @@ class UserRequest
 
     /**
      * @ORM\Column(type="string", length=60)
+     * @Assert\NotBlank()
+     * @Assert\Lenght(min=5)
      */
     private $object;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank()
+     * @Assert\Lenght(min=15)
      */
     private $message;
 

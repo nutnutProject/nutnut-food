@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
@@ -19,6 +20,8 @@ class Category
 
     /**
      * @ORM\Column(type="string", length=45)
+     * @Assert\NotBlank()
+     * @Assert\Lenght(min=5)
      */
     private $name;
 
