@@ -31,6 +31,18 @@ class UserRequest
      */
     private $message;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Recette", inversedBy="userRequests")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $recette;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="userRequests")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -56,6 +68,30 @@ class UserRequest
     public function setMessage(string $message): self
     {
         $this->message = $message;
+
+        return $this;
+    }
+
+    public function getRecette(): ?Recette
+    {
+        return $this->recette;
+    }
+
+    public function setRecette(?Recette $recette): self
+    {
+        $this->recette = $recette;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
