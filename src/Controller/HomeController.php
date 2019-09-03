@@ -17,11 +17,14 @@ class HomeController extends AbstractController
     public function index(CategoryRepository $categoryRepository, RecetteRepository $recetteRepository)
     {
         $categoryRepository = $this->getDoctrine()->getRepository(Category::class);
-
         $categories = $categoryRepository->findCategory();
+
+        $recetteRepository = $this->getDoctrine()->getRepository(Recette::class);
+        $lastRecettes = $recetteRepository->findLastRecettes(4);
 
         return $this->render('home/home.html.twig', [
            'categories' => $categories,
+           'last_recettes' => $lastRecettes,
         ]);
     }
 }
