@@ -20,7 +20,7 @@ class RecetteType extends AbstractType
             ])
             ->add('diet', null, [
                 'choice_label' => 'name',
-                'expended' => 'true', 
+                'expanded' => 'true', 
             ])
             ->add('description')
             ->add('online')
