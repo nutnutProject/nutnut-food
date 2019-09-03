@@ -28,6 +28,7 @@ class AppFixtures extends Fixture
     {
         $date = new DateTime('now');
 
+        $users = [];
         for($i=0; $i<10;$i++)
         {           
             $user = new User();
@@ -47,9 +48,21 @@ class AppFixtures extends Fixture
             $user->setTelephone('0320400000');
             $user->setDescription('Description'. $i);            
             $user->setPwdToken('xxxxxxxx');            
+            $users[] = $user;
             $manager->persist($user);
         }
 
+        $categories = [];
+        for($i=0; $i<4; $i++)
+        {
+            $category = new Category();
+            $category->setName('Categorie '. $i);
+            
+            $manager->persist($category);
+            $categories[] = $category;
+        }
+
+        $recettes = [];
         for($i=0; $i<10;$i++)
         {
             $recette = new Recette();
@@ -59,14 +72,10 @@ class AppFixtures extends Fixture
             $recette->setOnline(false);
             $recette->setValidate(false);
             $recette->setCreationDate($date);
+            $recette->setCategory($categories[rand(0,3)]);
+            $recette->setUser($users[rand(0,9)]);
+            $recettes[] = $recette;
             $manager->persist($recette);
-        }
-
-        for($i=0; $i<4; $i++)
-        {
-            $category = new Category();
-            $category->setName('Categorie '. $i);
-            $manager->persist($category);
         }
 
         for($i = 0 ; $i < 4 ; $i++)
@@ -90,6 +99,7 @@ class AppFixtures extends Fixture
             $ingredient = new Ingredient();
             $ingredient->setName('Poireau n° ' . $i);
             $ingredient->setQuantity(rand(0,10) . 'Litre(s)'); 
+            $ingredient->setRecette($recettes[rand(0,9)]);
             $manager->persist($ingredient);
         }
 
