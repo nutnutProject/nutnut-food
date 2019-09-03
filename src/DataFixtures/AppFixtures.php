@@ -53,11 +53,16 @@ class AppFixtures extends Fixture
         }
 
         $categories = [];
-        for($i=0; $i<4; $i++)
+        $names = [
+            'Aperitif',
+            'Entrée',
+            'Plat',
+            'Dessert'
+        ];
+        foreach($names as $name)
         {
             $category = new Category();
-            $category->setName('Categorie '. $i);
-            
+            $category->setName($name);
             $manager->persist($category);
             $categories[] = $category;
         }

@@ -131,12 +131,13 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
+                    {# {% for bestRecette in BestRecettes %}
                         <div class="col-sm">
                             <div class="card">
                                 <img class="card-img-top" src="img/profil-avatar-femme-icone-ronde_24640-14042.jpg" alt="Card image cap">
                                 <div class="card-body">
-                                    <h4 class="card-title"><a href="product.html" title="View Product">Juliette</a></h4>
-                                    <p class="card-text">Description du cuisinier</p>
+                                    <h4 class="card-title"><a href="product.html" title="View Product">{{bestRecette.firstname}}</a></h4>
+                                    <p class="card-text">{{bestRecette.description}}</p>
                                     <div class="row">
                                         <div class="col">
                                             <a href="cart.html" class="btn btn-success btn-block">Voir le profil</a>
@@ -145,48 +146,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm">
-                            <div class="card">
-                                <img class="card-img-top" src="img/profil-avatar-homme-icone-ronde_24640-14044.jpg" alt="Card image cap">
-                                <div class="card-body">
-                                    <h4 class="card-title"><a href="product.html" title="View Product">Pierre</a></h4>
-                                    <p class="card-text">Description du cuisinier</p>
-                                    <div class="row">
-                                        <div class="col">
-                                            <a href="cart.html" class="btn btn-success btn-block">Voir le profil</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm">
-                            <div class="card">
-                                <img class="card-img-top" src="img/profil-avatar-femme-icone-ronde_24640-14042.jpg" alt="Card image cap">
-                                <div class="card-body">
-                                    <h4 class="card-title"><a href="product.html" title="View Product">Pierre</a></h4>
-                                    <p class="card-text">Description du cuisinier</p>
-                                    <div class="row">
-                                        <div class="col">
-                                            <a href="cart.html" class="btn btn-success btn-block">Voir le profil</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm">
-                            <div class="card">
-                                <img class="card-img-top" src="img/profil-avatar-homme-icone-ronde_24640-14044.jpg" alt="Card image cap">
-                                <div class="card-body">
-                                    <h4 class="card-title"><a href="product.html" title="View Product">Salim</a></h4>
-                                    <p class="card-text">Description du cuisinier</p>
-                                    <div class="row">
-                                        <div class="col">
-                                            <a href="cart.html" class="btn btn-success btn-block">Voir le profil</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    {% endfor %} #}
                     </div>
                 </div>
             </div>

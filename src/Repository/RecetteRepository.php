@@ -27,6 +27,16 @@ class RecetteRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    // public function findBestRecettes($number)
+    // {
+    //     return $this->createQueryBuilder('p')
+    //     ->orderBy('p.note', 'DESC')
+    //     ->setMaxResults($number)
+    //     ->getQuery()
+    //     ->getResult();
+    // }
+    
     // /**
     //  * @return Recette[] Returns an array of Recette objects
     //  */
