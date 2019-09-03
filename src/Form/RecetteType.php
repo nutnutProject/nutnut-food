@@ -15,6 +15,13 @@ class RecetteType extends AbstractType
             ->add('title')
             ->add('slug')
             ->add('photo')
+            ->add('category', null, [
+                'choice_label' => 'name'
+            ])
+            ->add('diet', null, [
+                'choice_label' => 'name',
+                'expended' => 'true', 
+            ])
             ->add('description')
             ->add('online')
             ->add('validate')
