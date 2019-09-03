@@ -23,12 +23,12 @@ class HomeController extends AbstractController
 
         $recetteRepository = $this->getDoctrine()->getRepository(Recette::class);
         $lastRecettes = $recetteRepository->findLastRecettes(4);
-        // $bestRecettes = $recetteRepository->findBestRecettes(4);
+        $bestRecettes = $recetteRepository->findBestRecettes(4);
        
         return $this->render('home/home.html.twig', [
            'categories' => $categories,
            'last_recettes' => $lastRecettes,
-        //    'bestRecettes' => $bestRecettes,
+           'bestRecettes' => $bestRecettes,
         ]);
     }
 }

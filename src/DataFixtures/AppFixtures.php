@@ -52,6 +52,17 @@ class AppFixtures extends Fixture
             $manager->persist($user);
         }
 
+        $notes = [];
+        for($i = 0 ; $i < 10 ; $i++)
+        {
+            $note = new Note();
+            $note->setNote(rand(0,10));
+            $note->setCommentaire('Mon commentaire super commentaire de foufou numéro ' . $i);
+            $note->setValidate(true);
+            $notes[] = $note;
+            $manager->persist($note);
+        }
+
         $categories = [];
         $names = [
             'Aperitif',
@@ -77,26 +88,24 @@ class AppFixtures extends Fixture
             $recette->setOnline(false);
             $recette->setValidate(false);
             $recette->setCreationDate($date);
+            $recette->setNote($notes[rand(0,9)]);
             $recette->setCategory($categories[rand(0,3)]);
             $recette->setUser($users[rand(0,9)]);
             $recettes[] = $recette;
             $manager->persist($recette);
         }
 
-        for($i = 0 ; $i < 4 ; $i++)
+        $dietNames = [
+            'Vegetarien',
+            'Vegan',
+            'Hallal',
+            'Carne'
+        ];
+        foreach($dietNames as $name)
         {
             $diet = new Diet();
-            $diet->setName('Régime '. $i);
+            $diet->setName($name);
             $manager->persist($diet);
-        }
-
-        for($i = 0 ; $i < 10 ; $i++)
-        {
-            $note = new Note();
-            $note->setNote(rand(0,10));
-            $note->setCommentaire('Mon commentaire super commentaire de foufou numéro ' . $i);
-            $note->setValidate(true);
-            $manager->persist($note);
         }
 
         for($i = 0 ; $i < 10 ; $i++)

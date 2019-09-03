@@ -60,7 +60,8 @@ class Recette
     private $creation_date;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Note", inversedBy="recettes")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Note", inversedBy="recettes")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $note;
 
@@ -93,7 +94,6 @@ class Recette
 
     public function __construct()
     {
-        $this->note = new ArrayCollection();
         $this->diet = new ArrayCollection();
         $this->ingredients = new ArrayCollection();
         $this->userRequests = new ArrayCollection();
@@ -191,31 +191,20 @@ class Recette
         return $this;
     }
 
-    /**
-     * @return Collection|Note[]
-     */
-    public function getNote(): Collection
+
+
+    public function getNote(): ?Note
     {
         return $this->note;
     }
 
-    public function addNote(Note $note): self
+    public function setNote(?Note $note): self
     {
-        if (!$this->note->contains($note)) {
-            $this->note[] = $note;
-        }
+        $this->note = $note;
 
         return $this;
     }
 
-    public function removeNote(Note $note): self
-    {
-        if ($this->note->contains($note)) {
-            $this->note->removeElement($note);
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection|Diet[]

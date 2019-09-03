@@ -127,16 +127,16 @@
         <div class="col-sm">
             <div class="card">
                 <div class="card-header bg-primary text-white text-uppercase">
-                    <i class="fa fa-trophy"></i> Meilleurs cuisiniers
+                    <i class="fa fa-trophy"></i> Meilleures Recettes
                 </div>
                 <div class="card-body">
                     <div class="row">
-                    {# {% for bestRecette in BestRecettes %}
+                    {% for bestRecette in bestRecettes %}
                         <div class="col-sm">
                             <div class="card">
                                 <img class="card-img-top" src="img/profil-avatar-femme-icone-ronde_24640-14042.jpg" alt="Card image cap">
                                 <div class="card-body">
-                                    <h4 class="card-title"><a href="product.html" title="View Product">{{bestRecette.firstname}}</a></h4>
+                                    <h4 class="card-title"><a href="product.html" title="View Product">{{bestRecette.title}}</a></h4>
                                     <p class="card-text">{{bestRecette.description}}</p>
                                     <div class="row">
                                         <div class="col">
@@ -146,7 +146,7 @@
                                 </div>
                             </div>
                         </div>
-                    {% endfor %} #}
+                    {% endfor %}
                     </div>
                 </div>
             </div>

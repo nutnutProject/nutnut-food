@@ -39,7 +39,7 @@ class Note
     private $validate;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Recette", mappedBy="note")
+     * @ORM\OneToMany(targetEntity="App\Entity\Recette", mappedBy="note", orphanRemoval=true)
      */
     private $recettes;
 
