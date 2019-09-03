@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -99,6 +101,22 @@ class User implements UserInterface
      * @ORM\Column(type="json")
      */
     private $roles;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Recette", mappedBy="user", orphanRemoval=true)
+     */
+    private $recettes;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\UserRequest", mappedBy="user", orphanRemoval=true)
+     */
+    private $userRequests;
+
+    public function __construct()
+    {
+        $this->recettes = new ArrayCollection();
+        $this->userRequests = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -265,5 +283,67 @@ class User implements UserInterface
     public function eraseCredentials()
     {
         return null;
+    }
+
+    /**
+     * @return Collection|Recette[]
+     */
+    public function getRecettes(): Collection
+    {
+        return $this->recettes;
+    }
+
+    public function addRecette(Recette $recette): self
+    {
+        if (!$this->recettes->contains($recette)) {
+            $this->recettes[] = $recette;
+            $recette->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRecette(Recette $recette): self
+    {
+        if ($this->recettes->contains($recette)) {
+            $this->recettes->removeElement($recette);
+            // set the owning side to null (unless already changed)
+            if ($recette->getUser() === $this) {
+                $recette->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserRequest[]
+     */
+    public function getUserRequests(): Collection
+    {
+        return $this->userRequests;
+    }
+
+    public function addUserRequest(UserRequest $userRequest): self
+    {
+        if (!$this->userRequests->contains($userRequest)) {
+            $this->userRequests[] = $userRequest;
+            $userRequest->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserRequest(UserRequest $userRequest): self
+    {
+        if ($this->userRequests->contains($userRequest)) {
+            $this->userRequests->removeElement($userRequest);
+            // set the owning side to null (unless already changed)
+            if ($userRequest->getUser() === $this) {
+                $userRequest->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }

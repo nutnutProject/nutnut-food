@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Cocur\Slugify\Slugify;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -29,6 +31,16 @@ class Diet
      * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $slug;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Recette", mappedBy="diet")
+     */
+    private $recettes;
+
+    public function __construct()
+    {
+        $this->recettes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -58,6 +70,34 @@ class Diet
     public function setSlug(?string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Recette[]
+     */
+    public function getRecettes(): Collection
+    {
+        return $this->recettes;
+    }
+
+    public function addRecette(Recette $recette): self
+    {
+        if (!$this->recettes->contains($recette)) {
+            $this->recettes[] = $recette;
+            $recette->addDiet($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRecette(Recette $recette): self
+    {
+        if ($this->recettes->contains($recette)) {
+            $this->recettes->removeElement($recette);
+            $recette->removeDiet($this);
+        }
 
         return $this;
     }

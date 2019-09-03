@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Cocur\Slugify\Slugify;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -56,6 +58,46 @@ class Recette
      * @ORM\Column(type="datetime")
      */
     private $creation_date;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Note", inversedBy="recettes")
+     */
+    private $note;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Diet", inversedBy="recettes")
+     */
+    private $diet;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="recettes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="recettes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Ingredient", mappedBy="recette", orphanRemoval=true)
+     */
+    private $ingredients;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\UserRequest", mappedBy="recette", orphanRemoval=true)
+     */
+    private $userRequests;
+
+    public function __construct()
+    {
+        $this->note = new ArrayCollection();
+        $this->diet = new ArrayCollection();
+        $this->ingredients = new ArrayCollection();
+        $this->userRequests = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -145,6 +187,144 @@ class Recette
     public function setCreationDate(\DateTimeInterface $creation_date): self
     {
         $this->creation_date = $creation_date;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Note[]
+     */
+    public function getNote(): Collection
+    {
+        return $this->note;
+    }
+
+    public function addNote(Note $note): self
+    {
+        if (!$this->note->contains($note)) {
+            $this->note[] = $note;
+        }
+
+        return $this;
+    }
+
+    public function removeNote(Note $note): self
+    {
+        if ($this->note->contains($note)) {
+            $this->note->removeElement($note);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Diet[]
+     */
+    public function getDiet(): Collection
+    {
+        return $this->diet;
+    }
+
+    public function addDiet(Diet $diet): self
+    {
+        if (!$this->diet->contains($diet)) {
+            $this->diet[] = $diet;
+        }
+
+        return $this;
+    }
+
+    public function removeDiet(Diet $diet): self
+    {
+        if ($this->diet->contains($diet)) {
+            $this->diet->removeElement($diet);
+        }
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Ingredient[]
+     */
+    public function getIngredients(): Collection
+    {
+        return $this->ingredients;
+    }
+
+    public function addIngredient(Ingredient $ingredient): self
+    {
+        if (!$this->ingredients->contains($ingredient)) {
+            $this->ingredients[] = $ingredient;
+            $ingredient->setRecette($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIngredient(Ingredient $ingredient): self
+    {
+        if ($this->ingredients->contains($ingredient)) {
+            $this->ingredients->removeElement($ingredient);
+            // set the owning side to null (unless already changed)
+            if ($ingredient->getRecette() === $this) {
+                $ingredient->setRecette(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserRequest[]
+     */
+    public function getUserRequests(): Collection
+    {
+        return $this->userRequests;
+    }
+
+    public function addUserRequest(UserRequest $userRequest): self
+    {
+        if (!$this->userRequests->contains($userRequest)) {
+            $this->userRequests[] = $userRequest;
+            $userRequest->setRecette($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserRequest(UserRequest $userRequest): self
+    {
+        if ($this->userRequests->contains($userRequest)) {
+            $this->userRequests->removeElement($userRequest);
+            // set the owning side to null (unless already changed)
+            if ($userRequest->getRecette() === $this) {
+                $userRequest->setRecette(null);
+            }
+        }
 
         return $this;
     }
