@@ -6,6 +6,12 @@ use App\Entity\Category;
 use App\Entity\Diet;
 use App\Entity\Recette;
 use App\Entity\User;
+use App\Entity\Category;
+use App\Entity\Diet;
+use App\Entity\Ingredient;
+use App\Entity\Note;
+
+
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -47,6 +53,41 @@ class AppFixtures extends Fixture
             $recette->setValidate(false);
             $recette->setCreationDate($date);
             $manager->persist($recette);
+        }
+
+
+        $categories = [];
+        for($i=0; $i<4; $i++)
+        {
+            $category = new Category();
+            $category->setName('Categorie '. $i);
+            $manager->persist($category);
+        }
+
+        $diet = [];
+        for($i = 0 ; $i < 4 ; $i++)
+        {
+            $diet = new Diet();
+            $diet->setName('Régime '. $i);
+            $manager->persist($diet);
+        }
+
+
+        for($i = 0 ; $i < 10 ; $i++)
+        {
+            $note = new Note();
+            $note->setNote(rand(0,10));
+            $note->setCommentaire('Mon commentaire super commentaire de foufou numéro ' . $i);
+            $note->setValidate(true);
+            $manager->persist($note);
+        }
+
+        for($i = 0 ; $i < 10 ; $i++)
+        {
+            $ingredient = new Ingredient();
+            $ingredient->setName('Poireau n° ' . $i);
+            $ingredient->setQuantity(rand(0,10) . 'Litre(s)'); 
+            $manager->persist($ingredient);
         }
 
         $manager->flush();
