@@ -69,8 +69,7 @@
                             <div class="card">
                                 <img class="card-img-top img-fluid" src="img/pizza-fruits-de-mer-600x410.jpg" alt="Card image cap">
                                 <div class="card-body">
-                                    <h4 class="card-title"><a href="product.html" title="View Product">{{category.name}}</a></h4>
-                                    <p class="card-text">Description de la recette</p>
+                                    <h4 class="card-title"><a href="{{ path('category_show', {slug: category.slug})}}" title="View Product">{{category.name}}</a></h4>
                                     <div class="row">
                                         <div class="col">
                                             <a href="cart.html" class="btn btn-success btn-block">Interessé</a>
