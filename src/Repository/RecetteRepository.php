@@ -19,6 +19,14 @@ class RecetteRepository extends ServiceEntityRepository
         parent::__construct($registry, Recette::class);
     }
 
+    public function findLastRecettes($number)
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.title', 'DESC')
+            ->setMaxResults($number)
+            ->getQuery()
+            ->getResult();
+    }
     // /**
     //  * @return Recette[] Returns an array of Recette objects
     //  */
