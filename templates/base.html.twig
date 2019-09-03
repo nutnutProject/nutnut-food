@@ -3,10 +3,65 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+  <!-- Font Awesome -->
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+            <!-- Bootstrap core CSS -->
+            <link href=" {{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+            <!-- Material Design Bootstrap -->
+            <link href="{{ asset('css/mdb.min.css') }}" rel="stylesheet">
+            <!-- Your custom styles (optional) -->
+            <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+            <link rel="stylesheet" href=" {{ asset('bower_components/Morphext/dist/morphext.css') }}">
+        {% endblock %}
     </head>
+
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        <nav class="navbar navbar-expand-md navbar-light bg-light position-fixed w-100 sticky-top">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="img/logo.png" height="30" alt="mdb logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+                    <ul class="navbar-nav m-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="index.html">Accueil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="category.html">Recettes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                    </ul>
+
+                    <div class="my-2 my-lg-0">
+                        <button type="button" class="btn btn-outline-danger waves-effect"  data-toggle="modal" data-target="#login">Login</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        {% block body %}
+        
+        
+        {% endblock %}
+
+
+
+
+
+        {% block javascripts %}
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" type="text/javascript"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" type="text/javascript"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" type="text/javascript"></script>
+            <script src="{{ asset('bower_components/Morphext/dist/morphext.min.js')}}"></script>
+            <script src="js/style.js"></script>
+        {% endblock %}
+
+
     </body>
 </html>
