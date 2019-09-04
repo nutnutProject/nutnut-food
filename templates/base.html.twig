@@ -64,6 +64,8 @@
                     </div>
                     <!-- Formulaire de connexion -->
                     <div class="modal-body">
+
+
                         <form method="post" action="{{ path('app_login') }}">
                             <div class="md-form">
                                 <i class="fas fa-user prefix"></i>
@@ -76,6 +78,7 @@
                                 <label for="inputPassword">Mot de passe</label>
                             </div>
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
                             <div class="form-group form-check">
                                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                                 <label class="form-check-label" for="exampleCheck1">Se souvenir de moi</label>
@@ -104,7 +107,6 @@
         </div>
         
         {% block body %}
-
 
 
 

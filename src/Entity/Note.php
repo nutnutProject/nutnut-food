@@ -116,4 +116,10 @@ class Note
 
         return $this;
     }
+
+        // Sert à convertir les entités en string IMPERATIF pour EasyAdminBundle
+    public function __toString()
+    {
+        return $this->commentaire;
+    }
 }

@@ -48,10 +48,10 @@ class SecurityController extends AbstractController
             $user->setPwdTokenExpire(time()+3600);
             $user->setActivateTokenExpire(time()+3600);
             $user->setAccountActivate(false);
-
             $user->setPassword(
                 $this->passwordEncoder->encodePassword($user, $user->getPassword())
             );
+
 
             // Remplissage du rôle utilisateur
             $user->setRoles('[ROLE_USER]');
@@ -113,6 +113,17 @@ class SecurityController extends AbstractController
 
         // Modification de l'entrée utilisateur dans la bdd avec suppresion de la valeur du champ activateToken
 
+        try{
+            $user->setActivateToken("");
+            $user->setAccountActivate(true);
+            $entityManager->flush();
+
+        } catch (\Exception $e) {
+            $this->addFlash('warning', $e->getMessage());
+            return $this->redirectToRoute('home');
+        }
+
+
         if (($user->getActivateTokenExpire() - time()) < 0)
         {
             $user->setActivateToken("");
@@ -126,7 +137,12 @@ class SecurityController extends AbstractController
             $this->addFlash('alert', 'Votre token a expiré');
         }
 
+        $this->redirectToRoute('home'); 
+
+
+
         return $this->redirectToRoute('home'); 
+
     }
 
     /**
@@ -248,4 +264,8 @@ class SecurityController extends AbstractController
             'token' => $token,
         ]);
     }
+
 }
+
+
+
