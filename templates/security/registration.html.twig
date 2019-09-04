@@ -1,10 +1,85 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h2>Formulaire d'inscription</h2>  
 
-    {{ form_start(form)}}
-        {{ form_widget(form)}}
-        <button type="submit" class="btn btn-success">Inscription !</button>
-    {{ form_end(form)}}
+{% block body %}
+   <header class="v-header-all containeur">
+
+            <div class="fullscreen-image-wrap-all">
+            </div>
+
+            <div class="header-overlay-all">
+            </div>
+
+        <div class="header-content-all">
+
+
+            <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
+            <h1> Deviens FOODER !  </h1>
+
+           
+
+
+        </div>
+
+    </header>
+
+    
+
+
+    <div class="container" id="main-recette">
+           
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Accueil</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Inscription</li>
+            </ol>
+        </nav>
+
+        
+        {{ form_start(form, {'attr': {'class': 'text-center border border-light p-5'}})}}
+        <p class="h1 mb-4">Inscription</p>
+    
+        <div class="form-row mb-4">
+            <div class="col">
+                <!-- First name -->
+                {{ form_widget(form.firstname, {'attr': {'class': 'form-control'}})}}
+            </div>
+            <div class="col">
+        {{ form_widget(form.lastname, {'attr': {'class': 'form-control'}})}}
+        </div>
+
+        {{ form_widget(form.username, {'attr': {'class': 'form-control'}})}}
+
+        {{ form_widget(form.birthdate, {'attr': {'class': 'form-control'}})}}
+
+        {{ form_widget(form.password, {'attr': {'class': 'form-control'}})}}
+        <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4"></small>
+    
+        {{ form_widget(form.adresse, {'attr': {'class': 'form-control'}})}}
+        <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4"></small>
+
+        <div class="form-row mb-4">
+            <div class="col">
+        {{ form_widget(form.city, {'attr': {'class': 'form-control'}})}}
+            </div>
+            <div class="col">
+        {{ form_widget(form.cp, {'attr': {'class': 'form-control'}})}}
+        </div>
+
+        {{ form_widget(form.telephone, {'attr': {'class': 'form-control'}})}}
+
+        {{ form_widget(form.description, {'attr': {'class': 'form-control'}})}}
+
+
+        <button class="btn btn-info my-4 btn-block" type="submit">Inscription</button>
+        <!-- Terms of service -->
+        <p>En cliquant sur 
+            <em>Inscription</em> vous acceptez
+            <a href="" target="_blank">nos conditions générales.</a></p>
+        {{ form_end(form)}}
+    </div>
+</div>
+
+</div>
 {% endblock %}
