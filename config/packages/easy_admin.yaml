@@ -1,11 +1,33 @@
 easy_admin:
    entities:
-       # List the entity class name you want to manage
-       - App\Entity\Recette
-       - App\Entity\User
-       - App\Entity\Category
-       - App\Entity\Diet
-       - App\Entity\Note
+        Recette:
+            class: App\Entity\Recette
+            form:
+                fields: 
+                    - { property: title }
+                    - { property: photo }
+                    - { property: description }
+                    - { property: validate }
+                    - { property: creation_date }
+                    - { property: note }
+                    - { property: user }
+                    - { property: diet }
+                    - { property: category }
+
+
+
+
+        User:
+            class: App\Entity\User
+
+        Category:
+            class: App\Entity\Category
+
+        Diet:
+            class: App\Entity\Diet
+
+        Note:
+            class: App\Entity\Note
 
 
 
