@@ -80,7 +80,7 @@ class RecetteController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="recette_delete", methods={"DELETE"})
+     * @Route("admin/{id}", name="recette_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Recette $recette): Response
     {

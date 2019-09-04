@@ -10,11 +10,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/** 
+ * @Route'("/category", name"category)
+ */
 
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("/category/{slug}", name="category")
+     * @Route("/category/{slug}", name="category_show")
      * 
      * Route servant a afficher les catégories en même temps que les recettes
      */
@@ -32,6 +35,8 @@ class CategoryController extends AbstractController
             
         ]);
     }
+
+
     /**
      * @Route("/admin", name="category_index", methods={"GET"})
      */

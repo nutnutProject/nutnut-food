@@ -39,7 +39,7 @@
                     <ul class="list-group category_block">
                         {% for category in categories %}
                             <li class="list-group-item {{ current_category == category ? 'active' : '' }}">
-                                <a href="{{ path('category', {slug: category.slug}) }}">{{ category.name }}</a>
+                                <a href="{{ path('category_show', {slug: category.slug}) }}">{{ category.name }}</a>
                             </li>
                         {% endfor %}
                     </ul>
