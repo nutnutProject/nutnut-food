@@ -69,6 +69,8 @@ class SecurityController extends AbstractController
                 ->setSubject($sujet)
                 ->setBody($message);
             $mailer->send($message);
+
+            $this->addFlash('success', 'Votre inscription a été prise en compte. Un email vous a été envoyé. Merci de confirmer votre inscription en cliquant sur le lien contenu dans ce mail.');
         }
 
         return $this->render('security/registration.html.twig',[
@@ -83,14 +85,17 @@ class SecurityController extends AbstractController
     public function activation($token)
     {
         // Récupérer le repository de l'entité User
-        $productRepository = $this->getDoctrine()->getRepository(User::class);
-        $user = $productRepository->findOneBy(['activateToken' => $token]);
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = $entityManager->getRepository(User::class)->findOneBy(['activateToken' => $token]);
 
         // Modification de l'entrée utilisateur dans la bdd avec suppresion de la valeur du champ activateToken
-        
+        $user->setActivateToken("");
+        // Enregistrement
+        $entityManager->flush();
 
-        dd($user);
+        $this->addFlash('success', 'Votre compte a bien été activé. Vous pouvez maintenant vous connecter.');
 
+        $this->redirectToRoute('home');
     }
 
     /**
