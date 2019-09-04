@@ -14,7 +14,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ path('home') }}">Accueil</a></li>
-                        <li class="breadcrumb-item"><a href="{{ path('category', {slug: recette.category.slug}) }}">{{ recette.category.name }}</a></li>
+                        <li class="breadcrumb-item"><a href="{{ path('category_show', {slug: recette.category.slug}) }}">{{ recette.category.name }}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{ recette.title }}</li>
                     </ol>
                 </nav>
