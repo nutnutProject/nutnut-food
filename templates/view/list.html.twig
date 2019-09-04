@@ -25,6 +25,12 @@
                         {% else %}
                             <li class="breadcrumb-item active">Recettes</li>
                         {% endif %}
+                        {% if current_diet %}
+                            <li class="breadcrumb-item active">{{ current_diet.name }}</li>
+                        {% else %}
+                            <li class="breadcrumb-item active">Recettes</li>
+                        {% endif %}
+                        
                     </ol>
                 </nav>
             </div>
@@ -44,7 +50,18 @@
                         {% endfor %}
                     </ul>
                 </div>
+                <div class="card bg-light mb-3">
+                    <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Tag</div>
+                    <ul class="list-group category_block">
+                        {% for diet in diets %}
+                            <li class="list-group-item {{ current_diet == diet ? 'active' : '' }}">
+                                <a href="{{ path('diet_show', {slug: diet.slug}) }}">{{ diet.name }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>                
             </div>
+            
 
             <div class="col">
                 <div class="row">
@@ -55,7 +72,7 @@
                                 <div class="card-body">
                                     <h4 class="card-title"><a href="{{ path('recette_show', {slug: recette.slug}) }}" title="View Recette">{{ recette.title }}</a></h4>
                                     <p class="card-text">{{ recette.description }}</p>
-                                    <p class="card-text"></p>
+                                    <p class="card-text">{{recette.user.firstname}}</p>
 
                                     <div class="row">
                                         <div class="col">
