@@ -35,13 +35,19 @@ class LoginFromAuthenticator extends AbstractFormLoginAuthenticator
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
     }
-
+    
+    /**
+     * Guard doit fonctionner quand on est sur le login en POST.
+     */
     public function supports(Request $request)
     {
         return 'app_login' === $request->attributes->get('_route')
             && $request->isMethod('POST');
     }
 
+    /**
+     * On récupère la saisie dans la requête.
+     */
     public function getCredentials(Request $request)
     {
         $credentials = [
@@ -57,6 +63,11 @@ class LoginFromAuthenticator extends AbstractFormLoginAuthenticator
         return $credentials;
     }
 
+    /**
+     * On récupère l'utilisateur dans le provider
+     * S'il n'existe pas, on a une exception qui sera
+     * traduite en message d'erreur.
+     */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
@@ -74,21 +85,32 @@ class LoginFromAuthenticator extends AbstractFormLoginAuthenticator
         return $user;
     }
 
+    /**
+     * On vérifie la validité du mot de passe saisi.
+     */
     public function checkCredentials($credentials, UserInterface $user)
     {
         return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
 
+    /**
+     * Si l'utilisateur est bien connecté, on le redirige
+     * vers la liste des produits.
+     */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('recetterecette_index'));
+        return new RedirectResponse($this->urlGenerator->generate('home'));
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
     }
 
+    /**
+     * La classe mère de Guard s'en sert
+     * pour rediriger ici s'il y a une erreur.
+     */
     protected function getLoginUrl()
     {
         return '/login';
