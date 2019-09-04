@@ -23,10 +23,11 @@ class CategoryRepository extends ServiceEntityRepository
     public function findCategory()
     {
         return $this->createQueryBuilder('p')
-        ->orderBy('p.name', 'ASC')
-        ->getQuery()
-        ->getResult();
+            ->orderBy('p.name', 'ASC')
+            ->getQuery()
+            ->getResult();
     }
+
 
     // /**
     //  * @return Category[] Returns an array of Category objects

@@ -17,6 +17,7 @@
     </head>
 
     <body>
+    {% block nav %}
         <nav class="navbar navbar-expand-md navbar-light bg-light position-fixed w-100 sticky-top">
             <div class="container">
                 <a class="navbar-brand" href="index.html">
@@ -32,7 +33,7 @@
                             <a class="nav-link" href="index.html">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="category.html">Recettes</a>
+                            <a class="nav-link" href="{{path('recettes_list') }}">Recettes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="contact.html">Contact</a>
@@ -45,9 +46,9 @@
                 </div>
             </div>
         </nav>
+        {% endblock %}
+        
         {% block body %}
-        
-        
         {% endblock %}
 
 
