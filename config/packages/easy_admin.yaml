@@ -14,9 +14,6 @@ easy_admin:
                     - { property: diet }
                     - { property: category }
 
-
-
-
         User:
             class: App\Entity\User
 

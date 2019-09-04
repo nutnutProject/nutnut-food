@@ -70,6 +70,22 @@ class AppFixtures extends Fixture
             $manager->persist($note);
         }
 
+
+        $diets = [];
+        $dietNames = [
+            'Vegetarien',
+            'Vegan',
+            'Hallal',
+            'Carne'
+        ];
+        foreach($dietNames as $name)
+        {
+            $diet = new Diet();
+            $diet->setName($name);
+            $diets[] = $diet;
+            $manager->persist($diet);
+        }
+
         $categories = [];
         $names = [
             'Aperitif',
@@ -97,23 +113,13 @@ class AppFixtures extends Fixture
             $recette->setCreationDate($date);
             $recette->setNote($notes[rand(0,9)]);
             $recette->setCategory($categories[rand(0,3)]);
+            $recette->addDiet($diets[rand(0,3)]);
             $recette->setUser($users[rand(0,9)]);
             $recettes[] = $recette;
             $manager->persist($recette);
         }
 
-        $dietNames = [
-            'Vegetarien',
-            'Vegan',
-            'Hallal',
-            'Carne'
-        ];
-        foreach($dietNames as $name)
-        {
-            $diet = new Diet();
-            $diet->setName($name);
-            $manager->persist($diet);
-        }
+
 
         for($i = 0 ; $i < 10 ; $i++)
         {

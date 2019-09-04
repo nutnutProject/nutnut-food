@@ -8,6 +8,7 @@ use App\Repository\DietRepository;
 use App\Repository\RecetteRepository;
 use App\Repository\UserRepository;
 use \App\Entity\User;
+use Directory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,6 +34,7 @@ class ViewController extends AbstractController
         $diets = $dietRepository->findAll();
 
 
+
         return $this->render('view/list.html.twig', [
             'recettes' => $recettes,
             'categories' => $categories,
@@ -50,7 +52,6 @@ class ViewController extends AbstractController
 
         return $this->render('view/show_recette.html.twig', [
             'recette' => $recette,
-
         ]);
     }
 

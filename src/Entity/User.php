@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -137,6 +138,20 @@ class User implements UserInterface
         $this->userRequests = new ArrayCollection();
     }
 
+    /**
+     * Permet de transformer la birthdate en age
+     */
+    public function getAge()
+    {
+        $now = new DateTime('now');
+        $age = $this->getBirthdate();
+        $difference = $now->diff($age);
+
+       return $difference->format('%y ans');
+    }
+
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -173,7 +188,7 @@ class User implements UserInterface
 
     public function setBirthdate(\DateTimeInterface $birthdate): self
     {
-        $this->birthdate = $birthdate;
+
 
         return $this;
     }
