@@ -23,22 +23,22 @@ class ViewController extends AbstractController
     /**
      * @Route("/recettes", name="recettes_list")
      */
-    public function list(RecetteRepository $recetteRepository, CategoryRepository $categoryRepository, UserRepository $userRepository, DietRepository $dietRepository)
+    public function list(RecetteRepository $recetteRepository, CategoryRepository $categoryRepository, DietRepository $dietRepository)
     {
         // Trouver toutes les recettes
         $recettes = $recetteRepository->findAll();
         // Trouver toutes les categories
         $categories = $categoryRepository->findAll();
+        //Trouver tous les diets
+        $diets = $dietRepository->findAll();
 
-        // Trouver le user de la recette
-
-            
-        
 
         return $this->render('view/list.html.twig', [
             'recettes' => $recettes,
             'categories' => $categories,
+            'diets' => $diets,
             'current_category' => false,
+            'current_diet' => false,
         ]);
     }
 
