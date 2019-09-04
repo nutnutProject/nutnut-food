@@ -111,38 +111,27 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
-        // Modification de l'entrée utilisateur dans la bdd avec suppresion de la valeur du champ activateToken
-
-        try{
-            $user->setActivateToken("");
-            $user->setAccountActivate(true);
-            $entityManager->flush();
-
-        } catch (\Exception $e) {
-            $this->addFlash('warning', $e->getMessage());
-            return $this->redirectToRoute('home');
-        }
-
-
+        // Teste du token
         if (($user->getActivateTokenExpire() - time()) < 0)
-        {
-            $user->setActivateToken("");
-            $user->setAccountActivate(true);
-            $entityManager->flush();
-
-            $this->addFlash('success', 'Votre compte a bien été activé. Vous pouvez maintenant vous connecter.');
-        }
-        else
         {
             $this->addFlash('alert', 'Votre token a expiré');
         }
+        else
+        {
+            // Modification de l'entrée utilisateur dans la bdd avec suppresion de la valeur du champ activateToken
+            try{
+                $user->setActivateToken("");
+                $user->setAccountActivate(true);
+                $entityManager->flush();
 
-        $this->redirectToRoute('home'); 
+                $this->addFlash('success', 'Votre compte a bien été activé. Vous pouvez maintenant vous y connecter.');
 
-
-
+            } catch (\Exception $e) {
+                $this->addFlash('warning', $e->getMessage());
+                return $this->redirectToRoute('home');
+            }
+        }
         return $this->redirectToRoute('home'); 
-
     }
 
     /**
@@ -226,9 +215,6 @@ class SecurityController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
 
         $user = $entityManager->getRepository(User::class)->findOneBy(['pwd_token' => $token]);
-        /* @var $user User */
-
- 
 
         if ($user == null) {
             $this->addFlash('danger', 'Token Inconnu');
@@ -242,14 +228,14 @@ class SecurityController extends AbstractController
             {
                 if (($user->getActivateTokenExpire() - time()) < 0)
                 {
+                    $this->addFlash('alert', 'Votre token a expiré');
+                }
+                else
+                {
                     $user->setPassword($this->passwordEncoder->encodePassword($user, $user->getPassword()));
                     $entityManager->flush();
                 
                     $this->addFlash('success', 'Le mot de passe a bien été modifié.');
-                }
-                else
-                {
-                    $this->addFlash('alert', 'Votre token a expiré');
                 }
             }
             else
