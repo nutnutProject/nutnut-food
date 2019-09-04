@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Diet;
 use App\Form\DietType;
+use App\Repository\CategoryRepository;
 use App\Repository\DietRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,6 +16,29 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class DietController extends AbstractController
 {
+    /**
+     * @Route("/{slug}", name="diet_show")
+     * 
+     * Route servant à afficher les tags en même temps que les catégories et recettes
+     */
+    public function dietShow(Diet $diet, DietRepository $dietRepository, CategoryRepository $categoryRepository)
+    {
+        //Permet d'avoir les recettes par tag
+        $recettes = $diet->getRecettes();
+        $diets = $dietRepository->findAll();
+
+        //Récupère les catégories
+        $categories = $categoryRepository->findAll();
+
+        return $this->render('view/list.html.twig', [
+            'recettes'=> $recettes,
+            'categories' => $categories,
+            'diets' => $diets,
+            'current_diet' => $diet,
+            'current_category' => false,
+        ]);
+    }
+
     /**
      * @Route("/", name="diet_index", methods={"GET"})
      */
@@ -49,7 +73,7 @@ class DietController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="diet_show", methods={"GET"})
+     * @Route("/{id}", name="diet_read", methods={"GET"})
      */
     public function show(Diet $diet): Response
     {
