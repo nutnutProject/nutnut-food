@@ -37,6 +37,9 @@ class SecurityController extends AbstractController
 
             $user->setPwdToken($pwd_token);
             $user->setActivateToken($activateToken);
+            $user->setPwdTokenExpire(time()+3600);
+            $user->setActivateTokenExpire(time()+3600);
+            $user->setAccountActivate(false);
 
             // Remplissage du rôle utilisateur
             $user->setRoles('[ROLE_USER]');
@@ -71,6 +74,8 @@ class SecurityController extends AbstractController
             $mailer->send($message);
 
             $this->addFlash('success', 'Votre inscription a été prise en compte. Un email vous a été envoyé. Merci de confirmer votre inscription en cliquant sur le lien contenu dans ce mail.');
+
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('security/registration.html.twig',[
@@ -84,18 +89,33 @@ class SecurityController extends AbstractController
      */
     public function activation($token)
     {
+     
         // Récupérer le repository de l'entité User
         $entityManager = $this->getDoctrine()->getManager();
         $user = $entityManager->getRepository(User::class)->findOneBy(['activateToken' => $token]);
 
+        if($user === null)
+        {
+            // Le champ 'activateToken' n'a pas été trouvé dans la table 'User"
+            return $this->redirectToRoute('home');
+        }
+
         // Modification de l'entrée utilisateur dans la bdd avec suppresion de la valeur du champ activateToken
-        $user->setActivateToken("");
-        // Enregistrement
-        $entityManager->flush();
+        try{
+            $user->setActivateToken("");
+            $user->setAccountActivate(true);
+            $entityManager->flush();
+
+        } catch (\Exception $e) {
+            $this->addFlash('warning', $e->getMessage());
+            return $this->redirectToRoute('home');
+        }
 
         $this->addFlash('success', 'Votre compte a bien été activé. Vous pouvez maintenant vous connecter.');
 
-        $this->redirectToRoute('home');
+        $this->redirectToRoute('home'); 
+
+
     }
 
     /**
@@ -115,6 +135,15 @@ class SecurityController extends AbstractController
             'last_username' => $lastUsername,
             'error' => $error
         ]);
+    }
+
+    /**
+     * @Route("/",name="forget_password")
+     */
+
+    public function forgetPassword()
+    {
+
     }
 }
 // Tu vas y arriver Pierre !

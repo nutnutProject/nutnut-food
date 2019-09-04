@@ -116,6 +116,21 @@ class User implements UserInterface
      */
     private $userRequests;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $pwd_token_expire;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $activateToken_expire;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $account_activate;
+
     public function __construct()
     {
         $this->recettes = new ArrayCollection();
@@ -359,6 +374,42 @@ class User implements UserInterface
                 $userRequest->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPwdTokenExpire(): ?int
+    {
+        return $this->pwd_token_expire;
+    }
+
+    public function setPwdTokenExpire(int $pwd_token_expire): self
+    {
+        $this->pwd_token_expire = $pwd_token_expire;
+
+        return $this;
+    }
+
+    public function getActivateTokenExpire(): ?int
+    {
+        return $this->activateToken_expire;
+    }
+
+    public function setActivateTokenExpire(int $activateToken_expire): self
+    {
+        $this->activateToken_expire = $activateToken_expire;
+
+        return $this;
+    }
+
+    public function getAccountActivate(): ?bool
+    {
+        return $this->account_activate;
+    }
+
+    public function setAccountActivate(bool $account_activate): self
+    {
+        $this->account_activate = $account_activate;
 
         return $this;
     }
