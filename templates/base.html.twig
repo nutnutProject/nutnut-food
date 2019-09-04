@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
@@ -20,7 +20,7 @@
     {% block nav %}
         <nav class="navbar navbar-expand-md navbar-light bg-light position-fixed w-100 sticky-top">
             <div class="container">
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="{{path('home')}}">
                     <img src="img/logo.png" height="30" alt="mdb logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,20 +28,26 @@
                 </button>
 
                 <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+                    {% set current_route = app.request.attributes.get('_route') %}
+
                     <ul class="navbar-nav m-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="index.html">Accueil</a>
+                        <li class="nav-item {{ current_route == 'home' ? 'active' : '' }}">
+                            <a class="nav-link" href="{{path('home')}}">Accueil</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item {{ current_route == 'recettes_list' ? 'active' : '' }}">
                             <a class="nav-link" href="{{path('recettes_list') }}">Recettes</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item {{ current_route == 'contact' ? 'active' : '' }}">
                             <a class="nav-link" href="contact.html">Contact</a>
                         </li>
                     </ul>
 
                     <div class="my-2 my-lg-0">
-                        <button type="button" class="btn btn-outline-danger waves-effect"  data-toggle="modal" data-target="#login">Login</button>
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <a type="button" class="btn btn-outline-danger waves-effect" href="{{path('app_logout')}}">Logout</a>
+                        {% else %}
+                            <button type="button" class="btn btn-outline-danger waves-effect"  data-toggle="modal" data-target="#login">Login</button>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -58,17 +64,21 @@
                     </div>
                     <!-- Formulaire de connexion -->
                     <div class="modal-body">
-                        <form>
+
+
+                        <form method="post" action="{{ path('app_login') }}">
                             <div class="md-form">
                                 <i class="fas fa-user prefix"></i>
-                                <input type="text" id="inputIconEx2" class="form-control">
-                                <label for="inputIconEx2">E-mail </label>
+                                <input type="text" value="" name="username" id="inputUsername" class="form-control" required autofocus>
+                                <label for="inputUsername">E-mail </label>
                             </div>
                             <div class="md-form">
                                 <i class="fas fa-lock prefix"></i>
-                                <input type="password" id="inputValidationEx2" class="form-control validate">
-                                <label for="inputValidationEx2" data-error="wrong" data-success="right">Mot de passe</label>
+                                <input type="password" name="password" id="inputPassword" class="form-control" required>
+                                <label for="inputPassword">Mot de passe</label>
                             </div>
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
                             <div class="form-group form-check">
                                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                                 <label class="form-check-label" for="exampleCheck1">Se souvenir de moi</label>
@@ -85,9 +95,7 @@
         </div>
         {% endblock %}
         
-
-
-        {% block body %}
+        <div class="flash">
         {# Affiche tous les messages flash de notre application #}
         {% for type, messages in app.flashes %}
             {% for message in messages %}
@@ -96,6 +104,11 @@
                 </div>
             {% endfor %}
         {% endfor %}
+        </div>
+        
+        {% block body %}
+
+
 
         {% endblock %}
 
