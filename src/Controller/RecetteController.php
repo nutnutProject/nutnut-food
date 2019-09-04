@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class RecetteController extends AbstractController
 {
     /**
-     * @Route("/", name="recette_index", methods={"GET"})
+     * @Route("/", name="recette", methods={"GET"})
      */
     public function index(RecetteRepository $recetteRepository): Response
     {
@@ -24,6 +24,7 @@ class RecetteController extends AbstractController
             'recettes' => $recetteRepository->findAll(),
         ]);
     }
+
 
     /**
      * @Route("/new", name="recette_new", methods={"GET","POST"})
@@ -49,7 +50,7 @@ class RecetteController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="recette_show", methods={"GET"})
+     * @Route("/{id}", name="recette_read", methods={"GET"})
      */
     public function show(Recette $recette): Response
     {

@@ -10,13 +10,30 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/category")
- */
+
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("/", name="category_index", methods={"GET"})
+     * @Route("/category/{slug}", name="category")
+     * 
+     * Route servant a afficher les catégories en même temps que les recettes
+     */
+    public function categoryShow(Category $category,
+        CategoryRepository $categoryRepository
+    ) {
+        // Permet d'avoir les recettes par catégories
+        $recettes = $category->getRecettes();
+        $categories = $categoryRepository->findAll();
+        return $this->render('view/list.html.twig', [
+            'recettes' => $recettes,
+            'categories' => $categories,
+            // Permet de retrouver la route courante
+            'current_category' => $category,
+            
+        ]);
+    }
+    /**
+     * @Route("/admin", name="category_index", methods={"GET"})
      */
     public function index(CategoryRepository $categoryRepository): Response
     {
@@ -25,8 +42,9 @@ class CategoryController extends AbstractController
         ]);
     }
 
+
     /**
-     * @Route("/new", name="category_new", methods={"GET","POST"})
+     * @Route("/admin/new", name="category_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -49,7 +67,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="category_show", methods={"GET"})
+     * @Route("/admin/{id}", name="category_read", methods={"GET"})
      */
     public function show(Category $category): Response
     {
@@ -59,7 +77,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="category_edit", methods={"GET","POST"})
+     * @Route("/admin/{id}/edit", name="category_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Category $category): Response
     {
@@ -79,7 +97,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="category_delete", methods={"DELETE"})
+     * @Route("/admin/{id}", name="category_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Category $category): Response
     {

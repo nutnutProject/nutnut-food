@@ -47,7 +47,8 @@ class AppFixtures extends Fixture
             $user->setCp('59000');
             $user->setTelephone('0320400000');
             $user->setDescription('Description'. $i);            
-            $user->setPwdToken('xxxxxxxx');            
+            $user->setPwdToken('xxxxxxxx');
+            $user->setActivateToken('xxxxxxxx');            
             $users[] = $user;
             $manager->persist($user);
         }
@@ -82,7 +83,7 @@ class AppFixtures extends Fixture
         for($i=0; $i<10;$i++)
         {
             $recette = new Recette();
-            $recette->setTitle('Titre '.$i);
+            $recette->setTitle('Mon poulet coco '.$i);
             $recette->setPhoto('no-photo.jpg');
             $recette->setDescription('Description de la recette '.$i);
             $recette->setOnline(false);

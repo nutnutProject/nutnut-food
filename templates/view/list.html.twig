@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">
+                {# if we are on /category/{slug} or /products ? #}
+                {{ current_category ? current_category.name : 'Recettes' }}
+            </h1>
+            <p class="lead text-muted mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, veniam, eius aliquam quidem rem sunt nam quaerat facilis ex error placeat ipsa illo sed inventore soluta ipsum cumque atque ea?</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ path('home') }}">Accueil</a></li>
+                        {# if we are on /category/{slug} or /products ? #}
+                        {% if current_category %}
+                            <li class="breadcrumb-item"><a href="{{ path('recettes_list') }}">Recettes</a></li>
+                            <li class="breadcrumb-item active">{{ current_category.name }}</li>
+                        {% else %}
+                            <li class="breadcrumb-item active">Recettes</li>
+                        {% endif %}
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+ <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-3">
+                <div class="card bg-light mb-3">
+                    <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Catégories</div>
+                    <ul class="list-group category_block">
+                        {% for category in categories %}
+                            <li class="list-group-item {{ current_category == category ? 'active' : '' }}">
+                                <a href="{{ path('category', {slug: category.slug}) }}">{{ category.name }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="row">
+                    {% for recette in recettes %}
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="card">
+                                <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
+                                <div class="card-body">
+                                    <h4 class="card-title"><a href="{{ path('recette_show', {slug: recette.slug}) }}" title="View Recette">{{ recette.title }}</a></h4>
+                                    <p class="card-text">{{ recette.description }}</p>
+                                    <p class="card-text"></p>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            
+                                       
+                                            {# <p class="cart-text"> {{recette.user_id}}</p> #}
+                                          
+                                        </div>
+                                        {# <div class="col">
+                                            <a href="{{ path('cart_add', {id: recette.id} ) }}" class="btn btn-success btn-block">Ajouter au panier</a>
+                                        </div> #}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <div class="col-12">
+                        <nav aria-label="...">
+                            <ul class="pagination">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1">Précédent</a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item active">
+                                    <a class="page-link" href="#">2</a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Suivant</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
