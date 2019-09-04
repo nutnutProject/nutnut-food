@@ -1,0 +1,33 @@
+easy_admin:
+   entities:
+        Recette:
+            class: App\Entity\Recette
+            form:
+                fields: 
+                    - { property: title }
+                    - { property: photo }
+                    - { property: description }
+                    - { property: validate }
+                    - { property: creation_date }
+                    - { property: note }
+                    - { property: user }
+                    - { property: diet }
+                    - { property: category }
+
+
+
+
+        User:
+            class: App\Entity\User
+
+        Category:
+            class: App\Entity\Category
+
+        Diet:
+            class: App\Entity\Diet
+
+        Note:
+            class: App\Entity\Note
+
+
+

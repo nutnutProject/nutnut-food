@@ -23,7 +23,7 @@ class Diet
     /**
      * @ORM\Column(type="string", length=45)
      * @Assert\NotBlank()
-     * @Assert\Length(min=5)
+     * @Assert\Length(min=3)
      */
     private $name;
 
@@ -100,5 +100,11 @@ class Diet
         }
 
         return $this;
+    }
+
+        // Sert à convertir les entités en string IMPERATIF pour EasyAdminBundle
+    public function __toString()
+    {
+        return $this->name;
     }
 }
