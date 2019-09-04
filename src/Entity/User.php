@@ -9,6 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
+
+// 04/09/19
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
