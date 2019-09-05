@@ -102,7 +102,7 @@ class AppFixtures extends Fixture
         }
 
         $recettes = [];
-        for($i=0; $i<50;$i++)
+        for($i=0; $i<200;$i++)
         {
             $recette = new Recette();
             $recette->setTitle('Mon poulet coco '.$i);
