@@ -36,41 +36,63 @@
             </ol>
         </nav>
 
+
         
         {{ form_start(form, {'attr': {'class': 'text-center border border-light p-5'}})}}
         <p class="h1 mb-4">Inscription</p>
     
         <div class="form-row mb-4">
-            <div class="col">
-                <!-- First name -->
-                {{ form_widget(form.firstname, {'attr': {'class': 'form-control','placeholder': 'Prénom'}}) }}
+
+            <div class="col-sm-6 col-lg-6 ">
+                {{ form_widget(form.firstname, {'attr': {'class': 'form-control mb-4','placeholder': 'Prénom'}}) }}
             </div>
-            <div class="col">
+
+          <div class="col-sm-6 col-lg-6 ">
         {{ form_widget(form.lastname, {'attr': {'class': 'form-control mb-4','placeholder': 'Nom'}} ) }}
-        </div>
-
-        {{ form_widget(form.username, {'attr': {'class': 'form-control mb-4','placeholder': 'Adresse email'}} ) }}
-
-        {{ form_widget(form.birthdate, {'attr': {'class': 'form-control'}})}}
-
-        {{ form_widget(form.password, {'attr': {'class': 'form-control','placeholder':'Mot de passe'}})}}
-        <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4"></small>
-    
-        {{ form_widget(form.adresse, {'attr': {'class': 'form-control mb-4','placeholder':'Adresse'}})}}
-        <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4"></small>
-
-        <div class="form-row mb-4">
-            <div class="col">
-        {{ form_widget(form.city, {'attr': {'class': 'form-control','placeholder':'Ville'}})}}
             </div>
-            <div class="col">
-        {{ form_widget(form.cp, {'attr': {'class': 'form-control','placeholder':'Code postal'}})}}
+
+            <div class="col-12">
+        {{ form_widget(form.username, {'attr': {'class': 'form-control mb-4','placeholder': 'Adresse email'}} ) }}
+            </div>
+            
+          
+
+           
+            <div class="col-12">
+        {{ form_widget(form.password, {'attr': {'class': 'form-control mb-4','placeholder':'Mot de passe'}})}}
+        <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4"></small>
+            </div>
+
+            <div class="col-12">
+        {{ form_widget(form.adresse, {'attr': {'class': 'form-control mb-4','placeholder':'Adresse'}})}}
+            <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4"></small>
+            </div>
+
+        
+
+            <div class="col-sm-6 col-lg-6 ">
+        {{ form_widget(form.city, {'attr': {'class': 'form-control mb-4','placeholder':'Ville'}})}}
+            </div>
+
+            <div class="col-sm-6 col-lg-6 ">
+        {{ form_widget(form.cp, {'attr': {'class': 'form-control mb-4','placeholder':'Code postal'}})}}
         </div>
 
+            <div class="col-12">
         {{ form_widget(form.telephone, {'attr': {'class': 'form-control mb-4','placeholder': 'Téléphone'}} ) }}
+        </div>
 
+            <div class="col-12">
+        <label for="textarea" class="active text-center">Inserez votre date de naissance</label>
+
+        {{ form_widget(form.birthdate, {'attr': {'class': 'form mb-4','placeholder': 'Date de naissance'}})}}
+            </div>
+
+
+            <div class="col-12">
         <label for="textarea" class="active text-center">Décrivez vous en quelques mots</label>
         {{ form_widget(form.description, {'attr': {'class': 'form-control mb-4','id': 'textarea','placeholder': 'Description'}})}}
+        </div>
 
 
         <button class="btn btn-info my-4 btn-block" type="submit">Inscription</button>

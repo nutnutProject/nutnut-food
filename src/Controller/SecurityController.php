@@ -54,7 +54,7 @@ class SecurityController extends AbstractController
 
 
             // Remplissage du rôle utilisateur
-            $user->setRoles('[ROLE_USER]');
+            $user->setRoles('ROLE_USER');
 
             // Enregistrement dans la bdd
             $entityManager = $this->getDoctrine()->getManager();
