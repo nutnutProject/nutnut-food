@@ -170,7 +170,7 @@ class SecurityController extends AbstractController
             $user = $entityManager->getRepository(User::class)->findOneByUsername($username);
 
             if ($user === null) {
-                $this->addFlash('danger', 'Email Inconnu');
+                $this->addFlash('danger', 'Si un compte existe avec cette adresse email, un email vous sera envoyé.');
                 return $this->redirectToRoute('home');
             }
 
@@ -201,7 +201,7 @@ class SecurityController extends AbstractController
                 ->setBody($body);
             $mailer->send($message);
             
-            $this->addFlash('notice', 'Mail envoyé');
+            $this->addFlash('notice', 'Si un compte existe avec cette adresse email, un email vous sera envoyé.');
  
             return $this->redirectToRoute('home');
 
