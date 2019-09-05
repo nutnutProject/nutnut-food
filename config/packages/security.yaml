@@ -21,8 +21,8 @@ security:
                     - App\Security\LoginFromAuthenticator
                     
             form_login:
-                login_path: login
-                check_path: login
+                login_path: app_login
+                check_path: app_login
             logout:
                 path: app_logout
                 # where to redirect after logout
@@ -45,4 +45,4 @@ security:
     access_control:
         - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/profile, roles: ROLE_USER }
-        #- { path: ^/back, roles: ROLE_ADMIN }
+        - { path: ^/back, roles: ROLE_ADMIN }
