@@ -112,12 +112,11 @@
 
                         <div class="view overlay">
                                 <img src="img/salad.jpg" class="img-fluid " alt="smaple image">
-                                <p class="mask flex-center rgba-red-strong">
-                                    <p class="white-text">{{category.name}}</p>
+                                <p class="mask flex-center rgba-red-strong white-text">{{category.name}}</p>
                         </div>
+                        <p class="sub-vign"><a href="{{ path('category_show', {slug: category.slug})}}" title="View Product">Voir les {{category.name}} →</a></p>
 
                     </div>
-                        <p class="sub-vign"><a href="{{ path('category_show', {slug: category.slug})}}" title="View Product">Voir les {{category.name}} →</a></p>
                 {% endfor %}
             </div>
                 
