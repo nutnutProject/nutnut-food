@@ -58,7 +58,7 @@ class ViewController extends AbstractController
     }
 
     /**
-     * @Route("/fooder/{firstname}.{id}", name="fooder_show")
+     * @Route("/fooder/{firstname}-{id}", name="fooder_show")
      * 
      * permet d'aller sur le profil d'un fooder
      */
