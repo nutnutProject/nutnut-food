@@ -15,16 +15,6 @@ class UserController extends AbstractController
 {
 
     /**
-     * @Route("/user", name="user_index", methods={"GET"})
-     */
-    public function index(UserRepository $userRepository): Response
-    {
-        return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll(),
-        ]);
-    }
-
-    /**
      * @Route("/user/new", name="user_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
@@ -48,7 +38,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/user/{id}", name="user_show", methods={"GET"})
+     * @Route("/moncompte/{id}", name="user")
      */
     public function show(User $user): Response
     {
@@ -58,7 +48,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/user/{id}/edit", name="user_edit", methods={"GET","POST"})
+     * @Route("/moncompte/{id}/edit", name="user_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, User $user): Response
     {

@@ -36,8 +36,8 @@ class AppFixtures extends Fixture
             $roles = (1 === $i) ? ['ROLE_ADMIN'] : ['ROLE_USER'];
             $user->setUsername($username);
             $user->setRoles($roles);
-            $user->setFirstname('Firstname '.$i);
-            $user->setLastname('Lastname '.$i);
+            $user->setFirstname('Monique'.$i);
+            $user->setLastname('Poteau '.$i);
             $user->setBirthdate($date);
             $user->setPassword(
                 $this->passwordEncoder->encodePassword($user, 'test')
@@ -46,7 +46,7 @@ class AppFixtures extends Fixture
             $user->setCity('Lille');
             $user->setCp('59000');
             $user->setTelephone('0320400000');
-            $user->setDescription('Description'. $i);            
+            $user->setDescription('La journée je sauve le monde et pour me detendre de fait des petits plats.'. $i);            
             $user->setPwdToken('xxxxxxxx'.$i);
             $user->setActivateToken('xxxxxxxxx'.$i);
             $user->setPwdTokenExpire(time()+3600);
@@ -60,7 +60,7 @@ class AppFixtures extends Fixture
         }
 
         $notes = [];
-        for($i = 0 ; $i < 10 ; $i++)
+        for($i = 0 ; $i < 50 ; $i++)
         {
             $note = new Note();
             $note->setNote(rand(0,10));
@@ -102,12 +102,12 @@ class AppFixtures extends Fixture
         }
 
         $recettes = [];
-        for($i=0; $i<10;$i++)
+        for($i=0; $i<50;$i++)
         {
             $recette = new Recette();
             $recette->setTitle('Mon poulet coco '.$i);
             $recette->setPhoto('no-photo.jpg');
-            $recette->setDescription('Description de la recette '.$i);
+            $recette->setDescription('Je fais des quiches au saumon depuis que je suis enfant, recette de ma grand-mere..'.$i);
             $recette->setOnline(false);
             $recette->setValidate(false);
             $recette->setCreationDate($date);
