@@ -147,7 +147,11 @@ class SecurityController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
         
-        $this->addFlash('alert', $error->getMessageKey());
+        if ($error)
+        {
+            $this->addFlash('alert', $error->getMessageKey());
+        }
+        
         
         return $this->redirectToRoute('home');
     }

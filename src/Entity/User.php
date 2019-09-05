@@ -191,7 +191,7 @@ class User implements UserInterface
 
     public function setBirthdate(\DateTimeInterface $birthdate): self
     {
-
+        $this->birthdate = $birthdate;
 
         return $this;
     }

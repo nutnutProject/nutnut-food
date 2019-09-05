@@ -90,7 +90,17 @@ class LoginFromAuthenticator extends AbstractFormLoginAuthenticator
      */
     public function checkCredentials($credentials, UserInterface $user)
     {
-        return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
+        
+        if ($this->passwordEncoder->isPasswordValid($user, $credentials['password']))
+        {
+            if ($user->getAccountActivate() === false)
+            {
+                throw new CustomUserMessageAuthenticationException('Le compte n\'est pas activé.');
+            }
+            return true;
+        }
+       
+        return false;
     }
 
     /**
