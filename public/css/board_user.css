@@ -1,0 +1,15 @@
+.checked {
+    color: orange;
+  }
+
+#board{
+    padding-top: 50px;
+}
+
+.card-img-top-user{
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 11px;
+  margin-bottom: 13px;
+}
