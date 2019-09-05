@@ -14,11 +14,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     /**
-     * @Route ("/moncompte/mes-recettes", name="user_recettes")
+     * @Route ("/moncompte/{id}/mes-recettes", name="user_recettes")
      */
     public function userRecette(User $user)
     {
-        return $this->render('user/show.html.twig', [
+        return $this->render('user/user_mes_recettes.html.twig', [
             'user' => $user,
         ]);
     }
