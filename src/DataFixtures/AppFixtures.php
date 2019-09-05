@@ -33,7 +33,7 @@ class AppFixtures extends Fixture
         {           
             $user = new User();
             $username = (1 === $i) ? 'matthieu' : 'user-'.$i;
-            $roles = (1 === $i) ? ['ROLE_ADMIN'] : ['ROLE_USER'];
+            $roles = (1 === $i) ? 'ROLE_ADMIN' : 'ROLE_USER';
             $user->setUsername($username);
             $user->setRoles($roles);
             $user->setFirstname('Monique'.$i);
