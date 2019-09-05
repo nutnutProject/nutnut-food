@@ -2,34 +2,41 @@
 
     {% block body %}
 
-                <div class="container border border-grey rounded mb-3">
-                <h2>Recettes proposées :</h2>
-                <div class="row mx-auto mb-3">
-
-                 {% for recette in user.recettes %}
-                <div class="card col-sm-6 col-md-4 col-lg-3 mx-auto mb-3" style="width: 18rem;">
-               
-                    
-
-                    <img class="card-img-top" src="{{asset('img/junk.jpg')}}" alt="Card image cap">
-                    <div class="card-body d-flex flex-column">
-                        <h4 class="card-title"><a href="{{ path('recette_show', {slug: recette.slug}) }}" title="View Product">{{recette.title}}</a></h4>
-                        <div class="rating">
-                            <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
-                            <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
-                            <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
-                            <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
-
-
-                         <p class="card-text">{{recette.note.note}}</p>
-
-                        </div>
-                        <p class="card-text">{{recette.description}}</p>
+    <!-- Tableau de bord -->
+        <div class="container mt-5 mb-3" id="board">
+            <h2>Mes recettes</h2>    
+            <div class="row">
+                <div class="col-lg-4 mt-5">
+                    <div class="list-group" id="list-tab" role="tablist">
+                        <a class="list-group-item list-group-item-action active" id="list-home-list" href="board_user.html">Tableau de bord</a>
+                        <a class="list-group-item list-group-item-action" id="list-profile-list" href="profil_user.html">Mon profil</a>
+                        <a class="list-group-item list-group-item-action active" id="list-creation-list" href="creation_recette.html">Mes recettes</a>
+                        <a class="list-group-item list-group-item-action" id="list-interest-list" href="interest_user.html">Intêrets</a>
                     </div>
-                                
-                </div>       
+                </div> 
+                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-3 mt-3" id="ajout">
+                    <button type="button" class="btn btn-outline-success btn-lg">Ajouter une Recette</button> 
+                </div>
+            </div>
+        </div>
+
+        <div class="container border border-grey rounded mb-3">
+            <h2>Mes recettes en cours :</h2>
+                {% for recette in user.recettes %}
+                <div class="row mx-auto mb-3">
+                    <div class="card col-sm-6 col-md-4 col-lg-3 mx-auto mb-3" style="width: 18rem;">
+                        <img class="card-img-top" src="{{ asset(recette.photo) }}" alt="Card image cap">
+                        <div class="card-body d-flex flex-column">
+                            <h4 class="card-title"><a href="product.html" title="View Product">{{recette.title}}</a></h4>
+                            <div class="rating">
+                                <span class=""><img src="{{asset('img/noix-check.png')}}">{{recette.note.note}}</span>
+                            </div>
+                            <p class="card-text">{{recette.description}}</p>
+                        </div>
+                    </div>
+                </div>
                {% endfor %}
-            </div>  
+        </div>  
 
     {% endblock %}     
                     
