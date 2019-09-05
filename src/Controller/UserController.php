@@ -13,14 +13,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
 {
-
     /**
-     * @Route("/user", name="user_index", methods={"GET"})
+     * @Route ("/moncompte/mes-recettes", name="user_recettes")
      */
-    public function index(UserRepository $userRepository): Response
+    public function userRecette(User $user)
     {
-        return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll(),
+        return $this->render('user/show.html.twig', [
+            'user' => $user,
         ]);
     }
 
@@ -48,7 +47,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/user/{id}", name="user_show", methods={"GET"})
+     * @Route("/moncompte/{id}", name="user", methods={"GET"})
      */
     public function show(User $user): Response
     {
@@ -58,7 +57,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/user/{id}/edit", name="user_edit", methods={"GET","POST"})
+     * @Route("/moncompte/{id}/edit", name="user_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, User $user): Response
     {
@@ -68,7 +67,9 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('user_index');
+            return $this->render('user/show.html.twig', [
+                'user' => $user,
+            ]);
         }
 
         return $this->render('user/edit.html.twig', [

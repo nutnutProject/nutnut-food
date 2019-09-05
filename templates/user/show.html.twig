@@ -1,66 +1,124 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User{% endblock %}
+{% block title %}Mon compte{% endblock %}
 
 {% block body %}
-    <h1>User</h1>
+        <div class="container mt-5 mb-3" id="board">
+            <h2>Tableau de bord</h2>
+            <div class="row">
+                <div class="col-lg-4 mt-5">
+                    <div class="list-group" id="list-tab">
+                        <a class="list-group-item list-group-item-action active" id="list-home-list" href="{{path('user', {id: user.id})}}">Tableau de bord</a>
+                        <a class="list-group-item list-group-item-action" id="list-profile-list" href="{{path('user_edit', {id: user.id} )}}">Modifier mon profil</a>
+                        <a class="list-group-item list-group-item-action" id="list-creation-list" href="creation_recette.html">Mes recettes</a>
+                        <a class="list-group-item list-group-item-action" id="list-interest-list" href="interest_user.html">Intêrets</a>
+                    </div>
+                </div>
+                <div class="col mb-5">
+                <div class="card mx-auto p-3 mb-3 mt-3">
+                        <img src="{{asset('img/wonder_icon.png')}}" class="card-img-top-user" alt="...">
+                        <div class="rating">
+                            <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
+                            <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
+                            <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
+                            <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Firstname</th>
-                <td>{{ user.firstname }}</td>
-            </tr>
-            <tr>
-                <th>Lastname</th>
-                <td>{{ user.lastname }}</td>
-            </tr>
-            <tr>
-                <th>Birthdate</th>
-                <td>{{ user.birthdate ? user.birthdate|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-            <tr>
-                <th>Adresse</th>
-                <td>{{ user.adresse }}</td>
-            </tr>
-            <tr>
-                <th>City</th>
-                <td>{{ user.city }}</td>
-            </tr>
-            <tr>
-                <th>Cp</th>
-                <td>{{ user.cp }}</td>
-            </tr>
-            <tr>
-                <th>Telephone</th>
-                <td>{{ user.telephone }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ user.description }}</td>
-            </tr>
-            <tr>
-                <th>Pwd_token</th>
-                <td>{{ user.pwdToken }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-        </tbody>
-    </table>
 
-    <a href="{{ path('user_index') }}">back to list</a>
+                        </div>
+                        <div class="card-body">
+                          <h4 class="card-title">{{user.firstname}} {{user.lastname}} </h4>
+                          <h5 class="card-title">{{user.age}}</h5>
+                          <h5 class="card-title">{{user.username}}</h5>
+                          <h5 class="card-title">{{user.city}}</h5>
+                          <h4 class="card-title">{{user.adresse}}</h4>
+                          <p class="card-text">{{user.description}}</p>
+                        </div>             
+                </div>
+                </div>
+            </div>
+        </div>
 
-    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+        <!-- Recettes proposées -->
+            <div class="container border border-grey rounded mb-3">
+                <h2>Recettes proposées :</h2>
+                <div class="row mx-auto mb-3">
+                 {% for recette in user.recettes %}
+                <div class="card col-sm-6 col-md-4 col-lg-3 mx-auto mb-3" style="width: 18rem;">
+               
+                    
 
-    {{ include('user/_delete_form.html.twig') }}
+                    <img class="card-img-top" src="{{asset('img/junk.jpg')}}" alt="Card image cap">
+                    <div class="card-body d-flex flex-column">
+                        <h4 class="card-title"><a href="{{ path('recette_show', {slug: recette.slug}) }}" title="View Product">{{recette.title}}</a></h4>
+                        <div class="rating">
+                            <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
+                            <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
+                            <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
+                            <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
+
+
+                         <p class="card-text">{{recette.note.note}}</p>
+
+                        </div>
+                        <p class="card-text">{{recette.description}}</p>
+                    </div>
+                                
+                </div>       
+               {% endfor %}
+            </div>       
+                    
+
+            <!-- Evenement auxquels j'ai participé -->
+            <div class="container border border-grey rounded mb-3">
+                <h2>Evenements terminés :</h2>
+                    <div class="row mx-auto">
+                        <div class="card col-sm-6 col-md-4 col-lg-3 mx-auto mb-3" style="width: 18rem;">
+                            <img class="card-img-top img-fluid" src="img/pizza.jpg" alt="Card image cap">
+                            <div class="card-body d-flex flex-column">
+                                <h4 class="card-title">Poulet Curry</h4>
+                                <div class="rating">
+                                    <span class=""><img src="img/noix-check.png"></span>
+                                    <span class=""><img src="img/noix-check.png"></span>
+                                    <span class=""><img src="img/noix-check.png"></span>
+                                    <span class=""><img src="img/noix.png"></span>
+                                    <span class=""><img src="img/noix.png"></span>
+                                </div>
+                                <p class="card-text">Je vous invite à découvrir ma fameuse recette de poulet au curry vert. Direction l'Inde!</p>
+                            </div>
+                        </div>
+                        <div class="card col-sm-6 col-md-4 col-lg-3 mx-auto mb-3" style="width: 18rem;">
+                            <img class="card-img-top img-fluid" src="img/pizza.jpg" alt="Card image cap">
+                            <div class="card-body d-flex flex-column">
+                                <h4 class="card-title">Burger Texan</h4>
+                                <div class="rating">
+                                    <span class=""><img src="img/noix-check.png"></span>
+                                    <span class=""><img src="img/noix-check.png"></span>
+                                    <span class=""><img src="img/noix-check.png"></span>
+                                    <span class=""><img src="img/noix-check.png"></span>
+                                    <span class=""><img src="img/noix.png"></span>
+                                </div>
+                                <p class="card-text">Je vous invite à découvrir ma fameuse recette de poulet au curry vert. Direction l'Inde!</p>
+                            </div>
+                        </div>
+                        <div class="card col-sm-6 col-md-4 col-lg-3 mx-auto mb-3" style="width: 18rem;">
+                            <img class="card-img-top img-fluid" src="img/pizza.jpg" alt="Card image cap">
+                            <div class="card-body d-flex flex-column">
+                                <h4 class="card-title">Banana Split</h4>
+                                <div class="rating">
+                                    <span class=""><img src="img/noix-check.png"></span>
+                                    <span class=""><img src="img/noix-check.png"></span>
+                                    <span class=""><img src="img/noix-check.png"></span>
+                                    <span class=""><img src="img/noix-check.png"></span>
+                                    <span class=""><img src="img/noix-check.png"></span>
+                                </div>
+                                <p class="card-text">Je vous invite à découvrir ma fameuse recette de poulet au curry vert. Direction l'Inde!</p>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+
+
+
+
 {% endblock %}

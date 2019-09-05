@@ -58,13 +58,13 @@ class ViewController extends AbstractController
     }
 
     /**
-     * @Route("/fooder/{id}", name="fooder_show")
+     * @Route("/fooder/{firstname}.{id}", name="fooder_show")
      * 
      * permet d'aller sur le profil d'un fooder
      */
     public function showFooder(User $user)
     {
-        return $this->render('fooder_view/show_fooder.html.twig', [
+        return $this->render('view/show_fooder.html.twig', [
             'user' => $user,
         ]);
     }
