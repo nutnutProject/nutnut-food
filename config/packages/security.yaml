@@ -16,6 +16,8 @@ security:
         main:
             anonymous: true
 
+            access_denied_handler: App\Security\AccessDeniedHandler
+            
             guard:
                 authenticators:
                     - App\Security\LoginFromAuthenticator
@@ -34,6 +36,7 @@ security:
                 # checkbox in the login form (see below), uncomment the
                 # following line to always enable it.
                 always_remember_me: true
+
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
 
