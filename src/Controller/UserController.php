@@ -13,6 +13,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
 {
+    /**
+     * @Route ("/moncompte/mes-recettes", name="user_recettes")
+     */
+    public function userRecette(User $user)
+    {
+        return $this->render('user/show.html.twig', [
+            'user' => $user,
+        ]);
+    }
 
     /**
      * @Route("/user/new", name="user_new", methods={"GET","POST"})
@@ -38,7 +47,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/moncompte/{id}", name="user")
+     * @Route("/moncompte/{id}", name="user", methods={"GET"})
      */
     public function show(User $user): Response
     {
@@ -58,7 +67,9 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('user_index');
+            return $this->render('user/show.html.twig', [
+                'user' => $user,
+            ]);
         }
 
         return $this->render('user/edit.html.twig', [
