@@ -3,13 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Recette;
+use \App\Entity\User;
+
 use App\Repository\CategoryRepository;
 use App\Repository\DietRepository;
 use App\Repository\RecetteRepository;
 use App\Repository\UserRepository;
-use \App\Entity\User;
-use Directory;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -52,6 +54,18 @@ class ViewController extends AbstractController
 
         return $this->render('view/show_recette.html.twig', [
             'recette' => $recette,
+        ]);
+    }
+
+    /**
+     * @Route("/fooder/{id}", name="fooder_show")
+     * 
+     * permet d'aller sur le profil d'un fooder
+     */
+    public function showFooder(User $user)
+    {
+        return $this->render('fooder_view/show_fooder.html.twig', [
+            'user' => $user,
         ]);
     }
 
