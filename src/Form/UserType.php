@@ -3,9 +3,8 @@
 namespace App\Form;
 
 use App\Entity\User;
-use DateInterval;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
@@ -23,7 +22,7 @@ class UserType extends AbstractType
             ->add('lastname', TextType::class)
             ->add('username', TextType::class)
             ->add('password', PasswordType::class)
-            ->add('birthdate', DateType::class)
+            ->add('birthdate', BirthdayType::class)
             ->add('adresse', TextType::class)
             ->add('city', TextType::class)
             ->add('cp', NumberType::class)

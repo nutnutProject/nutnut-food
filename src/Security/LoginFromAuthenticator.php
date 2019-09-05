@@ -81,7 +81,7 @@ class LoginFromAuthenticator extends AbstractFormLoginAuthenticator
             // fail authentication with a custom error
             throw new CustomUserMessageAuthenticationException('Username could not be found.');
         }
-
+        
         return $user;
     }
 
