@@ -1,8 +1,65 @@
-<div class="container">
+{# <div class="container"> #}
 
-{{ form_start(form) }}
+{# {{ form_start(form) }}
     {{ form_widget(form) }}
     <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
 
-</div>
+
+</div> #}
+{{ form_start(form, {'attr': {'class': 'text-center border border-light p-5'}}) }}
+        <p class="h1 mb-4">Mon profil</p>
+    
+        <div class="form-row mb-4">
+
+            <div class="col-sm-6 col-lg-6 ">
+                <label for="text" class="active text-center">Nouveau Prénom:</label>
+                {{ form_widget(form.firstname, {'attr': {'class': 'form-control mb-4','value': {{user.firstname}}}}) }}
+            </div>
+
+            <div class="col-sm-6 col-lg-6 ">
+                <label for="text" class="active text-center">Nouveau Nom:</label>
+                {{ form_widget(form.lastname, {'attr': {'class': 'form-control mb-4','value': {{user.lastname}}}} ) }}
+            </div>
+
+            <div class="col-12">
+                <label for="text" class="active text-center">Nouvel Email:</label>
+                {{ form_widget(form.username, {'attr': {'class': 'form-control mb-4','value': {{user.username}}}} ) }}
+            </div>
+            
+            <div class="col-12">
+                <label for="text" class="active text-center">Nouveau Mot de passe:</label>
+                {{ form_widget(form.password, {'attr': {'class': 'form-control mb-4','value':{{user.password}}}}) }}
+                <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4"></small>
+            </div>
+
+            <div class="col-12">
+                <label for="text" class="active text-center">Nouvelle addresse:</label>
+                {{ form_widget(form.adresse, {'attr': {'class': 'form-control mb-4','value':{{user.adresse}}}}) }}
+                <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4"></small>
+            </div>
+
+            <div class="col-sm-6 col-lg-6 ">
+                <label for="text" class="active text-center">Nouvelle ville:</label>
+                {{ form_widget(form.city, {'attr': {'class': 'form-control mb-4','value':{{user.city}}}}) }}
+            </div>
+
+            <div class="col-sm-6 col-lg-6 ">
+                <label for="text" class="active text-center">Nouveau Code Postal:</label>
+                {{ form_widget(form.cp, {'attr': {'class': 'form-control mb-4','value':{{user.cp}}}}) }}
+            </div>
+
+            <div class="col-12">
+                <label for="text" class="active text-center">Nouveau numéro:</label>
+                {{ form_widget(form.telephone, {'attr': {'class': 'form-control mb-4','value': {{user.telephone}}}}) }}
+            </div>
+
+            <div class="col-12">
+                <label for="textarea" class="active text-center">Nouvelle description:</label>
+                {{ form_widget(form.description, {'attr': {'class': 'form-control mb-4','id': 'textarea','value': {{user.description}}}}) }}
+            </div> 
+            
+            {# <button class="btn">{{ button_label|default('Save') }}</button> #}
+
+        </div>
+
+{{ form_end(form) }}
