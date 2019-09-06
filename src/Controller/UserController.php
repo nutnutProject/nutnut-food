@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Recette;
 use App\Entity\User;
+use App\Form\RecetteType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,35 +26,51 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/user/new", name="user_new", methods={"GET","POST"})
+     * @Route("/moncompte/{id}/mes-recettes/new", name="recette_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function newRecette(User $user, Request $request): Response
     {
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        $recette = new Recette();
+        $form = $this->createForm(RecetteType::class, $recette);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
+            $entityManager->persist($recette);
             $entityManager->flush();
 
-            return $this->redirectToRoute('user_index');
+            return $this->render('user/user_mes_recettes.html.twig', [
+                'user' => $user,
+            ]);
         }
 
-        return $this->render('user/new.html.twig', [
+        return $this->render('recette/new.html.twig', [
             'user' => $user,
+            'recette' => $recette,
             'form' => $form->createView(),
         ]);
     }
 
-    /**
-     * @Route("/moncompte/{id}", name="user", methods={"GET"})
+        /**
+     * @Route("/moncompte/{id}/mes-recettes/{slug}/edit", name="recette_edit", methods={"GET","POST"})
      */
-    public function show(User $user): Response
+    public function editRecette(Request $request, User $user, Recette $recette): Response
     {
-        return $this->render('user/show.html.twig', [
+        $form = $this->createForm(RecetteType::class, $recette);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->render('user/user_mes_recettes.html.twig', [
+                'user' => $user,
+            ]);
+        }
+
+        return $this->render('recette/edit.html.twig', [
             'user' => $user,
+            'recette' => $recette,
+            'form' => $form->createView(),
         ]);
     }
 

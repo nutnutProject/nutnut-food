@@ -16,7 +16,7 @@ class RecetteType extends AbstractType
     {
         $builder
             ->add('title',TextType::class)
-            ->add('photo',FileType::class)
+            ->add('photo',FileType::class, array('data_class' => null))
             ->add('category', null, [
                 'choice_label' => 'name'
             ])

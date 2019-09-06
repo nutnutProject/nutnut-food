@@ -26,28 +26,7 @@ class RecetteController extends AbstractController
     }
 
 
-    /**
-     * @Route("/new", name="recette_new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $recette = new Recette();
-        $form = $this->createForm(RecetteType::class, $recette);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($recette);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('recette_index');
-        }
-
-        return $this->render('recette/new.html.twig', [
-            'recette' => $recette,
-            'form' => $form->createView(),
-        ]);
-    }
 
     /**
      * @Route("/{id}", name="recette_read", methods={"GET"})
@@ -59,25 +38,7 @@ class RecetteController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}/edit", name="recette_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, Recette $recette): Response
-    {
-        $form = $this->createForm(RecetteType::class, $recette);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('recette_index');
-        }
-
-        return $this->render('recette/edit.html.twig', [
-            'recette' => $recette,
-            'form' => $form->createView(),
-        ]);
-    }
 
     /**
      * @Route("admin/{id}", name="recette_delete", methods={"DELETE"})
