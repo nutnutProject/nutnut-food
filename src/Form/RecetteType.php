@@ -26,7 +26,9 @@ class RecetteType extends AbstractType
             ])
             ->add('description', TextareaType::class)
             ->add('online')
+
         ;
+
     }
 
     public function configureOptions(OptionsResolver $resolver)
