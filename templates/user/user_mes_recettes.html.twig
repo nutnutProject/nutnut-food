@@ -21,8 +21,9 @@
 
         <div class="container border border-grey rounded mb-3">
             <h2>Mes recettes en cours :</h2>
-                {% for recette in user.recettes %}
+                
                 <div class="row mx-auto mb-3">
+                {% for recette in user.recettes %}
                     <div class="card col-sm-6 col-md-4 col-lg-3 mx-auto mb-3" style="width: 18rem;">
                         <img class="card-img-top" src="{{ asset(recette.photo) }}" alt="Card image cap">
                         <div class="card-body d-flex flex-column">
@@ -38,8 +39,9 @@
                             </div>
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
-               {% endfor %}
+               
         </div>  
 
     {% endblock %}   
