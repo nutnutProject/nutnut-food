@@ -6,7 +6,6 @@ use App\Entity\Recette;
 use App\Entity\User;
 use App\Form\RecetteType;
 use App\Form\UserType;
-use App\Form\CollectionType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -44,7 +43,7 @@ class UserController extends AbstractController
     public function newRecette(User $user, Request $request): Response
     {
         $recette = new Recette();
-        $form = $this->createForm(RecetteType::class,  $recette);
+        $form = $this->createForm(RecetteType::class, $recette);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
