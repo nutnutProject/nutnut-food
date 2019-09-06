@@ -69,5 +69,44 @@ class ViewController extends AbstractController
         ]);
     }
 
+
+
+   /**
+     * @Route("/faq", name="faq")
+     * 
+     */
+    public function faq()
+    {
+        return $this->render('view/faq.html.twig');
+    }
+
+       /**
+     * @Route("/cgu", name="cgu")
+     * 
+     */
+    public function cgu()
+    {
+        return $this->render('view/cgu.html.twig');
+    }
+
+       /**
+     * @Route("/cgv", name="cgv")
+     * 
+     */
+    public function cgv()
+    {
+        return $this->render('view/cgv.html.twig');
+    }
+
+
+
+
+
+
+
+
+
+
+
 }
     
