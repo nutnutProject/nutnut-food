@@ -109,4 +109,7 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('user_index');
     }
+
+//Un petit message pour resoudre les conflits
+
 }
