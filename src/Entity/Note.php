@@ -39,14 +39,10 @@ class Note
     private $validate;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Recette", mappedBy="note", orphanRemoval=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Recette", inversedBy="recettes")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $recettes;
-
-    public function __construct()
-    {
-        $this->recettes = new ArrayCollection();
-    }
+    private $recette;
 
     public function getId(): ?int
     {
@@ -89,30 +85,14 @@ class Note
         return $this;
     }
 
-    /**
-     * @return Collection|Recette[]
-     */
-    public function getRecettes(): Collection
+    public function getRecette(): ?Recette
     {
-        return $this->recettes;
+        return $this->recette;
     }
 
-    public function addRecette(Recette $recette): self
+    public function setRecette(?Recette $recette): self
     {
-        if (!$this->recettes->contains($recette)) {
-            $this->recettes[] = $recette;
-            $recette->addNote($this);
-        }
-
-        return $this;
-    }
-
-    public function removeRecette(Recette $recette): self
-    {
-        if ($this->recettes->contains($recette)) {
-            $this->recettes->removeElement($recette);
-            $recette->removeNote($this);
-        }
+        $this->recette = $recette;
 
         return $this;
     }

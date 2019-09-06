@@ -3,19 +3,16 @@
 namespace App\Controller;
 
 use App\Entity\Recette;
-use \App\Entity\User;
+use App\Entity\Note;
+use App\Entity\User;
 use App\Entity\UserRequest;
 use App\Repository\CategoryRepository;
 use App\Repository\DietRepository;
 use App\Repository\RecetteRepository;
-use App\Repository\UserRepository;
-
-use Doctrine\ORM\EntityManagerInterface;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
@@ -60,6 +57,25 @@ class ViewController extends AbstractController
             'max_pages' => $max_pages,
         ]);
     }
+
+    /**
+     * @Route("/noter_la_recette/{slug}", name="add_note")
+     */
+    public function addNote(Recette $recette, Request $request)
+    {
+        $note = new Note();
+        $note->setCommentaire($request->request->get('commentaire'));
+        $note->setNote($request->request->get('note'));
+        $note->setValidate(false);
+        $note->setRecette($recette);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($note);
+        $entityManager->flush();
+
+        return $this->redirectToRoute("recettes_list");
+    }
+
 
     /**
      * @Route("/recettes/{slug}", name="recette_show")
