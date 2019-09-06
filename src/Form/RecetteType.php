@@ -6,6 +6,7 @@ use App\Entity\Recette;
 use App\Entity\Ingredient;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -29,16 +30,11 @@ class RecetteType extends AbstractType
             ])
             ->add('description', TextareaType::class)
             ->add('online')
-            ->add('ingredients', IngredientType::class, [
-                'class' => 'App\Entity\Ingredient',
-                'placeholder' => 'Ajouter votre ingredient',
-                'required' => true
+            ->add('ingredients', CollectionType::class, [
+                'entry_type' => IngredientType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
             ])
-            ->add('quantity', IngredientType::class, [
-                'class' => 'App\Entity\Ingredient',
-                'placeholder' => 'Ajouter votre ingredient',
-                'required' => true
-            ]);
             ;
 
 
