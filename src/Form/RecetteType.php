@@ -25,8 +25,13 @@ class RecetteType extends AbstractType
                 'expanded' => 'true', 
             ])
             ->add('description', TextareaType::class)
-            ->add('online')
-        ;
+            ->add('online');
+
+        $builder->add('ingredients', CollectionType::class, [
+            'entry_type' => IngredientType::class,
+            'entry_option' => ['label' => false],
+            'allow_add' => true,
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
