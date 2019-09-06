@@ -30,12 +30,6 @@ class RecetteType extends AbstractType
             ])
             ->add('description', TextareaType::class)
             ->add('online')
-            ->add('ingredients', CollectionType::class, [
-                'entry_type' => IngredientType::class,
-                'allow_add' => true,
-                'allow_delete' => true,
-            ])
-            ;
 
 
     }

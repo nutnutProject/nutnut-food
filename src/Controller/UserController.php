@@ -64,7 +64,7 @@ class UserController extends AbstractController
         ]);
     }
 
-        /**
+    /**
      * @Route("/moncompte/{id}/mes-recettes/{slug}/edit", name="recette_edit", methods={"GET","POST"})
      */
     public function editRecette(Request $request, User $user, Recette $recette): Response
