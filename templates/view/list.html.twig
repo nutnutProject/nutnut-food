@@ -1,16 +1,30 @@
 {% extends 'base.html.twig' %}
 
 
+
 {% block body %}
-    <section class="jumbotron text-center">
-        <div class="container">
-            <h1 class="jumbotron-heading">
-                {# if we are on /category/{slug} or /products ? #}
-                {{ current_category ? current_category.name : 'Recettes' }}
-            </h1>
-            <p class="lead text-muted mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, veniam, eius aliquam quidem rem sunt nam quaerat facilis ex error placeat ipsa illo sed inventore soluta ipsum cumque atque ea?</p>
+
+   <header class="v-header-all containeur">
+
+            <div class="fullscreen-image-wrap-all">
+            </div>
+
+            <div class="header-overlay-all">
+            </div>
+
+        <div class="header-content-all">
+
+
+            <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
+            <h1> {{ current_category ? current_category.name : 'Recettes' }} </h1>
+
+           
+
+
         </div>
-    </section>
+
+    </header>
 
     <div class="container">
         <div class="row">
@@ -37,21 +51,38 @@
         </div>
     </div>
 
+<div  class="container mt-3">
+            <div class="row">
+                <div class="col-sm">
+                    <div class="card mx-auto" id="search-box">
+                        <h1 class="search-home">On cuisine quoi aujourd'hui ? </h1>
+                        <div id="search" class="card-body  mx-auto text-center">
+                            <!-- Search form -->
+                            <form class="form-inline mr-auto">
+                                <input class="form-control form-control-lg mr-sm-2 center" type="text" placeholder="Rechercher une recette" aria-label="Rechercher">
+                                <button class="btn blue-gradient btn-rounded  btn-lg my-0" type="submit">Rechercher</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
  <div class="container">
         <div class="row">
             <div class="col-12 col-sm-3">
-                <div class="card bg-light mb-3">
-                    <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Catégories</div>
+                <div class="card border-warning bg-grey mb-3">
+                    <div class="card-header bg-light  text-uppercase"><i class="fa fa-list"></i> Catégories</div>
                     <ul class="list-group category_block">
                         {% for category in categories %}
-                            <li class="list-group-item {{ current_category == category ? 'active' : '' }}">
+                            <li class="list-group-item  {{ current_category == category ? 'active' : '' }}">
                                 <a href="{{ path('category_show', {slug: category.slug}) }}">{{ category.name }}</a>
                             </li>
                         {% endfor %}
                     </ul>
                 </div>
-                <div class="card bg-light mb-3">
-                    <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Tag</div>
+                <div class="card border-warning bg-grey mb-3">
+                    <div class="card-header bg-light  text-uppercase"><i class="fa fa-list"></i> Tag</div>
                     <ul class="list-group category_block">
                         {% for diet in diets %}
                             <li class="list-group-item {{ current_diet == diet ? 'active' : '' }}">
@@ -66,29 +97,75 @@
             <div class="col">
                 <div class="row">
                     {% for recette in recettes %}
-                        <div class="col-12 col-md-6 col-lg-4">
-                            <div class="card">
-                                <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
-                                <div class="card-body">
-                                    <h4 class="card-title"><a href="{{ path('recette_show', {slug: recette.slug}) }}" title="View Recette">{{ recette.title }}</a></h4>
-                                    <p class="card-text">{{ recette.description }}</p>
-                                    <p class="card-text">{{recette.user.firstname}}</p>
+                      <div class="col-sm d-flex align-items-stretch">
+                            <div class="card mx-auto">
+                                <img class="card-img-top img-fluid" src="{{asset('img/quiche.jpg')}}" alt="Card image cap">
+                                <div class="card-body d-flex flex-column">
+                                    <h4 class="card-title"><a href="{{ path('recette_show', {slug: recette.slug}) }}" title="View Product">{{ recette.title }}</a></h4>
+                                    <div class="user-synop">
+                                        <img class="icon-user" src="{{asset('img/wonder_icon.png')}}" alt="Card image cap">
+                                        <p class="user-name">{{recette.user.firstname}}</p>
 
-                                    <div class="row">
-                                        <div class="col">
-                                            
-                                       
-                                            {# <p class="cart-text"> {{recette.user_id}}</p> #}
-                                          
-                                        </div>
-                                        {# <div class="col">
-                                            <a href="{{ path('cart_add', {id: recette.id} ) }}" class="btn btn-success btn-block">Ajouter au panier</a>
-                                        </div> #}
+                                    </div>
+                                    <div class="rating">
+                                        <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
+                                        <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
+                                        <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
+                                        <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
+                                        <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
+
+                                    </div>
+
+                                    <p class="card-text">{{ recette.description }}</p>
+
+                                </div>
+                                <div class="col">
+                                    <div class="card-footer bg-transparent border-warning mt-auto align-self-end">
+                                        <a href="{{ path('recette_show', {slug: recette.slug}) }}" class="btn btn-amber btn-block ">Voir</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     {% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     <div class="col-12">
                         <nav aria-label="...">
                             <ul class="pagination">

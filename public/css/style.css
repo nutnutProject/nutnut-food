@@ -18,11 +18,11 @@ html {
 }
 
 .category_block li:hover {
-    background-color: #007bff;
+    background-color: #ffeeba;
 }
 
 .category_block li:hover a {
-    color: #ffffff;
+    color: #f62a3c;
 }
 
 .category_block li a {

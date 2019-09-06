@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Recette;
 use \App\Entity\User;
-
+use App\Entity\UserRequest;
 use App\Repository\CategoryRepository;
 use App\Repository\DietRepository;
 use App\Repository\RecetteRepository;
@@ -51,14 +51,33 @@ class ViewController extends AbstractController
      */
     public function show(Recette $recette)
     {
+        $recette_apprise = 0;
+        $user = $this->getUser();
+
+        //Si user connecté, récupération de l'id
+        if ($user)
+        {
+            $userRequestRepository = $this->getDoctrine()->getRepository(UserRequest::class);
+
+            $userRequest = $userRequestRepository->findOneBy([
+                'recette' => $recette,
+                'user' => $user,
+                ]);
+            
+            if ($userRequest){
+                $recette_apprise = 1;
+            }
+           
+        }
 
         return $this->render('view/show_recette.html.twig', [
             'recette' => $recette,
+            'recette_apprise' => $recette_apprise,
         ]);
     }
 
     /**
-     * @Route("/fooder/{firstname}.{id}", name="fooder_show")
+     * @Route("/fooder/{firstname}-{id}", name="fooder_show")
      * 
      * permet d'aller sur le profil d'un fooder
      */

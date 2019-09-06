@@ -11,207 +11,200 @@
         </div>
     </header>
 
-        <div class="container" id="main-recette">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ path('home') }}">Accueil</a></li>
-                        <li class="breadcrumb-item"><a href="{{ path('category_show', {slug: recette.category.slug}) }}">{{ recette.category.name }}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ recette.title }}</li>
-                </ol>
-            </nav>
+    <div class="container" id="main-recette">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ path('home') }}">Accueil</a></li>
+                    <li class="breadcrumb-item"><a href="{{ path('category_show', {slug: recette.category.slug}) }}">{{ recette.category.name }}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ recette.title }}</li>
+            </ol>
+        </nav>
 
-            <div class="row">
-              <div class="col-md-8">
-                    <div class="card" >
-                        <img src="{{ asset('img/tajine-kefta.jpg')}}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h1 class="card-title">{{recette.title}}  </h1>
-                            <p class="card-text">{{recette.description}}</p>
-                            {% for diet in recette.diet %}
-                                <span class="badge badge-success">{{diet.name}}</span>  
-                            {% endfor %}
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card" >
+                    <img src="{{ asset('img/tajine-kefta.jpg')}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h1 class="card-title">{{recette.title}}  </h1>
+                        <p class="card-text">{{recette.description}}</p>
+                        {% for diet in recette.diet %}
+                            <span class="badge badge-success">{{diet.name}}</span>  
+                        {% endfor %}
 
-                            <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                              aria-hidden="true">
-                              <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                  <div class="modal-header text-center">
-                                    <h4 class="modal-title w-100 font-weight-bold">Ecris au FOODER</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="true">&times;</span>
-                                    </button>
-                                  </div>
-                                  <div class="modal-body mx-3">
-                                    <div class="md-form mb-5">
-                                      <i class="fas fa-user prefix grey-text"></i>
-                                      <input type="text" id="form34" class="form-control validate">
-                                      <label data-error="wrong" data-success="right" for="form34">Your name</label>
-                                    </div>
+                        <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <form methode="POST">
+                                    <div class="modal-content">
+                                        <div class="modal-header text-center">
+                                            <h4 class="modal-title w-100 font-weight-bold">Ecris au FOODER</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body mx-3">
+                                            <div class="md-form mb-5">
+                                            <i class="fas fa-user prefix grey-text"></i>
+                                            <input type="text" id="form34" class="form-control validate">
+                                            <label data-error="wrong" data-success="right" for="form34">Your name</label>
+                                        </div>
                             
-                                    <div class="md-form mb-5">
-                                      <i class="fas fa-envelope prefix grey-text"></i>
-                                      <input type="email" id="form29" class="form-control validate">
-                                      <label data-error="wrong" data-success="right" for="form29">Your email</label>
+                                        <div class="md-form mb-5">
+                                            <i class="fas fa-envelope prefix grey-text"></i>
+                                            <input type="email" id="form29" class="form-control validate">
+                                            <label data-error="wrong" data-success="right" for="form29">Your email</label>
+                                        </div>
+                                
+                                        <div class="md-form mb-5">
+                                            <i class="fas fa-tag prefix grey-text"></i>
+                                            <input type="text" id="form32" class="form-control validate">
+                                            <label data-error="wrong" data-success="right" for="form32">Subject</label>
+                                        </div>
+                                
+                                        <div class="md-form">
+                                            <i class="fas fa-pencil prefix grey-text"></i>
+                                            <textarea type="text" id="form8" class="md-textarea form-control" rows="4"></textarea>
+                                            <label data-error="wrong" data-success="right" for="form8">Your message</label>
+                                        </div>
                                     </div>
-                            
-                                    <div class="md-form mb-5">
-                                      <i class="fas fa-tag prefix grey-text"></i>
-                                      <input type="text" id="form32" class="form-control validate">
-                                      <label data-error="wrong" data-success="right" for="form32">Subject</label>
+                                    <div class="modal-footer d-flex justify-content-center">
+                                        <button class="btn btn-unique">Envoyer <i class="fas fa-paper-plane-o ml-1"></i></button>
                                     </div>
-                            
-                                    <div class="md-form">
-                                      <i class="fas fa-pencil prefix grey-text"></i>
-                                      <textarea type="text" id="form8" class="md-textarea form-control" rows="4"></textarea>
-                                      <label data-error="wrong" data-success="right" for="form8">Your message</label>
-                                    </div>
-                            
-                                  </div>
-                                  <div class="modal-footer d-flex justify-content-center">
-                                    <button class="btn btn-unique">Envoyer <i class="fas fa-paper-plane-o ml-1"></i></button>
-                                  </div>
-                                </div>
-                              </div>
+                                </form>
                             </div>
-                            
+                        </div>
+                    </div>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        {% if ( recette_apprise == 0) %}
                             <div class="text-center">
-                              <a href="" class="btn btn-default btn-rounded mb-2 mt-5" data-toggle="modal" data-target="#modalContactForm">Apprendre !</a>
+                                <a class="btn btn-default btn-rounded mb-2 mt-5" data-toggle="modal" data-target="#modalContactForm">Apprendre !</a>
                             </div>
-                        </div>
-                    </div>
+                        {% else %}
+                            <div class="text-center">
+                                <a class="btn btn-default btn-rounded mb-2 mt-5">Déjà appris.</a>
+                            </div>
+                        {% endif %}
+                    {% endif %}
                 </div>
+            </div>
+        </div>
 
-                <div class="col">
-                    <div class="card" >
-                        <img src="{{asset('img/wonder_icon.png')}}" class="card-img-top-user" alt="...">
+        <div class="col">
+            <div class="card" >
+                <img src="{{asset('img/wonder_icon.png')}}" class="card-img-top-user" alt="...">
+                <div class="rating">
+                    <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
+                    <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
+                    <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
+                    <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
+                    <span class=""><img src="{{asset('img/noix-check.png')}}"></span> <br>
+                    <span class="">{{recette.note.note}} /10 </span>
+
+                </div>
+                    <div class="card-body">
+                        <h4 class="card-title">{{recette.user.firstname}}</h4>
+                        <h5 class="card-title">{{recette.user.age}}</h5>
+                        <h5 class="card-title">{{recette.user.city}}</h5>
+                        <p class="card-text">{{recette.user.description}}</p>
+                    </div>
+                    
+                </div>
+                <div class="card" id="list-ingredients">
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-warning">Ingredients</li>
+                        <li class="list-group-item">
+                            {% for ingredient in recette.ingredients %}
+                                <li class="list-group-item">{{ingredient.name}}, {{ingredient.quantity}}</li>
+                            {% endfor %}
+                        </li>
+                    </ul>
+                </div>
+            </div>         
+        </div>
+
+        <h1 class="category">AVIS :  </h1>
+
+        <div class="row">
+
+            <div class="col-sm">
+                <div class="card">
+                    <div class="card-body d-flex flex-column">
+                        <div class="user-synop">
+                            <img class="icon-user" src="img/wonder_icon.png" alt="Card image cap">
+                            <p class="user-name"> Wonder Woman</p>       
+                        </div>
                         <div class="rating">
-                            <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
-                            <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
-                            <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
-                            <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
-                            <span class=""><img src="{{asset('img/noix-check.png')}}"></span> <br>
-                            <span class="">{{recette.note.note}} /10 </span>
-
+                            <span class=""><img src="img/noix-check.png"></span>
+                            <span class=""><img src="img/noix-check.png"></span>
+                            <span class=""><img src="img/noix-check.png"></span>
+                            <span class=""><img src="img/noix-check.png"></span>
+                            <span class=""><img src="img/noix-check.png"></span>
                         </div>
-                            <div class="card-body">
-                              <h4 class="card-title">{{recette.user.firstname}}</h4>
-                              <h5 class="card-title">{{recette.user.age}}</h5>
-                              <h5 class="card-title">{{recette.user.city}}</h5>
-
-
-
-
-                              <p class="card-text">{{recette.user.description}}</p>
-                            </div>
-                         
-                          </div>
-                          <div class="card" id="list-ingredients">
-
-                                <ul class="list-group">
-                                      <li class="list-group-item list-group-item-warning">Ingredients</li>
-                                      <li class="list-group-item">
-                                      {% for ingredient in recette.ingredients %}
-                                          <li class="list-group-item">
-                                          {{ingredient.name}}, {{ingredient.quantity}}</li>
-                                      {% endfor %}
-                                       </li>
-                                </ul>
-                        </div>
-                    </div>         
+                            <p class="card-text">Je fait des quiches au saumon depuis que je suis enfant, recette de ma grand-mere..</p> 
+                    </div>           
                 </div>
+            </div>
 
-            <h1 class="category">AVIS :  </h1>
-
-            <div class="row">
-                    <div class="col-sm">
-                        <div class="card">
-                            <div class="card-body d-flex flex-column">
-                                <div class="user-synop">
-                                    <img class="icon-user" src="img/wonder_icon.png" alt="Card image cap">
-                                    <p class="user-name"> Wonder Woman</p>       
-                                </div>
-                                <div class="rating">
-                                    <span class=""><img src="img/noix-check.png"></span>
-                                    <span class=""><img src="img/noix-check.png"></span>
-                                    <span class=""><img src="img/noix-check.png"></span>
-                                    <span class=""><img src="img/noix-check.png"></span>
-                                    <span class=""><img src="img/noix-check.png"></span>
-                                </div>
-                                    <p class="card-text">Je fait des quiches au saumon depuis que je suis enfant, recette de ma grand-mere..</p> 
-                            </div>           
+            <div class="col-sm">
+                <div class="card">
+                    <div class="card-body d-flex flex-column">
+                        <div class="user-synop">
+                            <img class="icon-user" src="img/wonder_icon.png" alt="Card image cap">
+                            <p class="user-name"> Wonder Woman</p>       
                         </div>
-                    </div>
-
-
-
-
-                    <div class="col-sm">
-                        <div class="card">
-                                <div class="card-body d-flex flex-column">
-                                    <div class="user-synop">
-                                        <img class="icon-user" src="img/wonder_icon.png" alt="Card image cap">
-                                        <p class="user-name"> Wonder Woman</p>       
-                                    </div>
-                                    <div class="rating">
-                                        <span class=""><img src="img/noix-check.png"></span>
-                                        <span class=""><img src="img/noix-check.png"></span>
-                                        <span class=""><img src="img/noix-check.png"></span>
-                                        <span class=""><img src="img/noix-check.png"></span>
-                                        <span class=""><img src="img/noix-check.png"></span>
-                                    </div>
-                                        <p class="card-text">Je fait des quiches au saumon depuis que je suis enfant, recette de ma grand-mere..</p> 
-                                </div>           
-                            </div>
+                        <div class="rating">
+                            <span class=""><img src="img/noix-check.png"></span>
+                            <span class=""><img src="img/noix-check.png"></span>
+                            <span class=""><img src="img/noix-check.png"></span>
+                            <span class=""><img src="img/noix-check.png"></span>
+                            <span class=""><img src="img/noix-check.png"></span>
                         </div>
-
-
-
-                    <div class="col-sm">
-                            <div class="card">
-                                    <div class="card-body d-flex flex-column">
-                                        <div class="user-synop">
-                                            <img class="icon-user" src="img/wonder_icon.png" alt="Card image cap">
-                                            <p class="user-name"> Wonder Woman</p>       
-                                        </div>
-                                        <div class="rating">
-                                            <span class=""><img src="img/noix-check.png"></span>
-                                            <span class=""><img src="img/noix-check.png"></span>
-                                            <span class=""><img src="img/noix-check.png"></span>
-                                            <span class=""><img src="img/noix-check.png"></span>
-                                            <span class=""><img src="img/noix-check.png"></span>
-                                        </div>
-                                            <p class="card-text">Je fait des quiches au saumon depuis que je suis enfant, recette de ma grand-mere..</p> 
-                                    </div>           
-                                </div>
-                            </div>
-
-
-
-                    <div class="col-sm">
-                                <div class="card">
-                                        <div class="card-body d-flex flex-column">
-                                            <div class="user-synop">
-                                                <img class="icon-user" src="img/wonder_icon.png" alt="Card image cap">
-                                                <p class="user-name"> Wonder Woman</p>       
-                                            </div>
-                                            <div class="rating">
-                                                <span class=""><img src="img/noix-check.png"></span>
-                                                <span class=""><img src="img/noix-check.png"></span>
-                                                <span class=""><img src="img/noix-check.png"></span>
-                                                <span class=""><img src="img/noix-check.png"></span>
-                                                <span class=""><img src="img/noix-check.png"></span>
-                                            </div>
-                                                <p class="card-text">Je fait des quiches au saumon depuis que je suis enfant, recette de ma grand-mere..</p> 
-                                        </div>           
-                                    </div>
-                                </div>
-
-
-
-
-                    </div>
+                        <p class="card-text">Je fait des quiches au saumon depuis que je suis enfant, recette de ma grand-mere..</p> 
+                    </div>           
                 </div>
-         </div>
+            </div>
+
+            <div class="col-sm">
+                <div class="card">
+                    <div class="card-body d-flex flex-column">
+                        <div class="user-synop">
+                            <img class="icon-user" src="img/wonder_icon.png" alt="Card image cap">
+                            <p class="user-name"> Wonder Woman</p>       
+                        </div>
+                        <div class="rating">
+                            <span class=""><img src="img/noix-check.png"></span>
+                            <span class=""><img src="img/noix-check.png"></span>
+                            <span class=""><img src="img/noix-check.png"></span>
+                            <span class=""><img src="img/noix-check.png"></span>
+                            <span class=""><img src="img/noix-check.png"></span>
+                        </div>
+                        <p class="card-text">Je fait des quiches au saumon depuis que je suis enfant, recette de ma grand-mere..</p> 
+                    </div>           
+                </div>
+            </div>
+
+            <div class="col-sm">
+                <div class="card">
+                    <div class="card-body d-flex flex-column">
+                        <div class="user-synop">
+                            <img class="icon-user" src="img/wonder_icon.png" alt="Card image cap">
+                            <p class="user-name"> Wonder Woman</p>       
+                        </div>
+                        <div class="rating">
+                            <span class=""><img src="img/noix-check.png"></span>
+                            <span class=""><img src="img/noix-check.png"></span>
+                            <span class=""><img src="img/noix-check.png"></span>
+                            <span class=""><img src="img/noix-check.png"></span>
+                            <span class=""><img src="img/noix-check.png"></span>
+                        </div>
+                        <p class="card-text">Je fait des quiches au saumon depuis que je suis enfant, recette de ma grand-mere..</p> 
+                    </div>           
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
                        
 
 
