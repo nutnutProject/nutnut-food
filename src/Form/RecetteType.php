@@ -29,17 +29,8 @@ class RecetteType extends AbstractType
             ])
             ->add('description', TextareaType::class)
             ->add('online')
-            ->add('ingredients', IngredientType::class, [
-                'class' => 'App\Entity\Ingredient',
-                'placeholder' => 'Ajouter votre ingredient',
-                'required' => true
-            ])
-            ->add('quantity', IngredientType::class, [
-                'class' => 'App\Entity\Ingredient',
-                'placeholder' => 'Ajouter votre ingredient',
-                'required' => true
-            ]);
-            ;
+        ;
+        
 
 
     }
