@@ -60,10 +60,9 @@ class Recette
     private $creation_date;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Note", inversedBy="recettes")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToMany(targetEntity="App\Entity\Note", mappedBy="note", orphanRemoval=true)
      */
-    private $note;
+    private $notes;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Diet", inversedBy="recettes")
@@ -92,11 +91,17 @@ class Recette
      */
     private $userRequests;
 
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $note;
+
     public function __construct()
     {
         $this->diet = new ArrayCollection();
         $this->ingredients = new ArrayCollection();
         $this->userRequests = new ArrayCollection();
+        $this->notes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -191,21 +196,6 @@ class Recette
         return $this;
     }
 
-
-
-    public function getNote(): ?Note
-    {
-        return $this->note;
-    }
-
-    public function setNote(?Note $note): self
-    {
-        $this->note = $note;
-
-        return $this;
-    }
-
-
     /**
      * @return Collection|Diet[]
      */
@@ -255,6 +245,20 @@ class Recette
 
         return $this;
     }
+
+
+    public function getNote(): ?float
+    {
+        return $this->note;
+    }
+
+    public function setNote(float $note): self
+    {
+        $this->note = $note;
+
+        return $this;
+    }
+
 
     /**
      * @return Collection|Ingredient[]
@@ -318,9 +322,42 @@ class Recette
         return $this;
     }
 
-        // Sert à convertir les entités en string IMPERATIF pour EasyAdminBundle
+
+    /**
+     * @return Collection|Note[]
+     */
+    public function getNotes(): Collection
+    {
+        return $this->notes;
+    }
+
+    public function addNote(Note $note): self
+    {
+        if (!$this->notes->contains($note)) {
+            $this->notes[] = $note;
+            $note->addRecette($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNote(Note $note): self
+    {
+        if ($this->notes->contains($note)) {
+            $this->notes->removeElement($note);
+            $note->removeRecette($this);
+        }
+
+        return $this;
+    }
+
+
+
+    // Sert à convertir les entités en string IMPERATIF pour EasyAdminBundle
     public function __toString()
     {
         return $this->title;
     }
+
+
 }

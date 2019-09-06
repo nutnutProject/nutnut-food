@@ -71,7 +71,7 @@ class SecurityController extends AbstractController
             Pour activer votre compte, veuillez cliquer sur le lien ci dessous
             ou copier/coller dans votre navigateur internet.
 
-            http://votresite.com/activation/'.$pwd_token.'
+            http://votresite.com/activation/'.$activateToken.'
 
 
             ---------------
