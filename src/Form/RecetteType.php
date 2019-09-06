@@ -30,7 +30,7 @@ class RecetteType extends AbstractType
             ])
             ->add('description', TextareaType::class)
             ->add('online')
-
+        ;
 
     }
 
