@@ -3,12 +3,15 @@
 namespace App\Form;
 
 use App\Entity\Recette;
+use App\Entity\Ingredient;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\PropertyInfo\Type;
 
 class RecetteType extends AbstractType
 {
@@ -25,13 +28,20 @@ class RecetteType extends AbstractType
                 'expanded' => 'true', 
             ])
             ->add('description', TextareaType::class)
-            ->add('online');
+            ->add('online')
+            ->add('ingredients', IngredientType::class, [
+                'class' => 'App\Entity\Ingredient',
+                'placeholder' => 'Ajouter votre ingredient',
+                'required' => true
+            ])
+            ->add('quantity', IngredientType::class, [
+                'class' => 'App\Entity\Ingredient',
+                'placeholder' => 'Ajouter votre ingredient',
+                'required' => true
+            ]);
+            ;
 
-        $builder->add('ingredients', CollectionType::class, [
-            'entry_type' => IngredientType::class,
-            'entry_option' => ['label' => false],
-            'allow_add' => true,
-        ]);
+
     }
 
     public function configureOptions(OptionsResolver $resolver)
