@@ -10,6 +10,8 @@ use App\Repository\DietRepository;
 use App\Repository\RecetteRepository;
 use App\Repository\UserRepository;
 
+use Doctrine\ORM\EntityManagerInterface;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -49,7 +51,7 @@ class ViewController extends AbstractController
     /**
      * @Route("/recettes/{slug}", name="recette_show")
      */
-    public function show(Recette $recette)
+    public function show(Recette $recette, Request $request, \Swift_Mailer $mailer)
     {
         $recette_apprise = 0;
         $user = $this->getUser();
@@ -57,8 +59,48 @@ class ViewController extends AbstractController
         //Si user connecté, récupération de l'id
         if ($user)
         {
+            if ($request->isMethod('POST'))
+            {
+                $name = $request->request->get('name');
+                $email = $request->request->get('email');
+                $subject = $request->request->get('subject');
+                $message = $request->request->get('message');
+
+                $message = "Vous avez reçu un message de la part de ".$name."<br>Au sujet de la recette : ".$recette->getTitle()."<br>Voici le contenu du message :<br>".$message;
+
+                //Récupération de l'adresse email du fooder
+                $userRepository = $this->getDoctrine()->getRepository(User::class);
+                $userFooder = $userRepository->findOneBy([
+                    'id' => $recette->getUser(),
+                ]);
+
+                $email_fooder = $userFooder->getUsername();
+
+                // Ajout dans la tablee UserRequest
+                $userRequest = new UserRequest();
+                $userRequest->setMessage($message);
+                $userRequest->setObject($subject);
+                $userRequest->setRecette($recette);
+                $userRequest->setUser($user);
+
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($userRequest);
+                $entityManager->flush();
+
+                // Envoi du mail de confiration de souscription
+                $message = (new \Swift_Message($subject))
+                    ->setFrom($email)
+                    ->setTo($email_fooder)
+                    ->setBody($message);
+
+                $mailer->send($message);
+
+                $this->addFlash('success', 'Votre message a bien été envoyé.');
+            }
+
             $userRequestRepository = $this->getDoctrine()->getRepository(UserRequest::class);
 
+            // On cherche si la recette est déjà apprise
             $userRequest = $userRequestRepository->findOneBy([
                 'recette' => $recette,
                 'user' => $user,
@@ -67,7 +109,6 @@ class ViewController extends AbstractController
             if ($userRequest){
                 $recette_apprise = 1;
             }
-           
         }
 
         return $this->render('view/show_recette.html.twig', [
@@ -87,6 +128,45 @@ class ViewController extends AbstractController
             'user' => $user,
         ]);
     }
+
+
+
+   /**
+     * @Route("/faq", name="faq")
+     * 
+     */
+    public function faq()
+    {
+        return $this->render('view/faq.html.twig');
+    }
+
+       /**
+     * @Route("/cgu", name="cgu")
+     * 
+     */
+    public function cgu()
+    {
+        return $this->render('view/cgu.html.twig');
+    }
+
+       /**
+     * @Route("/cgv", name="cgv")
+     * 
+     */
+    public function cgv()
+    {
+        return $this->render('view/cgv.html.twig');
+    }
+
+
+
+
+
+
+
+
+
+
 
 }
     
