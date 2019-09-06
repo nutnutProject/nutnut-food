@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur {% endblock %}
+
+{% block body %}
+
+
+
+
+
+
+ <header class="v-header-all containeur">
+
+            <div class="fullscreen-image-wrap-all">
+            </div>
+
+            <div class="header-overlay-all">
+            </div>
+
+        <div class="header-content-all">
+            <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+            <h1> ERREUR {{ status_code }} </h1>
+        </div>
+
+    </header>
+
+    <div class="container" id="main-recette">
+           
+            <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="index.html">Accueil</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">CGU</li>
+                    </ol>
+                  </nav>
+
+
+
+        <p class="h1 mb-4">ERREUR {{ status_code }}</p>
+       
+            <h1>Oops! Je crois que nous avons un probleme Houston</h1>
+            <h2>Nous avons une erreur "{{ status_code }} {{ status_text }}".</h2>
+
+            <p>
+                La page n'existe certainement pas ! 
+            </p>
+
+         </div>
+           
+<main id="main">
+    <div class="infos" id="infos">
+
+          </div>
+    
+
+
+        <div  class="container mt-3">
+            <div class="row">
+                <div class="col-sm">
+                    <div class="card mx-auto" id="search-box">
+                        <h1 class="search-home">On cuisine quoi aujourd'hui ? </h1>
+                        <div id="search" class="card-body  mx-auto text-center">
+                            <form class="form-inline mr-auto">
+
+                                <input class="form-control form-control-lg mr-sm-2 center" type="text" placeholder="Rechercher une recette" aria-label="Rechercher">
+                                <button class="btn blue-gradient btn-rounded  btn-lg my-0" type="submit">Rechercher</button>
+                            </form>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
