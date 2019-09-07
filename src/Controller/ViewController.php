@@ -23,17 +23,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class ViewController extends AbstractController
 {
     /**
-     * @Route("/recettes{page}", name="recettes_list")
+     * @Route("/recettes/{page}", name="recettes_list")
      */
     public function list(RecetteRepository $recetteRepository, CategoryRepository $categoryRepository, DietRepository $dietRepository, $page = 1)
     {
         // Trouver toutes les recettes
         $recettes = $recetteRepository->findAll();
 
-        $max_pages= ceil(count($recettes)/8);
-        $debut = ($page -1 )*8;
-        $fin = $debut+8;
-        if ($page * 8 > count($recettes))
+        $max_pages= ceil(count($recettes)/6);
+        $debut = ($page -1 )*6;
+        $fin = $debut+6;
+        if ($page * 6 > count($recettes))
         {
             $fin = count($recettes);
         }
