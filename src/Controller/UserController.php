@@ -21,6 +21,10 @@ class UserController extends AbstractController
      */
     public function userShow(User $user)
     {
+        if ($this->getUser() != $user)
+        {
+            $user = $this->getUser();
+        }
         return $this->render('user/show.html.twig', [
             'user' => $user,
         ]);
@@ -32,6 +36,10 @@ class UserController extends AbstractController
      */
     public function userRecette(User $user)
     {
+        if ($this->getUser() != $user)
+        {
+            $user = $this->getUser();
+        }
         return $this->render('user/user_mes_recettes.html.twig', [
             'user' => $user,
         ]);
@@ -42,6 +50,11 @@ class UserController extends AbstractController
      */
     public function newRecette(User $user, Request $request): Response
     {
+        if ($this->getUser() != $user)
+        {
+            $user = $this->getUser();
+        }
+        
         $recette = new Recette();
         $form = $this->createForm(RecetteType::class, $recette);
         $form->handleRequest($request);
@@ -68,6 +81,11 @@ class UserController extends AbstractController
      */
     public function editRecette(Request $request, User $user, Recette $recette): Response
     {
+        if ($this->getUser() != $user)
+        {
+            $user = $this->getUser();
+        }
+        
         $form = $this->createForm(RecetteType::class, $recette);
         $form->handleRequest($request);
 
@@ -91,6 +109,11 @@ class UserController extends AbstractController
      */
     public function edit(Request $request, User $user): Response
     {
+        if ($this->getUser() != $user)
+        {
+            $user = $this->getUser();
+        }
+
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
@@ -107,21 +130,4 @@ class UserController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
-    /**
-     * @Route("/user/{id}", name="user_delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, User $user): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($user);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('user_index');
-    }
-
-//Un petit message pour resoudre les conflits
-
 }
