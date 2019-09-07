@@ -63,6 +63,8 @@ class ViewController extends AbstractController
      */
     public function addNote(Recette $recette, Request $request)
     {
+        
+        // Ajout du commentaire et de la note dans la table note
         $note = new Note();
         $note->setCommentaire($request->request->get('commentaire'));
         $note->setNote($request->request->get('note'));
@@ -71,6 +73,22 @@ class ViewController extends AbstractController
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($note);
+        $entityManager->flush();
+
+        // Calcul de la note moyenne de la recette
+        $noteRepository = $this->getDoctrine()->getRepository(Note::class);
+        $notes = $noteRepository->findBy(
+            ['recette' => $recette],
+        );
+        $moyenne = 0;
+        foreach ($notes as $note) {
+            $moyenne += $note->getNote();
+        }
+        $moyenne = $moyenne/count($notes);
+
+        // Ajout de la moyenne dans la recette
+        $recette->setNote($moyenne);
+        $entityManager->persist($recette);
         $entityManager->flush();
 
         return $this->redirectToRoute("recettes_list");
