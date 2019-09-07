@@ -23,7 +23,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ViewController extends AbstractController
 {
     /**
-     * @Route("/recettes/{page}", name="recettes_list")
+     * @Route("/recettes/{page}", name="recettes_list", requirements={"page"="\d+"})
      */
     public function list(RecetteRepository $recetteRepository, CategoryRepository $categoryRepository, DietRepository $dietRepository, $page = 1)
     {
