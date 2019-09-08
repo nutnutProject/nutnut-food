@@ -64,18 +64,18 @@
             </div>
 
             <div class="col-12">
-        {{ form_widget(form.adresse, {'attr': {'class': 'form-control mb-4','placeholder':'Adresse'}})}}
-            <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4"></small>
+        {{ form_widget(form.adresse, {'id':'user_input_autocomplete_address', 'attr': {'class': 'form-control mb-4',  'placeholder':'Adresse'}})}}
+            <small id="user_input_autocomplete_address" class="form-text text-muted mb-4"></small>
             </div>
 
         
 
             <div class="col-sm-6 col-lg-6 ">
-        {{ form_widget(form.city, {'attr': {'class': 'form-control mb-4','placeholder':'Ville'}})}}
+        {{ form_widget(form.city, {'id':'locality', 'attr': {'class': 'form-control mb-4','placeholder':'Ville'}})}}
             </div>
 
             <div class="col-sm-6 col-lg-6 ">
-        {{ form_widget(form.cp, {'attr': {'class': 'form-control mb-4','placeholder':'Code postal'}})}}
+        {{ form_widget(form.cp, {'id':'postal_code', 'attr': {'class': 'form-control mb-4','placeholder':'Code postal'}})}}
         </div>
 
             <div class="col-12">
@@ -91,7 +91,7 @@
 
             <div class="col-12">
         <label for="textarea" class="active text-center">Décrivez vous en quelques mots</label>
-        {{ form_widget(form.description, {'attr': {'class': 'form-control mb-4','id': 'textarea','placeholder': 'Description'}})}}
+        {{ form_widget(form.description, {'attr': {'class': 'form-control mb-4','placeholder': 'Description'}})}}
         </div>
 
 
@@ -105,4 +105,16 @@
 </div>
 
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
 {% endblock %}
