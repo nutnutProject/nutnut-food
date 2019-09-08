@@ -134,6 +134,9 @@ class ViewController extends AbstractController
                 $entityManager->persist($userRequest);
                 $entityManager->flush();
 
+
+                
+
                 // Envoi du mail de confiration de souscription
                 $message = (new \Swift_Message($subject))
                     ->setFrom($email)
