@@ -42,10 +42,13 @@
                         <h1 class="search-home">On cuisine quoi aujourd'hui ? </h1>
                         <div id="search" class="card-body  mx-auto text-center">
                             <!-- Search form -->
-                            <form class="form-inline mr-auto">
+                            {{ render (controller(
+                                'App\\Controller\\SearchController::searchbar'
+                            ))}}
+                            {# <form class="form-inline mr-auto">
                                 <input class="form-control form-control-lg mr-sm-2 center" type="text" placeholder="Rechercher une recette" aria-label="Rechercher">
                                 <button class="btn blue-gradient btn-rounded  btn-lg my-0" type="submit">Rechercher</button>
-                            </form>
+                            </form> #}
                         </div>
                     </div>
                 </div>
