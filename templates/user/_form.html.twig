@@ -6,60 +6,63 @@
 
 
 </div> #}
-{{ form_start(form, {'attr': {'class': 'text-center border border-light p-5'}} ) }}
-        <p class="h1 mb-4">Mon profil</p>
+{{ form_start(form, {'attr': {'class': 'border border-light px-5 py-2'}} ) }}
+        <p class="text-center h1 mb-4">Mon profil</p>
     
-        <div class="form-row mb-4">
-
+        <div class="form-row">
             <div class="col-sm-6 col-lg-6 ">
-                <label for="text" class="active text-center">Nouveau Prénom:</label>
+                <label for="text" class="active text-center">Prénom :</label>
                 {{ form_widget (form.firstname, {'attr': {'class': 'form-control mb-4','value': user.firstname }} ) }} 
             </div>
 
             <div class="col-sm-6 col-lg-6 ">
-                <label for="text" class="active text-center">Nouveau Nom:</label>
+                <label for="text" class="active text-center">Nom :</label>
                 {{ form_widget(form.lastname, {'attr': {'class': 'form-control mb-4','value': user.lastname }} ) }}
             </div>
 
             <div class="col-12">
-                <label for="text" class="active text-center">Nouvel Email:</label>
+                <label for="text" class="active text-center">Email :</label>
                 {{ form_widget(form.username, {'attr': {'class': 'form-control mb-4','value': user.username }} ) }}
             </div>
             
             <div class="col-12">
-                <label for="text" class="active text-center">Nouveau Mot de passe:</label>
+                <label for="text" class="active text-center">Mot de passe :</label>
                 {{ form_widget(form.password, {'attr': {'class': 'form-control mb-4','value':user.password }} ) }}
                 <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4"></small>
             </div>
 
             <div class="col-12">
-                <label for="text" class="active text-center">Nouvelle addresse:</label>
+                <label for="text" class="active text-center">addresse :</label>
                 {{ form_widget(form.adresse, {'attr': {'class': 'form-control mb-4','value':user.adresse }} ) }}
                 <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4"></small>
             </div>
 
             <div class="col-sm-6 col-lg-6 ">
-                <label for="text" class="active text-center">Nouvelle ville:</label>
+                <label for="text" class="active text-center">ville :</label>
                 {{ form_widget(form.city, {'attr': {'class': 'form-control mb-4','value':user.city }} ) }}
             </div>
 
             <div class="col-sm-6 col-lg-6 ">
-                <label for="text" class="active text-center">Nouveau Code Postal:</label>
+                <label for="text" class="active text-center">Code Postal :</label>
                 {{ form_widget(form.cp, {'attr': {'class': 'form-control mb-4','value':user.cp }} ) }}
             </div>
 
             <div class="col-12">
-                <label for="text" class="active text-center">Nouveau numéro:</label>
+                <label for="text" class="active text-center">Numéro de téléphone :</label>
                 {{ form_widget(form.telephone, {'attr': {'class': 'form-control mb-4','value': user.telephone }} ) }}
             </div>
 
             <div class="col-12">
-                <label for="textarea" class="active text-center">Nouvelle description:</label>
+                <label for="textarea" class="active text-center">Date de naissance :</label>
+                {{ form_widget(form.birthdate, {'attr': {'class': 'form mb-4'}})}}
+            </div>
+
+            <div class="col-12">
+                <label for="textarea" class="active text-center">Description :</label>
                 {{ form_widget(form.description, {'attr': {'class': 'form-control mb-4','id': 'textarea','value': user.description }} ) }}
             </div> 
             
-            {# <button class="btn">{{ button_label|default('Save') }}</button> #}
-
+            <button class="btn btn-success mx-auto">{{ button_label|default('Save') }}</button>
         </div>
 
 {{ form_end(form) }}
