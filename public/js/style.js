@@ -31,3 +31,24 @@ $('input[type=text], input[type=password], input[type=email], input[type=url], i
         $(this).siblings('label').removeClass('active');
     }
 });
+
+
+// Ajout des fonction d'autoload
+
+$(document).ready(function () {
+    'use strict';
+    $('#form_titre').autocompleter({
+      url_list: '/search-title',
+      url_get: '/?term='
+    });
+  
+  
+    $("#ui-id-1").click(function(){
+      var id = $("#form_title").val();
+  
+      if(id.toString().length > 0){
+        $(location).attr('href', '/search/'+id.toString());
+      }
+    })
+  
+  }); 
