@@ -9,6 +9,7 @@ use App\Form\UserType;
 use App\Repository\UserRepository;
 use App\Repository\RecetteRepository;
 
+use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -85,17 +86,33 @@ class UserController extends AbstractController
             {
                 $user = $this->getUser();
             }
-            
+
             $recette = new Recette();
             $form = $this->createForm(RecetteType::class, $recette);
             $form->handleRequest($request);
+           
 
             if ($form->isSubmitted() && $form->isValid()) {
+
+                foreach ($recette->getDiet() as $value) {
+                    dd($value);
+                }
+
+                $recette->setUser($user);
+                $recette->setNote(0);
+                $recette->setCreationDate(new \DateTime());
+                $recette->setValidate(true);
+                
+                // Enregistrement du ou des régimes alimentaire
+
+
+
+                // Enregistrement de la recette
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($recette);
                 $entityManager->flush();
 
-                $this->redirectToRoute('user_recettes');
+                return $this->redirectToRoute('user_recettes',array('id' => $user->getId()));
             }
 
             return $this->render('recette/new.html.twig', [
