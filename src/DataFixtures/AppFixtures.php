@@ -146,7 +146,7 @@ class AppFixtures extends Fixture
         for($i = 0 ; $i < 50 ; $i++)
         {
             $note = new Note();
-            $note->setNote(rand(0,10));
+            $note->setNote(rand(0,4));
             $note->setCommentaire($noteComment[rand(0,6)]);
             $note->setValidate(true);
             $note->setRecette($recettes[rand(0,50)]);
