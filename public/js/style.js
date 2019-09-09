@@ -31,3 +31,13 @@ $('input[type=text], input[type=password], input[type=email], input[type=url], i
         $(this).siblings('label').removeClass('active');
     }
 });
+
+
+
+
+
+
+
+$('.alert').alert();
+
+

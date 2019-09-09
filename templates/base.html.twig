@@ -16,15 +16,13 @@
             <link href="{{ asset('css/profil_user.css') }}" rel="stylesheet">
             <link href="{{ asset('css/board_user.css') }}" rel="stylesheet">
 
-
-
             <link rel="stylesheet" href=" {{ asset('bower_components/Morphext/dist/morphext.css') }}">
         {% endblock %}
     </head>
 
     <body>
     {% block nav %}
-        <nav class="navbar navbar-expand-md navbar-light bg-light position-fixed w-100 sticky-top">
+        <nav class="navbar navbar-expand-md navbar-light bg-light position-fixed w-100 sticky-top  {{ app.session.flashbag.peek('{{title}}')|length > 0 ? '' : 'mb-5' }}">
             <div class="container">
                 <a class="navbar-brand" href="{{path('home')}}">
                     <img src="{{ asset('img/logo.png')}}" height="30" alt="Nut nut Food Logo">
@@ -50,7 +48,7 @@
 
                     <div class="my-2 my-lg-0">
                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                            <a href="#"><img src="img/wonder_icon.png" width="50" height="50" alt="Mon profil"></a>
+                            <a href="{{ path('user', {'id': app.user.id}) }}"><img src="img/wonder_icon.png" width="50" height="50" alt="Mon profil"></a>
                             <a type="button" class="btn btn-outline-danger waves-effect" href="{{path('app_logout')}}">Déconnexion</a>
                         {% else %}
                             <button type="button" class="btn btn-outline-success waves-effect"  data-toggle="modal" data-target="#login">Se connecter</button>
@@ -58,7 +56,18 @@
                     </div>
                 </div>
             </div>
+
+  
+
+     
         </nav>
+
+
+               
+
+
+        
+                     
                 <!-- Modal de connexion -->
         <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -100,19 +109,31 @@
                 </div>
             </div>
         </div>
-        
+
         {% endblock %}
-        
-        <div class="flash">
+
+
+
+  <div class="flash">
         {# Affiche tous les messages flash de notre application #}
+        
         {% for type, messages in app.flashes %}
+
             {% for message in messages %}
-                <div class="alert alert-{{ type }}">
-                    {{ message }}
-                </div>
-            {% endfor %}
+            <div class="alert alert-primary" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+
+           {% endfor %}
+
         {% endfor %}
+
         </div>
+
+       
         
         {% block body %}
 
@@ -120,8 +141,7 @@
 
         {% endblock %}
 
-
-
+ 
 
 <!-- Footer -->
 <footer class="text-light">
@@ -148,8 +168,7 @@
                 <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
                 <ul class="list-unstyled">
                     <li><a href="{{path('faq')}}">FAQ</a></li>
-                    <li><a href="{{path('cgu')}}">CGU</a></li>
-                    <li><a href="{{path('cgv')}}">CGV</a></li>
+                    <li><a href="{{path('mentionslegales')}}">Mentions Legales</a></li>
                 </ul>
             </div>
 
