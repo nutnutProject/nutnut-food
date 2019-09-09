@@ -115,6 +115,8 @@ class AppFixtures extends Fixture
             $note->setNote(rand(0,10));
             $note->setCommentaire('Mon commentaire super commentaire de foufou numéro ' . $i);
             $note->setValidate(true);
+            $note->setCreationDate(new \DateTime());
+            $note->setUser($users[rand(0,9)]);
             $note->setRecette($recettes[rand(0,50)]);
             $manager->persist($note);
         }

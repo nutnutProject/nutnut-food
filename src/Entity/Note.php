@@ -44,6 +44,17 @@ class Note
      */
     private $recette;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $creation_date;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="notes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -102,4 +113,28 @@ class Note
     {
         return $this->commentaire;
     }
+
+        public function getCreationDate(): ?\DateTimeInterface
+        {
+            return $this->creation_date;
+        }
+
+        public function setCreationDate(\DateTimeInterface $creation_date): self
+        {
+            $this->creation_date = $creation_date;
+
+            return $this;
+        }
+
+        public function getUser(): ?User
+        {
+            return $this->user;
+        }
+
+        public function setUser(?User $user): self
+        {
+            $this->user = $user;
+
+            return $this;
+        }
 }
