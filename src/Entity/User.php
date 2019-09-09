@@ -460,7 +460,10 @@ class User implements UserInterface
     public function setImage(?string $image): self
     {
         $this->image = $image;
+        
+        return $this;
     }
+
     /**
      * @return Collection|Note[]
      */

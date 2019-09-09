@@ -4,6 +4,11 @@
 {{ form_start(form, {'attr': {'class': 'border border-light px-5 py-2'}} ) }}
         <p class="text-center h1 mb-4">Mon profil</p>
     
+        <div class="row-12 mb-4">
+            <label for="photo">Choisir une photo:</label>
+            {{ form_widget(form.image, {'attr': {'class': 'form-control-file','value': user.image}}) }}
+        </div>
+
         <div class="form-row">
             <div class="col-sm-6 col-lg-6 ">
                 <label for="text" class="active text-center">Prénom :</label>
