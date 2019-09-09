@@ -16,7 +16,7 @@
                 </div>
                 <div class="col mb-5">
                 <div class="card mx-auto p-3 mb-3 mt-3" style="width: 75%;">
-                        <img src="{{asset('img/wonder_icon.png')}}" class="card-img-top-user"  alt="...">
+                        <img src="{{asset('img/wonder_icon.png')}}" width="auto" height="257px" class="card-img-top-user"  alt="image profil">
                         <div class="rating">
                             <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
                             <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
@@ -47,7 +47,7 @@
                
                     
 
-                    <img class="card-img-top" src="{{asset('img/junk.jpg')}}" alt="Card image cap">
+                    <img class="card-img-top" src="{{asset('img/junk.jpg')}}" width="255px" height="236px" alt="Card image cap">
                     <div class="card-body d-flex flex-column">
                         <h4 class="card-title"><a href="{{ path('recette_show', {slug: recette.slug}) }}" title="View Product">{{recette.title}}</a></h4>
                         <div class="rating">
@@ -77,7 +77,7 @@
                          {% for recette in user.recettes %}
                       <div class="col-sm d-flex align-items-stretch">
                             <div class="card mx-auto">
-                                <img class="card-img-top img-fluid" src="{{asset('img/quiche.jpg')}}" alt="Card image cap">
+                                <img class="card-img-top img-fluid" src="{{asset('img/quiche.jpg')}}" width="255px" height="236px" alt="Card image cap">
                                 <div class="card-body d-flex flex-column">
                                     <h4 class="card-title"><a href="{{ path('recette_show', {slug: recette.slug}) }}" title="View Product">{{ recette.title }}</a></h4>
                                     <div class="user-synop">

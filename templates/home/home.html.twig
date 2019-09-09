@@ -116,7 +116,7 @@
                     {% for bestRecette in bestRecettes %}
                         <div class="col-sm d-flex align-items-stretch">
                             <div class="card">
-                                <img class="card-img-top img-fluid" src="img/quiche.jpg" alt="Card image cap">
+                                <img class="card-img-top img-fluid h-40 w-40" src="img/quiche.jpg" alt="Card image cap">
                                 <div class="card-body d-flex flex-column">
                                     <h4 class="card-title"><a href="{{ path('recette_show', {slug: bestRecette.slug}) }}" title="View Product">{{bestRecette.title}}</a></h4>
                                     <div class="user-synop">

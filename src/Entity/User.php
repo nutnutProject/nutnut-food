@@ -135,6 +135,11 @@ class User implements UserInterface
      */
     private $account_activate;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+
     public function __construct()
     {
         $this->recettes = new ArrayCollection();
@@ -437,6 +442,18 @@ class User implements UserInterface
     public function __toString()
     {
         return $this->firstname;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
     }
 
 }
