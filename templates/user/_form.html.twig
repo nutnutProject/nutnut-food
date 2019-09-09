@@ -1,11 +1,6 @@
-{# <div class="container"> #}
-
-{# {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
 
 
-</div> #}
+
 {{ form_start(form, {'attr': {'class': 'border border-light px-5 py-2'}} ) }}
         <p class="text-center h1 mb-4">Mon profil</p>
     
@@ -62,7 +57,9 @@
                 {{ form_widget(form.description, {'attr': {'class': 'form-control mb-4','id': 'textarea','value': user.description }} ) }}
             </div> 
             
+
             <button class="btn btn-success mx-auto">{{ button_label|default('Save') }}</button>
+
         </div>
 
 {{ form_end(form) }}

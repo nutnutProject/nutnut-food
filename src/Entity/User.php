@@ -136,9 +136,15 @@ class User implements UserInterface
     private $account_activate;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+  
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Note", mappedBy="user_id", orphanRemoval=true)
      */
     private $notes;
+
 
     public function __construct()
     {
@@ -445,6 +451,16 @@ class User implements UserInterface
         return $this->firstname;
     }
 
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+    }
     /**
      * @return Collection|Note[]
      */
