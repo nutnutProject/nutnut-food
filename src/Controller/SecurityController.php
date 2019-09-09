@@ -39,6 +39,13 @@ class SecurityController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid())
         {
+            $userRepository = $this->getDoctrine()->getRepository(User::class);
+            if ($userRepository->findBy(['username' => $user->getUsername()]))
+            {
+                $this->addFlash('danger', 'Un utilisateur est déjà inscrit avec cette adresse email');            
+                return $this->redirectToRoute('home');
+            }
+            
             // Génération des token
             $pwd_token = md5(uniqid());
             $activateToken = md5(uniqid());
