@@ -126,7 +126,7 @@ class AppFixtures extends Fixture
 
             $recette = new Recette();
             $recette->setTitle($recetteTitles[rand(0,23)] .' '. $i);
-            $recette->setPhoto($recettePhoto[rand(0,12)]);
+            $recette->setPhoto('img/'.$recettePhoto[rand(0,12)]);
             $recette->setDescription($recetteDescriptions[rand(0,21)]);
             $recette->setOnline(true);
             $recette->setValidate(true);
