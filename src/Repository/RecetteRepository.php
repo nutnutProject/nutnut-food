@@ -22,7 +22,7 @@ class RecetteRepository extends ServiceEntityRepository
     public function findLastRecettes($number)
     {
         return $this->createQueryBuilder('p')
-            ->orderBy('p.title', 'DESC')
+            ->orderBy('p.creation_date', 'DESC')
             ->setMaxResults($number)
             ->getQuery()
             ->getResult();
