@@ -49,7 +49,7 @@ class AppFixtures extends Fixture
         "Je fais du patinage artistique depuis mes douzes ans et suis actuellement champion Français en la matière. Par contre, je suis végétarien et vous propose de vous partager mes plus belles recettes ! Avec moi vous oublierez la viande... ",
         "On a décidé de s'inscrire sur ce site pour doper nos mornes soirées familiales. Chez nous, ce sera cuisine en famille ! "];
 
-        for($i=0; $i<10;$i++)
+        for($i=0; $i<20;$i++)
         {           
             $user = new User();
             $username = (1 === $i) ? 'toto@toto.fr' : 'titi'.$i.'@titi.fr';
@@ -129,7 +129,7 @@ class AppFixtures extends Fixture
             $recette = new Recette();
             $recette->setTitle($recetteTitles[rand(0,23)]);
             $recette->setPhoto('no-photo.jpg');
-            $recette->setDescription($recetteDescriptions[rand(0,23)]);
+            $recette->setDescription($recetteDescriptions[rand(0,21)]);
             $recette->setOnline(true);
             $recette->setValidate(true);
             $recette->setCreationDate(new \Datetime('@'.$randomTimestamp));
