@@ -84,7 +84,9 @@ class SecurityController extends AbstractController
                 ->setBody($body);
             $mailer->send($message);
 
+            
             $this->addFlash('success', 'Votre inscription a été prise en compte. Un email vous a été envoyé. Merci de confirmer votre inscription en cliquant sur le lien contenu dans ce mail.');
+
 
             return $this->redirectToRoute('home');
         }
@@ -149,7 +151,7 @@ class SecurityController extends AbstractController
         
         if ($error)
         {
-            $this->addFlash('alert', $error->getMessageKey());
+            $this->addFlash('alert', 'Votre mot de passe est incorrect.');
         }
         
         

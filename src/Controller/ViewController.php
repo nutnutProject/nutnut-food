@@ -197,22 +197,14 @@ class ViewController extends AbstractController
         return $this->render('view/faq.html.twig');
     }
 
-       /**
-     * @Route("/cgu", name="cgu")
-     * 
-     */
-    public function cgu()
-    {
-        return $this->render('view/cgu.html.twig');
-    }
 
        /**
-     * @Route("/cgv", name="cgv")
+     * @Route("/mentionslegales", name="mentionslegales")
      * 
      */
-    public function cgv()
+    public function mention()
     {
-        return $this->render('view/cgv.html.twig');
+        return $this->render('view/mentions.html.twig');
     }
 
 
