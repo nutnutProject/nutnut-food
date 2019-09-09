@@ -48,7 +48,7 @@
 
                     <div class="my-2 my-lg-0">
                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                            <a href="{{ path('user', {'id': app.user.id}) }}"><img src="img/wonder_icon.png" width="50" height="50" alt="Mon profil"></a>
+                            <a href="{{ path('user', {'id': app.user.id}) }}"><img src="img/moi_mini.jpg" width="50" height="50" alt="Mon profil"></a>
                             <a type="button" class="btn btn-outline-danger waves-effect" href="{{path('app_logout')}}">Déconnexion</a>
                         {% else %}
                             <button type="button" class="btn btn-outline-success waves-effect"  data-toggle="modal" data-target="#login">Se connecter</button>
