@@ -18,7 +18,7 @@ class RecetteType extends AbstractType
             ->add('title',TextType::class)
             ->add('photo',FileType::class)
             ->add('category', null, [
-                'choice_label' => 'name'
+                'choice_label' => 'name',
             ])
             ->add('diet', null, [
                 'choice_label' => 'name',
@@ -37,4 +37,3 @@ class RecetteType extends AbstractType
         ]);
     }
 }
-// tu sens mauvais

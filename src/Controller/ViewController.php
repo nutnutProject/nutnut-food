@@ -23,17 +23,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class ViewController extends AbstractController
 {
     /**
-     * @Route("/recettes{page}", name="recettes_list")
+     * @Route("/recettes/{page}", name="recettes_list", requirements={"page"="\d+"})
      */
     public function list(RecetteRepository $recetteRepository, CategoryRepository $categoryRepository, DietRepository $dietRepository, $page = 1)
     {
         // Trouver toutes les recettes
         $recettes = $recetteRepository->findAll();
 
-        $max_pages= ceil(count($recettes)/8);
-        $debut = ($page -1 )*8;
-        $fin = $debut+8;
-        if ($page * 8 > count($recettes))
+        $max_pages= ceil(count($recettes)/6);
+        $debut = ($page -1 )*6;
+        $fin = $debut+6;
+        if ($page * 6 > count($recettes))
         {
             $fin = count($recettes);
         }
@@ -63,16 +63,39 @@ class ViewController extends AbstractController
      */
     public function addNote(Recette $recette, Request $request)
     {
-        $note = new Note();
-        $note->setCommentaire($request->request->get('commentaire'));
-        $note->setNote($request->request->get('note'));
-        $note->setValidate(false);
-        $note->setRecette($recette);
+        $user = $this->getUser();
 
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($note);
-        $entityManager->flush();
+        if ($user)
+        {
+            // Ajout du commentaire et de la note dans la table note
+            $note = new Note();
+            $note->setCommentaire($request->request->get('commentaire'));
+            $note->setNote($request->request->get('note'));
+            $note->setValidate(false);
+            $note->setRecette($recette);
+            $note->setUser($user);
+            $note->setCreationDate(new \DateTime());
 
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($note);
+            $entityManager->flush();
+
+            // Calcul de la note moyenne de la recette
+            $noteRepository = $this->getDoctrine()->getRepository(Note::class);
+            $notes = $noteRepository->findBy(
+                ['recette' => $recette],
+            );
+            $moyenne = 0;
+            foreach ($notes as $note) {
+                $moyenne += $note->getNote();
+            }
+            $moyenne = $moyenne/count($notes);
+
+            // Ajout de la moyenne dans la recette
+            $recette->setNote($moyenne);
+            $entityManager->persist($recette);
+            $entityManager->flush();
+        }
         return $this->redirectToRoute("recettes_list");
     }
 
@@ -84,6 +107,10 @@ class ViewController extends AbstractController
     {
         $recette_apprise = 0;
         $user = $this->getUser();
+
+        // Récupération des commentaires
+        $noteRepository = $this->getDoctrine()->getRepository(Note::class);
+        $notes = $noteRepository->findBy(['recette' => $recette]);
 
         //Si user connecté, récupération de l'id
         if ($user)
@@ -143,6 +170,7 @@ class ViewController extends AbstractController
         return $this->render('view/show_recette.html.twig', [
             'recette' => $recette,
             'recette_apprise' => $recette_apprise,
+            'notes' => $notes,
         ]);
     }
 

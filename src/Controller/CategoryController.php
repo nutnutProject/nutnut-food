@@ -18,26 +18,40 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("/category/{slug}", name="category_show")
+     * @Route("/category/{slug}/{page}", name="category_show")
      * 
      * Route servant a afficher les catégories en même temps que les recettes
      */
     public function categoryShow(Category $category,
-        CategoryRepository $categoryRepository, DietRepository $dietRepository) 
+        CategoryRepository $categoryRepository, DietRepository $dietRepository,$page=1) 
         {
         // Permet d'avoir les recettes par catégories
         $recettes = $category->getRecettes();
+
+        $max_pages= ceil(count($recettes)/6);
+        $debut = ($page -1 )*6;
+        $fin = $debut+6;
+        if ($page * 6 > count($recettes))
+        {
+            $fin = count($recettes);
+        }
+        for ($i = $debut; $i < $fin; $i++)
+        {
+            $recette[] = $recettes[$i];
+        }
+
         $categories = $categoryRepository->findAll();
         $diets = $dietRepository->findAll();
 
         return $this->render('view/list.html.twig', [
-            'recettes' => $recettes,
+            'recettes' => $recette,
             'categories' => $categories,
             'diets' => $diets,
             // Permet de retrouver la route courante
             'current_category' => $category,
             'current_diet' => false,
-            
+            'current_page' => $page,
+            'max_pages' => $max_pages,
         ]);
     }
 
