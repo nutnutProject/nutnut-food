@@ -168,6 +168,7 @@ class ViewController extends AbstractController
         }
 
         return $this->render('view/show_recette.html.twig', [
+            'user' => $user,
             'recette' => $recette,
             'recette_apprise' => $recette_apprise,
             'notes' => $notes,
