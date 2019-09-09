@@ -9,6 +9,7 @@ use App\Form\RecetteType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use App\Repository\RecetteRepository;
+use App\Repository\UserRequestRepository;
 
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -221,6 +222,51 @@ class UserController extends AbstractController
                 'user' => $user,
                 'form' => $form->createView(),
             ]);
+        }
+        return $this->redirectToRoute('home');
+    }
+
+    /**
+     * @Route("/moncompte/{id}/interests/{page}", name="user_interests")
+     */
+    public function interests(UserRequestRepository $userRequestRepository, User $user, $page = 1): Response
+    {
+        if ($this->getUser())
+        {
+            if ($this->getUser() != $user)
+            {
+                $user = $this->getUser();
+            }
+            
+            // Récupération des mes intérets, on récupère toutes les recettes interessées
+            $userRequests = $userRequestRepository->findBy([
+                'user' => $user,
+            ]);
+            $recettes = [];
+            foreach ($userRequests as $userRequest) {
+                $recetteRepository = $this->getDoctrine()->getRepository(Recette::class); 
+                $recettes[] = $recetteRepository->findBy(['id' => $userRequest->getRecette()->getId()]);
+            } 
+            
+            $max_pages= ceil(count($recettes)/6);
+            $debut = ($page -1 )*6;
+            $fin = $debut+6;
+            if ($page * 6 > count($recettes))
+            {
+                $fin = count($recettes);
+            }
+            for ($i = $debut; $i < $fin; $i++)
+            {
+                $recette[] = $recettes[$i];
+            }
+            //dd($recette);
+            return $this->render('user/interests.html.twig',[
+                'recettes' => $recette,
+                'user' =>  $user,
+                'current_page' => $page,
+                'max_pages' => $max_pages,
+            ]);
+
         }
         return $this->redirectToRoute('home');
     }

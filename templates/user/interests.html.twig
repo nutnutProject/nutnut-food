@@ -12,8 +12,8 @@
                             <div class="list-group" id="list-tab">
                                 <a class="list-group-item list-group-item-action" id="list-home-list" href="{{path('user', {id: user.id})}}">Tableau de bord</a>
                                 <a class="list-group-item list-group-item-action" id="list-profile-list" href="{{path('user_edit', {id: user.id} )}}">Modifier mon profil</a>
-                                <a class="list-group-item list-group-item-action active" id="list-creation-list" href="{{path('user_recettes', {id: user.id})}}">Mes recettes</a>
-                                <a class="list-group-item list-group-item-action" id="list-interest-list" href="{{path('user_interests', {id: user.id})}}">Intêrets</a>                    
+                                <a class="list-group-item list-group-item-action" id="list-creation-list" href="{{path('user_recettes', {id: user.id})}}">Mes recettes</a>
+                                <a class="list-group-item list-group-item-action active" id="list-interest-list" href="{{path('user_interests', {id: user.id})}}">Intêrets</a>                    
                             </div>
                         </div>
                     </div>
@@ -29,17 +29,17 @@
                             {% for recette in recettes %}
                                 <div class="col-12 col-sm-6 col-lg-4">
                                     <div class="card mx-auto">
-                                        <img class="card-img-top" src="{{ asset(recette.photo) }}" alt="Card image cap">
+                                        <img class="card-img-top" src="{{ asset(recette[0].photo) }}" alt="Card image cap">
                                         <div class="card-body">
-                                            <h4 class="card-title">{{recette.title}}</h4>
+                                            <h4 class="card-title">{{recette[0].title}}</h4>
                                             <div class="rating">
-                                                <span class=""><img src="{{asset('img/noix-check.png')}}">{{recette.note}}</span>
+                                                <span class=""><img src="{{asset('img/noix-check.png')}}">{{recette[0].note}}</span>
                                             </div>
-                                            <p class="card-text">{{recette.description}}</p>
+                                            <p class="card-text">{{recette[0].description}}</p>
                                         </div>
                                         <div class="col">
                                             <div class="card-footer bg-transparent border-warning mt-auto align-self-end">
-                                                <a href="{{path('recette_edit', {id: user.id, slug: recette.slug} ) }}" class="btn btn-amber btn-block ">Modifier</a>
+                                                <a href="{{path('recette_show', {slug: recette[0].slug} ) }}" class="btn btn-amber btn-block ">Voir</a>
                                             </div>
                                         </div>
                                     </div>
@@ -77,4 +77,4 @@
              </div>  
         </div>  
 
-    {% endblock %}   
+    {% endblock %}
