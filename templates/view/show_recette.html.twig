@@ -23,7 +23,7 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="card" >
-                    <img src="{{asset(recette.photo)}}" class="card-img-top" alt="...">
+                    <img src="{{asset(recette.photo)}}" class="card-img-top" alt="..." >
                     <div class="card-body">
                         <h1 class="card-title">{{recette.title}}  </h1>
                         <p class="card-text">{{recette.description}}</p>
@@ -46,7 +46,7 @@
                                             <div class="md-form mb-5">
                                                 <i class="fas fa-user prefix grey-text"></i>
                                                 <input type="text" id="form34" class="form-control validate" name="name">
-                                                <label data-error="wrong" data-success="right" for="form34">{{user.firstname}}</label>
+                                                <label data-error="wrong" data-success="right" for="form34">Votre prénom</label>
                                             </div>
                             
                                             <div class="md-form mb-5">
@@ -128,7 +128,7 @@
 
         <div class="col">
             <div class="card" >
-                <img src="{{asset('img/wonder_icon.png')}}" class="card-img-top-user" alt="...">
+                <img src="{{asset(recette.user.image)}}" class="card-img-top-user" alt="...">
                 <div class="rating">
                     <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
                     <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
@@ -138,12 +138,15 @@
                     <span class="">{{recette.note}} /5 </span>
                 </div>
                     <div class="card-body">
-                        <h4 class="card-title">{{recette.user.firstname}} {{recette.user.lastname|slice(0, 1)}}</h4>
+                        <a href="{{ path('fooder_show', {firstname: recette.user.firstname, id: recette.user.id}) }}"><h4 class="card-title">{{recette.user.firstname}} {{recette.user.lastname|slice(0, 1)}}</h4></a>
                         <h5 class="card-title">{{recette.user.age}}</h5>
                         <h5 class="card-title">{{recette.user.city}}</h5>
                         <p class="card-text">{{recette.user.description}}</p>
-                        <p class="card-text">{{recette.creationDate|date("m/d/Y")}}
+                        <p class="card-text"> Recette postée le {{recette.creationDate|date("m/d/Y")}}
                     </div> 
+                    <div class="card-footer bg-transparent border-warning mx-auto align-self">
+                        <a href="{{ path('fooder_show', {firstname: recette.user.firstname, id: recette.user.id}) }}" class="btn btn-amber btn-block ">Voir le profil de {{recette.user.firstname}}</a>
+                    </div>
                 </div>
                 <div class="card" id="list-ingredients">
                     <ul class="list-group">

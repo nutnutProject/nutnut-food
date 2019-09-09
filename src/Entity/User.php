@@ -196,6 +196,16 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image)
+    {
+        $this->image = $image;
+    }
+
     public function getBirthdate(): ?\DateTimeInterface
     {
         return $this->birthdate;
@@ -452,15 +462,7 @@ class User implements UserInterface
     }
 
 
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
 
-    public function setImage(?string $image): self
-    {
-        $this->image = $image;
-    }
     /**
      * @return Collection|Note[]
      */
