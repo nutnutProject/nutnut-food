@@ -24,48 +24,55 @@
                     </div>
                 </div>
                 <div class="col-lg-9">
-                    <div class="row mt-0">
-                    {% for recette in recettes %}
-                        <div class="col-12 col-sm-6 col-lg-4">
-                            <div class="card mx-auto">
-                                <img class="card-img-top" src="{{ asset(recette.photo) }}" alt="Card image cap">
-                                <div class="card-body">
-                                    <h4 class="card-title">{{recette.title}}</h4>
-                                    <div class="rating">
-                                        <span class=""><img src="{{asset('img/noix-check.png')}}">{{recette.note}}</span>
+                    {% if recettes != [] %}
+                        <div class="row mt-0">
+                            {% for recette in recettes %}
+                                <div class="col-12 col-sm-6 col-lg-4">
+                                    <div class="card mx-auto">
+                                        <img class="card-img-top" src="{{ asset(recette.photo) }}" alt="Card image cap">
+                                        <div class="card-body">
+                                            <h4 class="card-title">{{recette.title}}</h4>
+                                            <div class="rating">
+                                                <span class=""><img src="{{asset('img/noix-check.png')}}">{{recette.note}}</span>
+                                            </div>
+                                            <p class="card-text">{{recette.description}}</p>
+                                        </div>
+                                        <div class="col">
+                                            <div class="card-footer bg-transparent border-warning mt-auto align-self-end">
+                                                <a href="{{path('recette_edit', {id: user.id, slug: recette.slug} ) }}" class="btn btn-amber btn-block ">Modifier</a>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <p class="card-text">{{recette.description}}</p>
                                 </div>
-                                <div class="col">
-                                    <div class="card-footer bg-transparent border-warning mt-auto align-self-end">
-                                        <a href="{{path('recette_edit', {id: user.id, slug: recette.slug} ) }}" class="btn btn-amber btn-block ">Modifier</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                    </div>
-                    <nav>
-                        <ul class="pagination justify-content-center">
-                            {% if current_page != 1 %}
-                                <li class="page-item">
-                                    <a class="page-link" href="{{ path('user_recettes', {'id':user.id, 'page': current_page - 1}) }}">Précédent</a>
-                                </li>
-                            {% endif %}
-
-                            {% for p in range(max(current_page-3, 1), min(current_page+3, max_pages)) %}
-                                <li class="page-item {{ (current_page == p) ? 'active' : '' }}">
-                                    <a class="page-link" href="{{ path('user_recettes', {'id':user.id, 'page': p}) }}">{{ p }}</a>
-                                </li>
                             {% endfor %}
+                        </div>
+                        <nav>
+                            <ul class="pagination justify-content-center">
+                                {% if current_page != 1 %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="{{ path('user_recettes', {'id':user.id, 'page': current_page - 1}) }}">Précédent</a>
+                                    </li>
+                                {% endif %}
 
-                            {% if current_page != max_pages %}
-                                <li class="page-item">
-                                    <a class="page-link" href="{{ path('user_recettes', {'id':user.id, 'page': current_page + 1}) }}">Suivant</a>
-                                </li>
-                            {% endif %}
-                        </ul>
-                    </nav>
+                                {% for p in range(max(current_page-3, 1), min(current_page+3, max_pages)) %}
+                                    <li class="page-item {{ (current_page == p) ? 'active' : '' }}">
+                                        <a class="page-link" href="{{ path('user_recettes', {'id':user.id, 'page': p}) }}">{{ p }}</a>
+                                    </li>
+                                {% endfor %}
+
+                                {% if current_page != max_pages %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="{{ path('user_recettes', {'id':user.id, 'page': current_page + 1}) }}">Suivant</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    {% else %}
+                        <div class="row mt-0">
+                            <p>Vous n'avez pas créé de recettes.</p>
+                        </div>
+                    {% endif %}
+                    
                 </div>
              </div>  
         </div>  
