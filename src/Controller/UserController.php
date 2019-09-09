@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Recette;
 use App\Entity\User;
+use App\Entity\Diet;
 use App\Form\RecetteType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
@@ -60,6 +61,7 @@ class UserController extends AbstractController
             {
                 $fin = count($recettes);
             }
+            $recette=[];
             for ($i = $debut; $i < $fin; $i++)
             {
                 $recette[] = $recettes[$i];
@@ -92,21 +94,57 @@ class UserController extends AbstractController
             $form->handleRequest($request);
            
 
-            if ($form->isSubmitted() && $form->isValid()) {
+            if ($form->isSubmitted() && $form->isValid())
+            {
+                $recette_id = $recette->getId();
+                $file = $_FILES['recette'];
 
-                foreach ($recette->getDiet() as $value) {
-                    dd($value);
+                // Traitement de l'image
+                if (!preg_match("/\.(jpg|jpeg|gif|png)$/",$file['name']['photo']))
+                {
+                    $errors['cover'] = "Le type de l'image n'est pas valide";
+                }
+        
+                // Controle de la taille du fichier
+                if ($file['size']['photo'] > 2000000 )
+                {
+                    $errors['cover'] = "La taille de l'image est supérieur à 2Mo.";
+        
                 }
 
+                //Récupération de l'extension d'origine
+                if(empty($errors))
+                {
+                    $pathinfo = pathinfo($file['name']['photo']);
+                    $extension = $pathinfo['extension'];
+                }
+        
+                // Définition du nom de fichier, celui-ci doit être unique
+                $filename = uniqid();
+                $filename .= "." .$extension;
+        
+                // Définition de l'emplacement du fichier
+                $filepath = "img/".$filename;
+                
+                // Déplacement du fichier dans le dossier "img/"
+                copy($file['tmp_name']['photo'], $filepath);
+
+                // Enregistrement du ou des régimes alimentaire
+                foreach ($recette->getDiet() as $diet)
+                {
+                    // Ajouter dans la table recette_diet
+                    $diet_id =$diet->getId();
+                    $dietRepository = $this->getDoctrine()->getRepository(Diet::class); 
+                    $diet = $dietRepository->find($diet_id);
+                    $recette->addDiet($diet);
+                }
+
+                $recette->setPhoto($filepath);
                 $recette->setUser($user);
                 $recette->setNote(0);
                 $recette->setCreationDate(new \DateTime());
                 $recette->setValidate(true);
                 
-                // Enregistrement du ou des régimes alimentaire
-
-
-
                 // Enregistrement de la recette
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($recette);
