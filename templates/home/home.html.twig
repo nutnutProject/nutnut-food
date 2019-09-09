@@ -64,7 +64,7 @@
                             <div class="card">
                                 <img class="card-img-top img-fluid" src="{{asset(last_recette.photo)}}" alt="Card image cap">
                                 <div class="card-body d-flex flex-column">
-                                    <h4 class="card-title"><a href="{{ path('recette_show', {slug: last_recette.slug}) }}" title="View Product">{{last_recette.title| slice (0,23)}}...</a></h4>
+                                    <h4 class="card-title"><a href="{{ path('recette_show', {slug: last_recette.slug}) }}" title="{{bestRecette.title}}">{{last_recette.title| slice (0,23)}}...</a></h4>
                                     <div class="user-synop">
                                         <img class="icon-user" src="img/wonder_icon.png" alt="Card image cap">
                                         <p class="user-name"> {{last_recette.user.firstname}}</p>
@@ -118,7 +118,7 @@
                             <div class="card">
                                 <img class="card-img-top img-fluid" src="{{asset(bestRecette.photo)}}" alt="Card image cap">
                                 <div class="card-body d-flex flex-column">
-                                    <h4 class="card-title"><a href="{{ path('recette_show', {slug: bestRecette.slug}) }}" title="View Product">{{bestRecette.title | slice (0,23)}}...</a></h4>
+                                    <h4 class="card-title"><a href="{{ path('recette_show', {slug: bestRecette.slug}) }}" title="{{bestRecette.title}}">{{bestRecette.title | slice (0,23)}}...</a></h4>
                                     <div class="user-synop">
                                         <img class="icon-user" src="img/wonder_icon.png" alt="Card image cap">
                                         <p class="user-name"> {{bestRecette.user.firstname}}</p>
