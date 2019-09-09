@@ -36,7 +36,7 @@ class AppFixtures extends Fixture
         // Generate random birthdate
         $eigtheenYear = time() - 60 * 60 * 24 * 7 * 53 * 18 ;
         $eigthy = time() - 60 * 60 * 24 * 7 * 53 * 80;
-        $randomTimestamp = rand($eigthy, $eigtheenYear);
+       
         // Génération des adresses 
         $adresseUsers = ['62  Chemin Challet', '126  Place du Jeu de Paume', '1 Rue du Ballon', '150 Rue Solférino', '36 Rue de Gand', "81 Rue d'Angleterre", '107 Rue Saint-André', '106 Avenue Henri Delecaux', '368 Avenue du Maréchal de Lattre de Tassigny', '23 Allée Vauban'    ];
         $cityUsers = ['Lille', 'Lille', 'Lille', 'Lille', 'Lambersart', 'Saint-André-lez-Lille', 'La Madeleine' ];
@@ -62,6 +62,8 @@ class AppFixtures extends Fixture
             $user->setRoles($roles);
             $user->setFirstname($firstnameUsers[rand(0,24)]);
             $user->setLastname($lastnameUsers[rand(0,22)]);
+            // Générateur de birthdates aléatoires
+            $randomTimestamp = rand(time() - 60 * 60 * 24 * 7 * 53 * 80, time() - 60 * 60 * 24 * 7 * 53 * 18);
             $user->setBirthdate(new \Datetime('@'.$randomTimestamp));
             $user->setPassword(
                 $this->passwordEncoder->encodePassword($user, 'test')
