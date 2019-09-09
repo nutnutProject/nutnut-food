@@ -27,8 +27,6 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         
-      
-
         $users = [];
         // Génération des prénoms et noms
         $firstnameUsers = ['Gabriel', 'Jules', 'Nathan', 'Lucas', 'Hugo', 'Leo', 'Raphael', 'Ethan', 'Louise', 'Emma', 'Chloe', 'Manon', 'Alice', 'Lina', 'Lea', 'Camille', 'Theo', 'Axel', 'Jacques', 'Monique', 'Ibrahim', 'Fathia', 'Oscar', 'Oumar', 'Alpha'];
@@ -127,7 +125,7 @@ class AppFixtures extends Fixture
             $randomTimestamp = rand($now, $threeMonth);
 
             $recette = new Recette();
-            $recette->setTitle($recetteTitles[rand(0,23)]);
+            $recette->setTitle($recetteTitles[rand(0,23)] .' '. $i);
             $recette->setPhoto('no-photo.jpg');
             $recette->setDescription($recetteDescriptions[rand(0,21)]);
             $recette->setOnline(true);
@@ -154,8 +152,6 @@ class AppFixtures extends Fixture
             $note->setRecette($recettes[rand(0,50)]);
             $manager->persist($note);
         }
-
-
 
         for($i = 0 ; $i < 10 ; $i++)
         {
