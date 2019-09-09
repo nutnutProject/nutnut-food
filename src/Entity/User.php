@@ -135,10 +135,16 @@ class User implements UserInterface
      */
     private $account_activate;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Note", mappedBy="user_id", orphanRemoval=true)
+     */
+    private $notes;
+
     public function __construct()
     {
         $this->recettes = new ArrayCollection();
         $this->userRequests = new ArrayCollection();
+        $this->notes = new ArrayCollection();
     }
 
     /**
@@ -437,6 +443,37 @@ class User implements UserInterface
     public function __toString()
     {
         return $this->firstname;
+    }
+
+    /**
+     * @return Collection|Note[]
+     */
+    public function getNotes(): Collection
+    {
+        return $this->notes;
+    }
+
+    public function addNote(Note $note): self
+    {
+        if (!$this->notes->contains($note)) {
+            $this->notes[] = $note;
+            $note->setUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNote(Note $note): self
+    {
+        if ($this->notes->contains($note)) {
+            $this->notes->removeElement($note);
+            // set the owning side to null (unless already changed)
+            if ($note->getUserId() === $this) {
+                $note->setUserId(null);
+            }
+        }
+
+        return $this;
     }
 
 }
