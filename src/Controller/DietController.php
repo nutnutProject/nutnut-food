@@ -6,6 +6,7 @@ use App\Entity\Diet;
 use App\Form\DietType;
 use App\Repository\CategoryRepository;
 use App\Repository\DietRepository;
+use App\Repository\RecetteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,10 +22,18 @@ class DietController extends AbstractController
      * 
      * Route servant à afficher les tags en même temps que les catégories et recettes
      */
-    public function dietShow(Diet $diet, DietRepository $dietRepository, CategoryRepository $categoryRepository,$page=1)
+    public function dietShow(Request $request, Diet $diet, DietRepository $dietRepository, CategoryRepository $categoryRepository, RecetteRepository $recetteRepository ,$page=1)
     {
+        $request = isset($_GET["query"]) ? trim($_GET["query"]) : null;
+
+        if ($request == null){
+        // Permet d'avoir les recettes par catégories
+            $recettes = $diet->getRecettes();
+        } else {
+            $recettes = $recetteRepository->findDietRecettesByRequest($request);
+        }
         //Permet d'avoir les recettes par tag
-        $recettes = $diet->getRecettes();
+
 
         $max_pages= ceil(count($recettes)/6);
         $debut = ($page -1 )*6;
