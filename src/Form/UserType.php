@@ -27,7 +27,6 @@ class UserType extends AbstractType
             ->add('lastname', TextType::class)
             ->add('username', TextType::class)
             ->add('birthdate', BirthdayType::class)
-            ->add('image',FileType::class)
             ->add('adresse', TextType::class)
             ->add('city', TextType::class)
             ->add('cp', NumberType::class)
@@ -43,6 +42,8 @@ class UserType extends AbstractType
             if(!$user || null === $user->getId())
             {
                 $form->add('password', PasswordType::class);
+                $form->add('image',FileType::class);
+
             }
         });
     }

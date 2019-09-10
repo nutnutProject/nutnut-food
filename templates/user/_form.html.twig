@@ -46,11 +46,6 @@
                 {{ form_widget(form.birthdate, {'attr': {'class': 'form mb-4'}})}}
             </div>
 
-            <div class="col-sm-6 col-lg-6">
-                <label for="image">Choisir une photo:</label>
-                {{ form_widget(form.image, {'attr': {'class': 'form-control-file','placeholder': 'Illustration'}}) }}
-            </div>
-
             <div class="col-12">
                 <label for="textarea" class="active text-center">Description :</label>
                 {{ form_widget(form.description, {'attr': {'class': 'form-control mb-4','id': 'textarea','value': user.description }} ) }}
