@@ -28,7 +28,7 @@ class ViewController extends AbstractController
     public function list(Request $request, RecetteRepository $recetteRepository, CategoryRepository $categoryRepository, DietRepository $dietRepository, $page = 1)
     {
 
-        $request = $_GET['query'];
+        $request = isset($_GET["query"]) ? trim($_GET["query"]) : null;
         // Trouver toutes les recettes
         if ($request == null){
         $recettes = $recetteRepository->findValidateOnlineRecettes();
