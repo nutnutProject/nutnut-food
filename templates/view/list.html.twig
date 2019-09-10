@@ -85,7 +85,7 @@
                     {% for recette in recettes %}
                         <div class="col-12 col-sm-6 col-lg-4">
                             <div class="card mx-auto">
-                                <a href="{{ path('recette_show', {slug: recette.slug}) }}"><img class="card-img-top img-fluid mx-auto" src="{{asset(recette.photo)}}" alt="Card image cap"  ></a>
+                                <a href="{{ path('recette_show', {slug: recette.slug}) }}"><img class="card-img-top img-fluid mx-auto" src="{{asset(recette.photo)}}" style="width:254.6px; height:236px" alt="Card image cap"  ></a>
                                 <div class="card-body d-flex flex-column">
                                     <h4 class="card-title"><a href="{{ path('recette_show', {slug: recette.slug}) }}" title="View Product">{{ recette.title |slice (0,80) | trim(01234567891020304050607090)}}</a></h4>
                                     <div class="user-synop">
