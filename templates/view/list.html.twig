@@ -111,6 +111,11 @@
                                         <a href="{{ path('recette_show', {slug: recette.slug}) }}" class="btn btn-amber btn-block ">Voir</a>
                                     </div>
                                 </div>
+                                <div class="col mx-auto">
+                                    {% for diet in recette.diet %}
+                                        <span class="badge badge-success mx-auto">{{diet.name}}</span>  
+                                    {% endfor %}
+                                </div>
                             </div>
                         </div>
                     {% endfor %}
