@@ -57,6 +57,32 @@ class RecetteRepository extends ServiceEntityRepository
         ->getResult();
     }
 
+    public function findCategoryRecettesByRequest($request)
+    {
+        return $this->createQueryBuilder('p')
+            ->innerJoin('p.category', 'c')
+            ->addSelect('c')
+            ->where('p.title LIKE :title')
+            ->setParameter('title', '%'.$request.'%')
+            ->andWhere('p.validate = true')
+            ->andWhere('p.online = true')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findDietRecettesByRequest($request)
+    {
+        return $this->createQueryBuilder('p')
+            ->innerJoin('p.category', 'c')
+            ->addSelect('c')
+            ->where('p.title LIKE :title')
+            ->setParameter('title', '%'.$request.'%')
+            ->andWhere('p.validate = true')
+            ->andWhere('p.online = true')
+            ->getQuery()
+            ->getResult();
+    }
+
 
 
   
