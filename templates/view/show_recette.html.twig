@@ -142,7 +142,8 @@
                         <h5 class="card-title">{{recette.user.age}}</h5>
                         <h5 class="card-title">{{recette.user.city}}</h5>
                         <p class="card-text">{{recette.user.description}}</p>
-                        <p class="card-text">{{recette.creationDate|date("m/d/Y")}}
+                        <p class="card-text">{{recette.creationDate|date("m/d/Y")}}</p>
+                        <p class="card-text"><a class="user-name" href="{{ path('fooder_show', {'firstname':recette.user.firstname,'id':recette.user.id}) }}">Voir toutes ces recettes</a></p>
                     </div> 
                 </div>
                 <div class="card" id="list-ingredients">

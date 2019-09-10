@@ -175,14 +175,32 @@ class ViewController extends AbstractController
     }
 
     /**
-     * @Route("/fooder/{firstname}-{id}", name="fooder_show")
+     * @Route("/fooder/{firstname}-{id}/{page}", name="fooder_show")
      * 
      * permet d'aller sur le profil d'un fooder
      */
-    public function showFooder(User $user)
+    public function showFooder(User $user, $id, $page=1)
     {
+        $recetteRepository = $this->getDoctrine()->getRepository(Recette::class);
+        $recettes = $recetteRepository->findBy(['user' => $id]);
+        
+        $max_pages= ceil(count($recettes)/8);
+        $debut = ($page -1 )*8;
+        $fin = $debut+8;
+        if ($page * 8 > count($recettes))
+        {
+            $fin = count($recettes);
+        }
+        $recette=[];
+        for ($i = $debut; $i < $fin; $i++)
+        {
+            $recette[] = $recettes[$i];
+        }
         return $this->render('view/show_fooder.html.twig', [
+            'recettes' => $recette,
             'user' => $user,
+            'max_pages' => $max_pages,
+            'current_page' => $page,
         ]);
     }
 
