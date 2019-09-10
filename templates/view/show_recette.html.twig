@@ -173,10 +173,10 @@
                                 <p class="user-name">{{note.user.firstname}} {{note.user.lastname|slice(0, 1)}}</p>       
                             </div>
                             <div class="rating">
-                                {% set nb_etoiles = 5 %}
+                                {% set nb_etoiles = 4 %}
                                 {% set message = "" %}
                                 {% for i in 0..nb_etoiles %}
-                                    {% if note.note >i and note.note <i+1 %}
+                                    {% if note.note > i and note.note <i+1 %}
                                         {% set message = message ~ '/' %}
                                     {% elseif note.note >i %}
                                         <img src="{{asset('img/noix-check.png')}}">

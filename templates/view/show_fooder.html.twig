@@ -126,25 +126,35 @@
             </h1>
 
             <div class="row">
-                <div class="col-sm">
-                    <div class="card">
-                        <div class="card-body d-flex flex-column">
-                            <div class="user-synop">
-                                <img class="icon-user" src="img/wonder_icon.png" alt="Card image cap">
-                                <p class="user-name">
-                                    Wonder Woman</p>
-                            </div>
-                            <div class="rating">
-                                <span class=""><img src="img/noix-check.png"></span>
-                                <span class=""><img src="img/noix-check.png"></span>
-                                <span class=""><img src="img/noix-check.png"></span>
-                                <span class=""><img src="img/noix-check.png"></span>
-                                <span class=""><img src="img/noix-check.png"></span>
-                            </div>
-                            <p class="card-text">Je fait des quiches au saumon depuis que je suis enfant, recette de ma grand-mere..</p>
+                {% if notes %}  
+                    {% for note in notes %}
+                    <div class="col-3">
+                        <div class="card">
+                            <div class="card-body d-flex flex-column">
+                                <div class="user-synop">
+                                    <img class="icon-user" src="img/wonder_icon.png" alt="Card image cap">
+                                    <p class="user-name">{{note.user.firstname}} {{note.user.lastname|slice(0, 1)}}</p>       
+                                </div>
+                                <div class="rating">
+                                    {% set nb_etoiles = 4 %}
+                                    {% set message = "" %}
+                                    {% for i in 0..nb_etoiles %}
+                                        {% if note.note > i and note.note <i+1 %}
+                                            {% set message = message ~ '/' %}
+                                        {% elseif note.note >i %}
+                                            <img src="{{asset('img/noix-check.png')}}">
+                                        {% else %}
+                                            <img src="{{asset('img/noix.png')}}">
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                <p class="card-text">{{note.commentaire}}</p>
+                                <p>Ajouté le {{note.creationDate|date("m/d/Y")}}</p> 
+                            </div>           
                         </div>
                     </div>
-                </div>
+                    {% endfor %}         
+                {% endif %}
 
             </div>
         </div>

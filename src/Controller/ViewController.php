@@ -183,6 +183,10 @@ class ViewController extends AbstractController
     {
         $recetteRepository = $this->getDoctrine()->getRepository(Recette::class);
         $recettes = $recetteRepository->findBy(['user' => $id]);
+
+        // Récupération des commentaires
+        $noteRepository = $this->getDoctrine()->getRepository(Note::class);
+        $notes = $noteRepository->findBy(['user' => $id]);
         
         $max_pages= ceil(count($recettes)/8);
         $debut = ($page -1 )*8;
@@ -201,6 +205,7 @@ class ViewController extends AbstractController
             'user' => $user,
             'max_pages' => $max_pages,
             'current_page' => $page,
+            'notes' => $notes,
         ]);
     }
 
