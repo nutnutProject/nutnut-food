@@ -129,7 +129,7 @@ class UserController extends AbstractController
                     $recette->addDiet($diet);
                 }
 
-                //$recette->setPhoto($filepath);
+                $recette->setPhoto($filepath);
                 $recette->setUser($user);
                 $recette->setNote(0);
                 $recette->setCreationDate(new \DateTime());
