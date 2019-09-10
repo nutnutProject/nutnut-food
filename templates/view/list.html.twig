@@ -87,10 +87,10 @@
                             <div class="card mx-auto">
                                 <a href="{{ path('recette_show', {slug: recette.slug}) }}"><img class="card-img-top img-fluid mx-auto" src="{{asset(recette.photo)}}" style="width:254.6px; height:236px" alt="Card image cap"  ></a>
                                 <div class="card-body d-flex flex-column">
-                                    <h4 class="card-title"><a href="{{ path('recette_show', {slug: recette.slug}) }}" title="View Product">{{ recette.title |slice (0,80) | trim(01234567891020304050607090)}}</a></h4>
+                                    <h4 class="card-title"><a href="{{ path('recette_show', {slug: recette.slug}) }}" title="View Product">{{ recette.title |slice (0,30) | trim(01234567891020304050607090)}}...</a></h4>
                                     <div class="user-synop">
                                         <img class="icon-user" src="{{asset(recette.user.image)}}" alt="Card image cap">
-                                        <p class="user-name">{{recette.user.firstname}}</p>
+                                        <a class="user-name" href="{{ path('fooder_show', {'firstname':recette.user.firstname,'id':recette.user.id}) }}">{{recette.user.firstname}}</a>
                                     </div>
                                     <div class="rating">
                                     {% if recette.note > 0 %}                              
@@ -106,16 +106,21 @@
                                     </div>
                                     <p class="card-text">{{ recette.description | slice (0,80)}}...</p>
                                 </div>
+                                 <div class="col mb-2">
+                                    {% for diet in recette.diet %}
+                                        <span class="badge badge-success mx-auto">{{diet.name}}</span>  
+                                        <span class="badge badge-success mx-auto">{{recette.category.name}}</span>  
+
+                                    {% endfor %}
+                                    
+                                </div>
+
                                 <div class="col">
                                     <div class="card-footer bg-transparent border-warning mt-auto align-self-end">
                                         <a href="{{ path('recette_show', {slug: recette.slug}) }}" class="btn btn-amber btn-block ">Voir</a>
                                     </div>
                                 </div>
-                                <div class="col mx-auto">
-                                    {% for diet in recette.diet %}
-                                        <span class="badge badge-success mx-auto">{{diet.name}}</span>  
-                                    {% endfor %}
-                                </div>
+                               
                             </div>
                         </div>
                     {% endfor %}
