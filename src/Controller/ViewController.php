@@ -27,13 +27,15 @@ class ViewController extends AbstractController
      */
     public function list(Request $request, RecetteRepository $recetteRepository, CategoryRepository $categoryRepository, DietRepository $dietRepository, $page = 1)
     {
-
+        //Récupère dans request les données envoyées dans le formulaire de recherche
         $request = isset($_GET["query"]) ? trim($_GET["query"]) : null;
-        // Trouver toutes les recettes
+       
+
         if ($request == null){
-        $recettes = $recetteRepository->findValidateOnlineRecettes();
+         // Trouver toutes les recettes
+            $recettes = $recetteRepository->findValidateOnlineRecettes();
         } else {
-        $recettes = $recetteRepository->findByRequest($request);    
+            $recettes = $recetteRepository->findByRequest($request);    
         }
 
         $max_pages= ceil(count($recettes)/6);
