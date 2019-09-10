@@ -37,6 +37,21 @@ class RecetteRepository extends ServiceEntityRepository
         ->getResult();
     }
 
+    public function findValidateOnlineRecettes()
+    {
+        return $this->createQueryBuilder('p')
+        ->andWhere('p.validate = true')
+        ->andWhere('p.online = true')
+        ->getQuery()
+        ->getResult();
+    }
+
+    public function findByRequest($request)
+    {
+        return $this->createQueryBuilder('p')
+        ->
+    }
+
 
 
   

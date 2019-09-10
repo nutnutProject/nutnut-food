@@ -25,10 +25,12 @@ class ViewController extends AbstractController
     /**
      * @Route("/recettes/{page}", name="recettes_list", requirements={"page"="\d+"})
      */
-    public function list(RecetteRepository $recetteRepository, CategoryRepository $categoryRepository, DietRepository $dietRepository, $page = 1)
+    public function list(Request $request, RecetteRepository $recetteRepository, CategoryRepository $categoryRepository, DietRepository $dietRepository, $page = 1)
     {
+
+        $request = isset($_GET['query']) ? trim($_GET['query']) : null;
         // Trouver toutes les recettes
-        $recettes = $recetteRepository->findAll();
+        $recettes = $recetteRepository->findValidateOnlineRecettes();
 
         $max_pages= ceil(count($recettes)/6);
         $debut = ($page -1 )*6;
