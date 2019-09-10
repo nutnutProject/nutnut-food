@@ -21,12 +21,6 @@
             </div>
             
             <div class="col-12">
-                <label for="text" class="active text-center">Mot de passe :</label>
-                {{ form_widget(form.password, {'attr': {'class': 'form-control mb-4','value':user.password }} ) }}
-                <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4"></small>
-            </div>
-
-            <div class="col-12">
                 <label for="text" class="active text-center">addresse :</label>
                 {{ form_widget(form.adresse, {'attr': {'class': 'form-control mb-4','value':user.adresse }} ) }}
                 <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4"></small>
@@ -37,7 +31,7 @@
                 {{ form_widget(form.city, {'attr': {'class': 'form-control mb-4','value':user.city }} ) }}
             </div>
 
-            <div class="col-sm-6 col-lg-6 ">
+            <div class="col-sm-6 col-lg-6">
                 <label for="text" class="active text-center">Code Postal :</label>
                 {{ form_widget(form.cp, {'attr': {'class': 'form-control mb-4','value':user.cp }} ) }}
             </div>
@@ -47,7 +41,7 @@
                 {{ form_widget(form.telephone, {'attr': {'class': 'form-control mb-4','value': user.telephone }} ) }}
             </div>
 
-            <div class="col-12">
+            <div class="col-sm-6 col-lg-6">
                 <label for="textarea" class="active text-center">Date de naissance :</label>
                 {{ form_widget(form.birthdate, {'attr': {'class': 'form mb-4'}})}}
             </div>
