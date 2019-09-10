@@ -45,7 +45,7 @@ class SecurityController extends AbstractController
                 $this->addFlash('danger', 'Un utilisateur est déjà inscrit avec cette adresse email');            
                 return $this->redirectToRoute('home');
             }
-            
+
             // Génération des token
             $pwd_token = md5(uniqid());
             $activateToken = md5(uniqid());
@@ -56,7 +56,7 @@ class SecurityController extends AbstractController
             $user->setActivateTokenExpire(time()+3600);
             $user->setAccountActivate(false);
             $user->setPassword(
-                $this->passwordEncoder->encodePassword($user, $user->getPassword())
+            $this->passwordEncoder->encodePassword($user, $user->getPassword())
             );
 
 
@@ -178,6 +178,10 @@ class SecurityController extends AbstractController
 
     public function forgetPassword(Request $request, \Swift_Mailer $mailer)
     {
+
+
+
+        
         if ($request->isMethod('POST'))
         {
             $username = $request->request->get('username');
