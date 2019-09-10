@@ -33,7 +33,16 @@
                                         <div class="card-body">
                                             <h4 class="card-title">{{recette.title}}</h4>
                                             <div class="rating">
-                                                <span class=""><img src="{{asset('img/noix-check.png')}}">{{recette.note}}</span>
+                                                {% if recette.note > 0 %}                              
+                                                    {% set nb_etoiles = 5 %}
+                                                    {% for i in 1..nb_etoiles %}
+                                                        {% if recette.note >= i %}
+                                                            <img src="{{asset('img/noix-check.png')}}">
+                                                        {% else %}
+                                                            <img src="{{asset('img/noix.png')}}">
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endif %}
                                             </div>
                                             <p class="card-text">{{recette.description}}</p>
                                         </div>

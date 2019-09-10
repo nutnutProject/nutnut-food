@@ -132,7 +132,6 @@
                 <div class="rating">
                     {% if recette.note > 0 %}                              
                         {% set nb_etoiles = 5 %}
-                        {% set message = "" %}
                         {% for i in 1..nb_etoiles %}
                             {% if recette.note >= i %}
                                 <img src="{{asset('img/noix-check.png')}}">
@@ -183,7 +182,6 @@
                             </div>
                             <div class="rating">                             
                                 {% set nb_etoiles = 5 %}
-                                {% set message = "" %}
                                 {% for i in 1..nb_etoiles %}
                                     {% if note.note >= i %}
                                         <img src="{{asset('img/noix-check.png')}}">
