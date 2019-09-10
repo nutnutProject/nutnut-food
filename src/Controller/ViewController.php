@@ -199,10 +199,12 @@ class ViewController extends AbstractController
         foreach ($recettes as $recette) {
             //dd($recette->getId());
             $noteRepository = $this->getDoctrine()->getRepository(Note::class);
-            $notes[] = $noteRepository->findBy(['recette' => $recette->getId()]);
+            $note = $noteRepository->findBy(['recette' => $recette->getId()]);           
+            if ($note)
+            {
+                $notes[] = $note[0];
+            }
         }
-
-        //dd($notes);
 
         $max_pages= ceil(count($recettes)/8);
         $debut = ($page -1 )*8;
