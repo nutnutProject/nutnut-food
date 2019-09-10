@@ -28,9 +28,13 @@ class ViewController extends AbstractController
     public function list(Request $request, RecetteRepository $recetteRepository, CategoryRepository $categoryRepository, DietRepository $dietRepository, $page = 1)
     {
 
-        $request = isset($_GET['query']) ? trim($_GET['query']) : null;
+        $request = $_GET['query'];
         // Trouver toutes les recettes
+        if ($request == null){
         $recettes = $recetteRepository->findValidateOnlineRecettes();
+        } else {
+        $recettes = $recetteRepository->findByRequest($request);    
+        }
 
         $max_pages= ceil(count($recettes)/6);
         $debut = ($page -1 )*6;
@@ -50,7 +54,7 @@ class ViewController extends AbstractController
         $diets = $dietRepository->findAll();
 
         return $this->render('view/list.html.twig', [
-            'recettes' => $recette,
+            'recettes' => $recettes,
             'categories' => $categories,
             'diets' => $diets,
             'current_category' => false,

@@ -40,7 +40,7 @@ class RecetteRepository extends ServiceEntityRepository
     public function findValidateOnlineRecettes()
     {
         return $this->createQueryBuilder('p')
-        ->andWhere('p.validate = true')
+        ->Where('p.validate = true')
         ->andWhere('p.online = true')
         ->getQuery()
         ->getResult();
@@ -49,7 +49,12 @@ class RecetteRepository extends ServiceEntityRepository
     public function findByRequest($request)
     {
         return $this->createQueryBuilder('p')
-        ->
+        ->where('p.title LIKE :title')
+        ->setParameter('title', '%'.$request.'%')
+        ->andWhere('p.validate = true')
+        ->andWhere('p.online = true')
+        ->getQuery()
+        ->getResult();
     }
 
 
