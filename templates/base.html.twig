@@ -27,39 +27,40 @@
     </head>
 
     <body>
-        {% block nav %}
-            <nav class="navbar navbar-expand-md navbar-light bg-light position-fixed w-100 sticky-top  {{ app.session.flashbag.peek('{{title}}')|length > 0 ? '' : 'mb-5' }}">
-                <div class="container">
-                    <a class="navbar-brand" href="{{path('home')}}">
-                        <img src="{{ asset('img/logo.png')}}" height="30" alt="Nut nut Food Logo">
-                    </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
 
-                    <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
-                        {% set current_route = app.request.attributes.get('_route') %}
+    {% block nav %}
+        <nav class="navbar navbar-expand-md navbar-light bg-light position-fixed w-100 sticky-top  {{ app.session.flashbag.peek('{{title}}')|length > 0 ? '' : 'mb-5' }}">
+            <div class="container">
+                <a class="navbar-brand" href="{{path('home')}}">
+                    <img src="{{ asset('img/logo.png')}}" height="30" alt="Nut nut Food Logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-                        <ul class="navbar-nav m-auto">
-                            <li class="nav-item {{ current_route == 'home' ? 'active' : '' }}">
-                                <a class="nav-link" href="{{path('home')}}">Accueil</a>
-                            </li>
-                            <li class="nav-item {{ current_route == 'recettes_list' ? 'active' : '' }}">
-                                <a class="nav-link" href="{{path('recettes_list') }}">Recettes</a>
-                            </li>
-                            <li class="nav-item {{ current_route == 'contact' ? 'active' : '' }}">
-                                <a class="nav-link" href="contact.html">Contact</a>
-                            </li>
-                        </ul>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+                    {% set current_route = app.request.attributes.get('_route') %}
 
-                        <div class="my-2 my-lg-0">
-                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                                <a href="{{ path('user', {'id': app.user.id}) }}"><img src="{{ asset('img/wonder_icon.png') }}" width="50" height="50" alt="Mon profil"></a>
-                                <a type="button" class="btn btn-outline-danger waves-effect" href="{{path('app_logout')}}">Déconnexion</a>
-                            {% else %}
-                                <button type="button" class="btn btn-outline-success waves-effect" data-toggle="modal" data-target="#login">Se connecter</button>
-                            {% endif %}
-                        </div>
+                    <ul class="navbar-nav m-auto">
+                        <li class="nav-item {{ current_route == 'home' ? 'active' : '' }}">
+                            <a class="nav-link" href="{{path('home')}}">Accueil</a>
+                        </li>
+                        <li class="nav-item {{ current_route == 'recettes_list' ? 'active' : '' }}">
+                            <a class="nav-link" href="{{path('recettes_list') }}">Recettes</a>
+                        </li>
+                        <li class="nav-item {{ current_route == 'contact' ? 'active' : '' }}">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                    </ul>
+
+                    <div class="my-2 my-lg-0">
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <a href="{{ path('user', {'id': app.user.id}) }}"><img src="{{ asset(app.user.image) }}" width="50" height="50" alt="Mon profil"></a>
+                            <a type="button" class="btn btn-outline-danger waves-effect" href="{{path('app_logout')}}">Déconnexion</a>
+                        {% else %}
+                            <button type="button" class="btn btn-outline-success waves-effect"  data-toggle="modal" data-target="#login">Se connecter</button>
+                        {% endif %}
+
                     </div>
                 </div>
 

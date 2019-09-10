@@ -45,6 +45,7 @@ class ViewController extends AbstractController
         {
             $fin = count($recettes);
         }
+        
         for ($i = $debut; $i < $fin; $i++)
         {
             $recette[] = $recettes[$i];
