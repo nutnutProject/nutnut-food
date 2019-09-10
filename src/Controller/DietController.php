@@ -24,13 +24,13 @@ class DietController extends AbstractController
      */
     public function dietShow(Request $request, Diet $diet, DietRepository $dietRepository, CategoryRepository $categoryRepository, RecetteRepository $recetteRepository ,$page=1)
     {
-        $request = isset($_GET["query"]) ? trim($_GET["query"]) : null;
+        $query = $request->query->get('query');
 
         if ($request == null){
         // Permet d'avoir les recettes par catégories
             $recettes = $diet->getRecettes();
         } else {
-            $recettes = $recetteRepository->findDietRecettesByRequest($request);
+            $recettes = $recetteRepository->findDietRecettesByRequest($query, $diet);
         }
         //Permet d'avoir les recettes par tag
 

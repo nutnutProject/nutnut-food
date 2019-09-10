@@ -27,13 +27,15 @@ class ViewController extends AbstractController
      */
     public function list(Request $request, RecetteRepository $recetteRepository, CategoryRepository $categoryRepository, DietRepository $dietRepository, $page = 1)
     {
+        //Récupère dans request les données envoyées dans le formulaire de recherche
+        $query = $request->query->get('query');
+       
 
-        $request = isset($_GET["query"]) ? trim($_GET["query"]) : null;
-        // Trouver toutes les recettes
         if ($request == null){
-        $recettes = $recetteRepository->findValidateOnlineRecettes();
+         // Trouver toutes les recettes
+            $recettes = $recetteRepository->findValidateOnlineRecettes();
         } else {
-        $recettes = $recetteRepository->findByRequest($request);    
+            $recettes = $recetteRepository->findByRequest($query);    
         }
 
         $max_pages= ceil(count($recettes)/6);
@@ -55,7 +57,7 @@ class ViewController extends AbstractController
         $diets = $dietRepository->findAll();
 
         return $this->render('view/list.html.twig', [
-            'recettes' => $recettes,
+            'recettes' => $recette,
             'categories' => $categories,
             'diets' => $diets,
             'current_category' => false,
@@ -189,13 +191,21 @@ class ViewController extends AbstractController
      */
     public function showFooder(User $user, $id, $page=1)
     {
+        // Récupération des recettes de l'utilisateur
         $recetteRepository = $this->getDoctrine()->getRepository(Recette::class);
         $recettes = $recetteRepository->findBy(['user' => $id]);
 
-        // Récupération des commentaires
-        $noteRepository = $this->getDoctrine()->getRepository(Note::class);
-        $notes = $noteRepository->findBy(['user' => $id]);
-        
+        // Pour chaque recette de l'utilisateur, on récupère les commentaires
+        foreach ($recettes as $recette) {
+            //dd($recette->getId());
+            $noteRepository = $this->getDoctrine()->getRepository(Note::class);
+            $note = $noteRepository->findBy(['recette' => $recette->getId()]);           
+            if ($note)
+            {
+                $notes[] = $note[0];
+            }
+        }
+
         $max_pages= ceil(count($recettes)/8);
         $debut = ($page -1 )*8;
         $fin = $debut+8;
