@@ -46,11 +46,11 @@ class RecetteRepository extends ServiceEntityRepository
         ->getResult();
     }
 
-    public function findByRequest($request)
+    public function findByRequest($query)
     {
         return $this->createQueryBuilder('p')
         ->where('p.title LIKE :title')
-        ->setParameter('title', '%'.$request.'%')
+        ->setParameter('title', '%'.$query.'%')
         ->andWhere('p.validate = true')
         ->andWhere('p.online = true')
         ->getQuery()
