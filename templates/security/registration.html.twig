@@ -3,32 +3,20 @@
 
 {% block body %}
    <header class="v-header-all containeur">
+        <div class="fullscreen-image-wrap-all">
+        </div>
 
-            <div class="fullscreen-image-wrap-all">
-            </div>
-
-            <div class="header-overlay-all">
-            </div>
+        <div class="header-overlay-all">
+        </div>
 
         <div class="header-content-all">
-
-
             <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 
             <h1> Deviens FOODER !  </h1>
-
-           
-
-
         </div>
-
     </header>
 
-    
-
-
-    <div class="container" id="main-recette">
-           
+    <div class="container" id="main-recette">     
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Accueil</a></li>
@@ -36,74 +24,70 @@
             </ol>
         </nav>
 
-
-        
         {{ form_start(form, {'attr': {'class': 'text-center border border-light p-5'}})}}
-        <p class="h1 mb-4">Inscription</p>
+            <p class="h1 mb-4">Inscription</p>
     
-        <div class="form-row mb-4">
+            <div class="form-row mb-4">
 
-            <div class="col-sm-6 col-lg-6 ">
-                {{ form_widget(form.firstname, {'attr': {'class': 'form-control mb-4','placeholder': 'Prénom'}}) }}
+                <div class="col-sm-6 col-lg-6 ">
+                    {{ form_widget(form.firstname, {'attr': {'class': 'form-control mb-4','placeholder': 'Prénom'}}) }}
+                </div>
+
+                <div class="col-sm-6 col-lg-6 ">
+                    {{ form_widget(form.lastname, {'attr': {'class': 'form-control mb-4','placeholder': 'Nom'}} ) }}
+                </div>
+
+                <div class="col-12">
+                    {{ form_widget(form.username, {'attr': {'class': 'form-control mb-4','placeholder': 'Adresse email'}} ) }}
+                </div>
+                
+                <div class="col-12">
+                    {{ form_widget(form.password, {'attr': {'class': 'form-control mb-4','placeholder':'Mot de passe'}})}}
+                    <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4"></small>
+                </div>
+
+                <div class="col-12">
+                    {{ form_widget(form.adresse, {'id':'user_input_autocomplete_address', 'attr': {'class': 'form-control mb-4',  'placeholder':'Adresse'}})}}
+                    <small id="user_input_autocomplete_address" class="form-text text-muted mb-4"></small>
+                </div>
+
+                <div class="col-sm-6 col-lg-6 ">
+                    {{ form_widget(form.city, {'id':'locality', 'attr': {'class': 'form-control mb-4','placeholder':'Ville'}})}}
+                </div>
+
+                <div class="col-sm-6 col-lg-6 ">
+                    {{ form_widget(form.cp, {'id':'postal_code', 'attr': {'class': 'form-control mb-4','placeholder':'Code postal'}})}}
+                </div>
+
+                <div class="col-12">
+                    {{ form_widget(form.telephone, {'attr': {'class': 'form-control mb-4','placeholder': 'Téléphone'}} ) }}
+                </div>
+
+                <div class="col-sm-6 col-lg-6">
+                    <label for="textarea" class="active text-center">Date de naissance :</label>
+                    {{ form_widget(form.birthdate, {'attr': {'class': 'form mb-4'}})}}
+                </div>
+
+                <div class="col-sm-6 col-lg-6">
+                    <label for="image">Choisir une photo de profil:</label>
+                    {{ form_widget(form.image, {'attr': {'class': 'form-control-file','placeholder': 'Illustration'}}) }}
+                </div>
+
+                <div class="col-12">
+                    <label for="textarea" class="active text-center">Décrivez vous en quelques mots</label>
+                    {{ form_widget(form.description, {'attr': {'class': 'form-control mb-4','placeholder': 'Description'}})}}
+                </div>
+
+
+                <button class="btn btn-info my-4 btn-block" type="submit">Inscription</button>
+                <!-- Terms of service -->
+                <p class="text-center">En cliquant sur 
+                    <em>Inscription</em> vous acceptez
+                    <a href="" target="_blank">nos conditions générales.</a>
+                </p>
             </div>
-
-          <div class="col-sm-6 col-lg-6 ">
-        {{ form_widget(form.lastname, {'attr': {'class': 'form-control mb-4','placeholder': 'Nom'}} ) }}
-            </div>
-
-            <div class="col-12">
-        {{ form_widget(form.username, {'attr': {'class': 'form-control mb-4','placeholder': 'Adresse email'}} ) }}
-            </div>
-            
-          
-
-           
-            <div class="col-12">
-        {{ form_widget(form.password, {'attr': {'class': 'form-control mb-4','placeholder':'Mot de passe'}})}}
-        <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4"></small>
-            </div>
-
-            <div class="col-12">
-        {{ form_widget(form.adresse, {'id':'user_input_autocomplete_address', 'attr': {'class': 'form-control mb-4',  'placeholder':'Adresse'}})}}
-            <small id="user_input_autocomplete_address" class="form-text text-muted mb-4"></small>
-            </div>
-
-        
-
-            <div class="col-sm-6 col-lg-6 ">
-        {{ form_widget(form.city, {'id':'locality', 'attr': {'class': 'form-control mb-4','placeholder':'Ville'}})}}
-            </div>
-
-            <div class="col-sm-6 col-lg-6 ">
-        {{ form_widget(form.cp, {'id':'postal_code', 'attr': {'class': 'form-control mb-4','placeholder':'Code postal'}})}}
-        </div>
-
-            <div class="col-12">
-        {{ form_widget(form.telephone, {'attr': {'class': 'form-control mb-4','placeholder': 'Téléphone'}} ) }}
-        </div>
-
-            <div class="col-12">
-        <label for="textarea" class="active text-center">Inserez votre date de naissance</label>
-
-        {{ form_widget(form.birthdate, {'attr': {'class': 'form mb-4','placeholder': 'Date de naissance'}})}}
-            </div>
-
-
-            <div class="col-12">
-        <label for="textarea" class="active text-center">Décrivez vous en quelques mots</label>
-        {{ form_widget(form.description, {'attr': {'class': 'form-control mb-4','placeholder': 'Description'}})}}
-        </div>
-
-
-        <button class="btn btn-info my-4 btn-block" type="submit">Inscription</button>
-        <!-- Terms of service -->
-        <p class="text-center">En cliquant sur 
-            <em>Inscription</em> vous acceptez
-            <a href="" target="_blank">nos conditions générales.</a></p>
         {{ form_end(form)}}
     </div>
-</div>
-
 </div>
 
 
