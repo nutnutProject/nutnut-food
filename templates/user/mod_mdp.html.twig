@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SecurityController!{% endblock %}
+
+{% block body %}
+
+    {# l'image du header #}
+    <header class="v-header-all containeur">
+        <div class="fullscreen-image-wrap-all"></div>
+        <div class="header-overlay-all"></div>
+        <div class="header-content-all">
+            <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+            <h1> Modifier ton mot de passe  </h1>
+        </div>
+    </header>
+
+   {# fil d'Ariane #}
+    <div class="container" id="main-recette">
+       <nav aria-label="breadcrumb">
+           <ol class="breadcrumb">
+               <li class="breadcrumb-item"><a href="index.html">Accueil</a></li>
+               <li class="breadcrumb-item active" aria-current="page">Modifier le mot de passe</li>
+           </ol>
+       </nav>
+    </div>
+
+
+<form class="text-center border border-light p-5" method="post">
+​
+    <p class="h1 mb-4">Modifier votre mot de passe</p>
+
+    
+    <label for="defaultRegisterFormEmail">Mot de passe actuel</label>
+    <input type="password" id="defaultRegisterFormEmail" class="form-control mb-4" name="old_password">
+
+    <label for="defaultRegisterFormEmail">Nouveau mot de passe</label>
+    <input type="password" id="defaultRegisterFormEmail" class="form-control mb-4" name="new_password">
+
+    <label for="defaultRegisterFormEmail">Confirmer votre nouveau mot de passe</label>
+    <input type="password" id="defaultRegisterFormEmail" class="form-control mb-4" name="new_password_confirm">
+​       
+    <!--  button -->
+    <button class="btn btn-info my-4 btn-block" type="submit">Changer votre mot de passe</button>
+    
+</form>
+
+{% endblock %}
