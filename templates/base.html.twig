@@ -57,9 +57,9 @@
 
                             <a href="{{ path('user', {'id': app.user.id}) }}"><img src="{{ asset(app.user.image) }}" width="50" height="50" alt="Mon profil"></a>
 
-                            <a type="button" class="btn btn-outline-danger waves-effect" href="{{path('app_logout')}}">Déconnexion</a>
+                            <a class="btn btn-outline-danger btn-sm" href="{{path('app_logout')}}">Déconnexion</a>
                         {% else %}
-                            <button type="button" class="btn btn-outline-success waves-effect"  data-toggle="modal" data-target="#login">Se connecter</button>
+                            <button class="btn btn-outline-success btn-sm"  data-toggle="modal" data-target="#login">Se connecter</button>
                         {% endif %}
                     </div>
                 </div>
@@ -97,17 +97,15 @@
                                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
                                 <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">Se souvenir de moi</label>
                                     <p class="mdp_forget">
                                         <a href="{{ path('forget_password') }} ">Mot de passe oublié</a>
                                     </p>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Se connecter</button>
+                                <button class="btn btn-outline-success btn-sm"  data-toggle="modal" data-target="#login">Se connecter</button>
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <a type="button" class="btn btn-primary" href="{{ path('security_registration') }}">Créer un compte</a>
+                            <a class="btn btn-outline-primary btn-sm" href="{{ path('security_registration') }}">Créer un compte</a>
                         </div>
                     </div>
                 </div>
