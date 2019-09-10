@@ -24,7 +24,7 @@ class DietController extends AbstractController
      */
     public function dietShow(Request $request, Diet $diet, DietRepository $dietRepository, CategoryRepository $categoryRepository, RecetteRepository $recetteRepository ,$page=1)
     {
-        $query = isset($_GET["query"]) ? trim($_GET["query"]) : null;
+        $query = $request->query->get('query');
 
         if ($request == null){
         // Permet d'avoir les recettes par catégories
@@ -53,7 +53,7 @@ class DietController extends AbstractController
         $categories = $categoryRepository->findAll();
 
         return $this->render('view/list.html.twig', [
-            'recettes'=> $recettes,
+            'recettes'=> $recette,
             'categories' => $categories,
             'diets' => $diets,
             'current_diet' => $diet,

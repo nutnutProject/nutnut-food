@@ -27,7 +27,7 @@ class CategoryController extends AbstractController
         CategoryRepository $categoryRepository, DietRepository $dietRepository, RecetteRepository $recetteRepository ,$page=1) 
         {
         //Récupère dans request les données envoyées dans le formulaire de recherche
-        $query = isset($_GET["query"]) ? trim($_GET["query"]) : null;
+        $query = $request->query->get('query');
 
         if ($request == null){
         // Permet d'avoir les recettes par catégories
@@ -52,7 +52,7 @@ class CategoryController extends AbstractController
         $diets = $dietRepository->findAll();
 
         return $this->render('view/list.html.twig', [
-            'recettes' => $recettes,
+            'recettes' => $recette,
             'categories' => $categories,
             'diets' => $diets,
             // Permet de retrouver la route courante

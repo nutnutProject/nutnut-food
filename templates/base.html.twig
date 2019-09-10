@@ -27,7 +27,6 @@
     </head>
 
     <body>
-
     {% block nav %}
         <nav class="navbar navbar-expand-md navbar-light bg-light position-fixed w-100 sticky-top  {{ app.session.flashbag.peek('{{title}}')|length > 0 ? '' : 'mb-5' }}">
             <div class="container">
@@ -60,7 +59,6 @@
                         {% else %}
                             <button type="button" class="btn btn-outline-success waves-effect"  data-toggle="modal" data-target="#login">Se connecter</button>
                         {% endif %}
-
                     </div>
                 </div>
 
