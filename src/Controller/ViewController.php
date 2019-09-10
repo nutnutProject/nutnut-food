@@ -191,13 +191,19 @@ class ViewController extends AbstractController
      */
     public function showFooder(User $user, $id, $page=1)
     {
+        // Récupération des recettes de l'utilisateur
         $recetteRepository = $this->getDoctrine()->getRepository(Recette::class);
         $recettes = $recetteRepository->findBy(['user' => $id]);
 
-        // Récupération des commentaires
-        $noteRepository = $this->getDoctrine()->getRepository(Note::class);
-        $notes = $noteRepository->findBy(['user' => $id]);
-        
+        // Pour chaque recette de l'utilisateur, on récupère les commentaires
+        foreach ($recettes as $recette) {
+            //dd($recette->getId());
+            $noteRepository = $this->getDoctrine()->getRepository(Note::class);
+            $notes[] = $noteRepository->findBy(['recette' => $recette->getId()]);
+        }
+
+        //dd($notes);
+
         $max_pages= ceil(count($recettes)/8);
         $debut = ($page -1 )*8;
         $fin = $debut+8;
