@@ -31,76 +31,112 @@ class SecurityController extends AbstractController
     /**
      * @route("/inscription",name="security_registration")
      */
-    public function registration(Request $request, \Swift_Mailer $mailer){
-
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid())
+    public function registration(Request $request, \Swift_Mailer $mailer)
+    {    
+        if(!$this->getUser())
         {
-            $userRepository = $this->getDoctrine()->getRepository(User::class);
-            if ($userRepository->findBy(['username' => $user->getUsername()]))
+            $user = new User();
+            $form = $this->createForm(UserType::class, $user);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid())
             {
-                $this->addFlash('danger', 'Un utilisateur est déjà inscrit avec cette adresse email');            
+                $userRepository = $this->getDoctrine()->getRepository(User::class);
+                if ($userRepository->findBy(['username' => $user->getUsername()]))
+                {
+                    $this->addFlash('danger', 'Un utilisateur est déjà inscrit avec cette adresse email');            
+                    return $this->redirectToRoute('home');
+                }
+                
+                // Génération des token
+                $pwd_token = md5(uniqid());
+                $activateToken = md5(uniqid());
+
+                $file = $_FILES['user'];
+
+                // Traitement de l'image
+                if (!preg_match("/\.(jpg|jpeg|gif|png)$/",$file['name']['image']))
+                {
+                    $errors['cover'] = "Le type de l'image n'est pas valide";
+                }
+        
+                // Controle de la taille du fichier
+                if ($file['size']['image'] > 2000000 )
+                {
+                    $errors['cover'] = "La taille de l'image est supérieur à 2Mo.";
+        
+                }
+
+                //Récupération de l'extension d'origine
+                if(empty($errors))
+                {
+                    $pathinfo = pathinfo($file['name']['image']);
+                    $extension = $pathinfo['extension'];
+                }
+        
+                // Définition du nom de fichier, celui-ci doit être unique
+                $filename = uniqid();
+                $filename .= "." .$extension;
+        
+                // Définition de l'emplacement du fichier
+                $filepath = "img/user/".$filename;
+                
+                // Déplacement du fichier dans le dossier "img/"
+                copy($file['tmp_name']['image'], $filepath);
+
+                $user->setImage($filepath);
+                $user->setPwdToken($pwd_token);
+                $user->setActivateToken($activateToken);
+                $user->setPwdTokenExpire(time()+3600);
+                $user->setActivateTokenExpire(time()+3600);
+                $user->setAccountActivate(false);
+                $user->setPassword(
+                    $this->passwordEncoder->encodePassword($user, $user->getPassword())
+                );
+
+
+                // Remplissage du rôle utilisateur
+                $user->setRoles('ROLE_USER');
+
+                // Enregistrement dans la bdd
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($user);
+                $entityManager->flush();
+
+                // Préparation du mail contenant le lien d'activation
+                $destinataire = $user->getUsername();
+                $sujet = "Activer votre compte" ;
+
+                // Le lien d'activation est composé du token
+                $body = 'Bienvenue sur Nut Nut Food,
+
+                Pour activer votre compte, veuillez cliquer sur le lien ci dessous
+                ou copier/coller dans votre navigateur internet.
+
+                http://votresite.com/activation/'.$activateToken.'
+
+
+                ---------------
+                Ceci est un mail automatique, Merci de ne pas y répondre.';
+
+                // Envoi du mail de confiration de souscription
+                $message = (new \Swift_Message($sujet))
+                    ->setFrom('inscription@nutnutfood.fr')
+                    ->setTo($destinataire)
+                    ->setBody($body);
+                $mailer->send($message);
+
+                
+                $this->addFlash('success', 'Votre inscription a été prise en compte. Un email vous a été envoyé. Merci de confirmer votre inscription en cliquant sur le lien contenu dans ce mail.');
+
+
                 return $this->redirectToRoute('home');
             }
-
-            // Génération des token
-            $pwd_token = md5(uniqid());
-            $activateToken = md5(uniqid());
-
-            $user->setPwdToken($pwd_token);
-            $user->setActivateToken($activateToken);
-            $user->setPwdTokenExpire(time()+3600);
-            $user->setActivateTokenExpire(time()+3600);
-            $user->setAccountActivate(false);
-            $user->setPassword(
-            $this->passwordEncoder->encodePassword($user, $user->getPassword())
-            );
-
-
-            // Remplissage du rôle utilisateur
-            $user->setRoles('ROLE_USER');
-
-            // Enregistrement dans la bdd
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            // Préparation du mail contenant le lien d'activation
-            $destinataire = $user->getUsername();
-            $sujet = "Activer votre compte" ;
-
-            // Le lien d'activation est composé du token
-            $body = 'Bienvenue sur Nut Nut Food,
-
-            Pour activer votre compte, veuillez cliquer sur le lien ci dessous
-            ou copier/coller dans votre navigateur internet.
-
-            http://votresite.com/activation/'.$activateToken.'
-
-
-            ---------------
-            Ceci est un mail automatique, Merci de ne pas y répondre.';
-
-            // Envoi du mail de confiration de souscription
-            $message = (new \Swift_Message($sujet))
-                ->setFrom('inscription@nutnutfood.fr')
-                ->setTo($destinataire)
-                ->setBody($body);
-            $mailer->send($message);
-
-            
-            $this->addFlash('success', 'Votre inscription a été prise en compte. Un email vous a été envoyé. Merci de confirmer votre inscription en cliquant sur le lien contenu dans ce mail.');
-
-
-            return $this->redirectToRoute('home');
+            return $this->render('security/registration.html.twig',[
+                'form' => $form->createView()
+            ]);
         }
-
-        return $this->render('security/registration.html.twig',[
-            'form' => $form->createView()
-        ]);
+        return $this->redirectToRoute('home');    
     }
 
 

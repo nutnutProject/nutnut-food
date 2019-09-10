@@ -88,9 +88,9 @@ class UserController extends AbstractController
             $form = $this->createForm(RecetteType::class, $recette);
             $form->handleRequest($request);
 
-
             if ($form->isSubmitted() && $form->isValid()) {
                 $recette_id = $recette->getId();
+                
                 $file = $_FILES['recette'];
 
                 // Traitement de l'image
@@ -114,13 +114,14 @@ class UserController extends AbstractController
                 $filename .= "." . $extension;
 
                 // Définition de l'emplacement du fichier
-                $filepath = "img/" . $filename;
+                $filepath = "img/recette/".$filename;
 
                 // Déplacement du fichier dans le dossier "img/"
                 copy($file['tmp_name']['photo'], $filepath);
 
                 // Enregistrement du ou des régimes alimentaire
-                foreach ($recette->getDiet() as $diet) {
+                foreach ($recette->getDiet() as $diet)
+                {
                     // Ajouter dans la table recette_diet
                     $diet_id = $diet->getId();
                     $dietRepository = $this->getDoctrine()->getRepository(Diet::class);
@@ -128,7 +129,7 @@ class UserController extends AbstractController
                     $recette->addDiet($diet);
                 }
 
-                $recette->setPhoto($filepath);
+                //$recette->setPhoto($filepath);
                 $recette->setUser($user);
                 $recette->setNote(0);
                 $recette->setCreationDate(new \DateTime());
@@ -298,3 +299,4 @@ class UserController extends AbstractController
         }
     }
 }
+    

@@ -27,13 +27,13 @@ class CategoryController extends AbstractController
         CategoryRepository $categoryRepository, DietRepository $dietRepository, RecetteRepository $recetteRepository ,$page=1) 
         {
         //Récupère dans request les données envoyées dans le formulaire de recherche
-        $request = isset($_GET["query"]) ? trim($_GET["query"]) : null;
+        $query = $request->query->get('query');
 
         if ($request == null){
         // Permet d'avoir les recettes par catégories
             $recettes = $category->getRecettes();
         } else {
-            $recettes = $recetteRepository->findCategoryRecettesByRequest($request);
+            $recettes = $recetteRepository->findCategoryRecettesByRequest($query, $category);
         }
 
         $max_pages= ceil(count($recettes)/6);

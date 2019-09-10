@@ -29,18 +29,7 @@ class CategoryRepository extends ServiceEntityRepository
     }
 
 
-    public function findCategoryRecettesByRequest($request)
-    {
-        return $this->createQueryBuilder('p')
-            ->innerJoin('p.recette', 'r')
-            ->addSelect('r')
-            ->where('p.title LIKE :title')
-            ->setParameter('title', '%'.$request.'%')
-            ->andWhere('p.validate = true')
-            ->andWhere('p.online = true')
-            ->getQuery()
-            ->getResult();
-    }
+
 
 
     // /**

@@ -46,41 +46,45 @@ class RecetteRepository extends ServiceEntityRepository
         ->getResult();
     }
 
-    public function findByRequest($request)
+    public function findByRequest($query)
     {
         return $this->createQueryBuilder('p')
         ->where('p.title LIKE :title')
-        ->setParameter('title', '%'.$request.'%')
+        ->setParameter('title', '%'.$query.'%')
         ->andWhere('p.validate = true')
         ->andWhere('p.online = true')
         ->getQuery()
         ->getResult();
     }
 
-    public function findCategoryRecettesByRequest($request)
+    public function findCategoryRecettesByRequest($query, $category)
     {
         return $this->createQueryBuilder('p')
             ->innerJoin('p.category', 'c')
             ->addSelect('c')
             ->where('p.title LIKE :title')
-            ->setParameter('title', '%'.$request.'%')
+            ->setParameter('title', '%'.$query.'%')
+            ->andWhere('c.id = :category')
+            ->setParameter('category', $category->getId())
             ->andWhere('p.validate = true')
             ->andWhere('p.online = true')
             ->getQuery()
             ->getResult();
     }
 
-    public function findDietRecettesByRequest($request)
+    public function findDietRecettesByRequest($query, $diet)
     {
         return $this->createQueryBuilder('p')
-            ->innerJoin('p.category', 'c')
-            ->addSelect('c')
+            ->leftJoin('p.diet', 'd')
+            ->addSelect('d')
             ->where('p.title LIKE :title')
-            ->setParameter('title', '%'.$request.'%')
+            ->setParameter('title', '%'.$query.'%')
+            ->andWhere('d.id = :diet')
+            ->setParameter('diet', $diet->getId())
             ->andWhere('p.validate = true')
             ->andWhere('p.online = true')
             ->getQuery()
-            ->getResult();
+            ->getResult(); 
     }
 
 
