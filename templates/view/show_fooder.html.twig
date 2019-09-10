@@ -66,22 +66,19 @@
                         {% for recette in recettes %}
                             <div class="col-3 d-flex align-items-stretch">
                                 <div class="card">
-                                        <img class="card-img-top img-fluid mx-auto" src="{{asset(recette.photo)}}"  alt="Card image cap">
-                                        <div class="card-body d-flex flex-column">
-                                            <h4 class="card-title">
-                                                <a href="{{ path('recette_show', {slug: recette.slug}) }}" title="View Product">{{recette.title | slice (0,80) | trim(0123456789102030405060)}}</a>
-                                            </h4>
-                                            <div class="user-synop">
-                                                <img class="icon-user" src="{{asset('img/wonder_icon.png')}}" alt="Card image cap">
-                                                <p class="user-name">
-                                                    {{user.firstname}}</p>
-                                            </div>
-
-
+                                    <img class="card-img-top img-fluid mx-auto" src="{{asset(recette.photo)}}"  alt="Card image cap">
+                                    <div class="card-body d-flex flex-column">
+                                        <h4 class="card-title">
+                                            <a href="{{ path('recette_show', {slug: recette.slug}) }}" title="View Product">{{recette.title | slice (0,80) | trim(0123456789102030405060)}}</a>
+                                        </h4>
+                                        <div class="user-synop">
+                                            <img class="icon-user" src="{{asset('img/wonder_icon.png')}}" alt="Card image cap">
+                                            <p class="user-name">
+                                                {{user.firstname}}</p>
+                                        </div>
                                         <div class="rating">
                                         {% if recette.note > 0 %}                              
                                             {% set nb_etoiles = 5 %}
-                                            {% set message = "" %}
                                             {% for i in 1..nb_etoiles %}
                                                 {% if recette.note >= i %}
                                                     <img src="{{asset('img/noix-check.png')}}">
@@ -128,15 +125,11 @@
                     {% endif %}
                 </ul>
             </nav>
-
         </div>
 
-
         <div class="container mt-3">
-
             <h1 class="category">AVIS :
             </h1>
-
             <div class="row">
                 {% if notes %}  
                     {% for note in notes %}
@@ -149,7 +142,6 @@
                                 </div>
                                 <div class="rating">
                                     {% set nb_etoiles = 5 %}
-                                    {% set message = "" %}
                                     {% for i in 1..nb_etoiles %}
                                         {% if note.note >= i %}
                                             <img src="{{asset('img/noix-check.png')}}">
