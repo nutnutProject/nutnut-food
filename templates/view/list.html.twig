@@ -23,8 +23,9 @@
                     <div id="search" class="card-body  mx-auto text-center">
                         <!-- Search form -->
                         <form class="form-inline mr-auto" method="get" >
-                            <input class="form-control form-control-lg mr-sm-2 center" type="text" placeholder="Rechercher une recette" aria-label="Rechercher" name="query" id="search-user">
+                            <input class="form-control form-control-lg mr-sm-2 center" type="text" placeholder="Rechercher une recette" aria-label="Rechercher" name="query" id="search-recette">
                             <button class="btn blue-gradient btn-rounded  btn-lg my-0" type="submit">Rechercher</button>
+                            <div id="match"></div>
                         </form>
                     </div>
                 </div>
@@ -177,27 +178,33 @@
             {{ parent() }}
     <script>
         $(document).ready(function(){
-            $('#search-user').keyup(function(){
-                
-                var title = $(this).val();
-                 console.log(title);
-                if(title != null){
+            $('#search-recette').keyup(function(){
+                var input = $(this).val();
+                 console.log(input);
+                if(input.length >= 4){
+                    var data = {input:input};
                     $.ajax({
                         url: "{{path('recettes_list')}}",
                         type: "GET",
                         dataType: "json",
-                        data: 'query=' + encodeURIComponent(title),
-                        success : function(data){
-                            if(data != null){
-                                $('#result-search').append(data);
-                            } else {
-                                document.getElementById('result-search').innerHTML = "<div>Veuillez renseigner votre recherche</div>";
-                            }
+                        data: data,
+                        timeout : 3000,
+                        success : function(response){
+                            $('#match').html(response.recetteList)
+                            $('#matchList li').on('click', function(){
+                                $('#result-search').val($(this).text());
+                                $('#match').text('');
+                            });
+                        },
+                        error: function(){
+                            $('#match').text('Petit problème, je vous suggère de recherche par vous même !');
                         }
-                    });
-                }
-            });
-        });
+                });
+        } else {
+             $('#match').text('');
+        }
+    });
+});
     </script>
         {% endblock %}
 
