@@ -93,7 +93,17 @@
                                         <a class="user-name" href="{{ path('fooder_show', {'firstname':recette.user.firstname,'id':recette.user.id}) }}">{{recette.user.firstname}}</a>
                                     </div>
                                     <div class="rating">
-                                        {{ recette.note }}
+                                    {% if recette.note > 0 %}                              
+                                        {% set nb_etoiles = 5 %}
+                                        {% set message = "" %}
+                                        {% for i in 1..nb_etoiles %}
+                                            {% if recette.note >= i %}
+                                                <img src="{{asset('img/noix-check.png')}}">
+                                            {% else %}
+                                                <img src="{{asset('img/noix.png')}}">
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
                                     </div>
                                     <p class="card-text">{{ recette.description | slice (0,80)}}...</p>
                                 </div>

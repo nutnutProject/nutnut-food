@@ -77,7 +77,17 @@
                                                 {{user.firstname}}</p>
                                         </div>
                                         <div class="rating">
-                                            {{ recette.note }}
+                                        {% if recette.note > 0 %}                              
+                                            {% set nb_etoiles = 5 %}
+                                            {% set message = "" %}
+                                            {% for i in 1..nb_etoiles %}
+                                                {% if recette.note >= i %}
+                                                    <img src="{{asset('img/noix-check.png')}}">
+                                                {% else %}
+                                                    <img src="{{asset('img/noix.png')}}">
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
                                         </div>
                                         <p class="card-text">{{recette.description}}</p>
                                     </div>
@@ -136,12 +146,10 @@
                                     <p class="user-name">{{note.user.firstname}} {{note.user.lastname|slice(0, 1)}}</p>       
                                 </div>
                                 <div class="rating">
-                                    {% set nb_etoiles = 4 %}
+                                    {% set nb_etoiles = 5 %}
                                     {% set message = "" %}
-                                    {% for i in 0..nb_etoiles %}
-                                        {% if note.note > i and note.note <i+1 %}
-                                            {% set message = message ~ '/' %}
-                                        {% elseif note.note >i %}
+                                    {% for i in 1..nb_etoiles %}
+                                        {% if note.note >= i %}
                                             <img src="{{asset('img/noix-check.png')}}">
                                         {% else %}
                                             <img src="{{asset('img/noix.png')}}">
@@ -153,7 +161,11 @@
                             </div>           
                         </div>
                     </div>
-                    {% endfor %}         
+                    {% endfor %}
+                {% else %}
+                    <div class="col-6 offset-3 text-center">
+                        <p>L'utilisateur n'a pas encore eu d'avis.</p>
+                    </div>       
                 {% endif %}
 
             </div>

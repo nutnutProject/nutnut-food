@@ -130,12 +130,18 @@
             <div class="card" >
                 <img src="{{asset('img/wonder_icon.png')}}" class="card-img-top-user" alt="...">
                 <div class="rating">
-                    <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
-                    <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
-                    <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
-                    <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
-                    <span class=""><img src="{{asset('img/noix-check.png')}}"></span> <br>
-                    <span class="">{{recette.note}} /5 </span>
+                    {% if recette.note > 0 %}                              
+                        {% set nb_etoiles = 5 %}
+                        {% set message = "" %}
+                        {% for i in 1..nb_etoiles %}
+                            {% if recette.note >= i %}
+                                <img src="{{asset('img/noix-check.png')}}">
+                            {% else %}
+                                <img src="{{asset('img/noix.png')}}">
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    <p>{{recette.note}} /5 </p>
                 </div>
                     <div class="card-body">
                         <h4 class="card-title">{{recette.user.firstname}} {{recette.user.lastname|slice(0, 1)}}</h4>
@@ -172,13 +178,11 @@
                                 <img class="icon-user" src="img/wonder_icon.png" alt="Card image cap">
                                 <p class="user-name">{{note.user.firstname}} {{note.user.lastname|slice(0, 1)}}</p>       
                             </div>
-                            <div class="rating">
-                                {% set nb_etoiles = 4 %}
+                            <div class="rating">                             
+                                {% set nb_etoiles = 5 %}
                                 {% set message = "" %}
-                                {% for i in 0..nb_etoiles %}
-                                    {% if note.note > i and note.note <i+1 %}
-                                        {% set message = message ~ '/' %}
-                                    {% elseif note.note >i %}
+                                {% for i in 1..nb_etoiles %}
+                                    {% if note.note >= i %}
                                         <img src="{{asset('img/noix-check.png')}}">
                                     {% else %}
                                         <img src="{{asset('img/noix.png')}}">
@@ -191,7 +195,12 @@
                     </div>
                 </div>
                 {% endfor %}         
+            {% else %}
+                <div class="col-6 offset-3 text-center">
+                    <p>La recette n'a pas encore était notée, Afin de pouvoir laisser une note, il faut y participer.</p>
+                </div>
             {% endif %}
+
         </div>
 
     </div>
