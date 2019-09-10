@@ -70,11 +70,17 @@
                                         <p class="user-name"> {{last_recette.user.firstname}}</p>
                                     </div>
                                     <div class="rating">
-                                            <span class=""><img src="img/noix-check.png"></span>
-                                            <span class=""><img src="img/noix-check.png"></span>
-                                            <span class=""><img src="img/noix-check.png"></span>
-                                            <span class=""><img src="img/noix-check.png"></span>
-                                            <span class=""><img src="img/noix-check.png"></span>
+                                        {% if last_recette.note > 0 %}                              
+                                            {% set nb_etoiles = 5 %}
+                                            {% set message = "" %}
+                                            {% for i in 1..nb_etoiles %}
+                                                {% if last_recette.note >= i %}
+                                                    <img src="{{asset('img/noix-check.png')}}">
+                                                {% else %}
+                                                    <img src="{{asset('img/noix.png')}}">
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
                                     </div>
                                     <p class="card-text">{{last_recette.description | slice (0,80)}}...</p>
                                 </div>
@@ -126,14 +132,20 @@
                                     <h4 class="card-title"><a href="{{ path('recette_show', {slug: bestRecette.slug}) }}" title="{{bestRecette.title}}">{{bestRecette.title | slice (0,80) | trim(0123456789)}}</a></h4>
                                     <div class="user-synop">
                                         <img class="icon-user" src="{{asset(bestRecette.user.image)}}" alt="Card image cap">
-                                        <p class="user-name"> {{bestRecette.user.firstname}}</p>
+                                        <a class="user-name" href="{{ path('fooder_show', {'firstname':bestRecette.user.firstname,'id':bestRecette.user.id}) }}">{{bestRecette.user.firstname}}</a>
                                     </div>
                                     <div class="rating">
-                                        <span class=""><img src="img/noix-check.png"></span>
-                                        <span class=""><img src="img/noix-check.png"></span>
-                                        <span class=""><img src="img/noix-check.png"></span>
-                                        <span class=""><img src="img/noix-check.png"></span>
-                                        <span class=""><img src="img/noix-check.png"></span>
+                                        {% if bestRecette.note > 0 %}                              
+                                            {% set nb_etoiles = 5 %}
+                                            {% set message = "" %}
+                                            {% for i in 1..nb_etoiles %}
+                                                {% if bestRecette.note >= i %}
+                                                    <img src="{{asset('img/noix-check.png')}}">
+                                                {% else %}
+                                                    <img src="{{asset('img/noix.png')}}">
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
                                     </div>
                                     <p class="card-text">{{bestRecette.description | slice (0,80)}}...</p>
                                 </div>

@@ -255,6 +255,8 @@ class UserController extends AbstractController
             {
                 $fin = count($recettes);
             }
+
+            $recette = [];
             for ($i = $debut; $i < $fin; $i++)
             {
                 $recette[] = $recettes[$i];
