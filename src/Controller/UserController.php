@@ -125,7 +125,7 @@ class UserController extends AbstractController
                 $filename .= "." .$extension;
         
                 // Définition de l'emplacement du fichier
-                $filepath = "img/".$filename;
+                $filepath = "img/recette/".$filename;
                 
                 // Déplacement du fichier dans le dossier "img/"
                 copy($file['tmp_name']['photo'], $filepath);
