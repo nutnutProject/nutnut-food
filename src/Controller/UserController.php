@@ -236,7 +236,10 @@ class UserController extends AbstractController
             if ($page * 6 > count($recettes)) {
                 $fin = count($recettes);
             }
-            for ($i = $debut; $i < $fin; $i++) {
+
+            $recette = [];
+            for ($i = $debut; $i < $fin; $i++)
+            {
                 $recette[] = $recettes[$i];
             }
             //dd($recette);

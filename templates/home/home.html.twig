@@ -62,26 +62,36 @@
                     {% for last_recette in last_recettes %}
                         <div class="col-sm d-flex align-items-stretch">
                             <div class="card mx-auto">
-                                <img class="card-img-top img-fluid mx-auto" src="{{asset(last_recette.photo)}}" alt="Card image cap" style="width: 260px">
+                                <img class="card-img-top img-fluid mx-auto" src="{{asset(last_recette.photo)}}" style="width:254.6px; height:247px" alt="Card image cap" >
                                 <div class="card-body d-flex flex-column">
-                                    <h4 class="card-title"><a href="{{ path('recette_show', {slug: last_recette.slug}) }}" title="{{last_recette.title}}">{{last_recette.title| slice (0,23)}}...</a></h4>
+                                    <h4 class="card-title"><a href="{{ path('recette_show', {slug: last_recette.slug}) }}" title="{{last_recette.title}}">{{last_recette.title| slice (0,80) | trim(0123456789102030405060)}}</a></h4>
                                     <div class="user-synop">
-                                        <img class="icon-user" src="img/wonder_icon.png" alt="Card image cap">
+                                        <img class="icon-user" src="{{asset(last_recette.user.image)}}" alt="Card image cap">
                                         <p class="user-name"> {{last_recette.user.firstname}}</p>
                                     </div>
                                     <div class="rating">
-                                            <span class=""><img src="img/noix-check.png"></span>
-                                            <span class=""><img src="img/noix-check.png"></span>
-                                            <span class=""><img src="img/noix-check.png"></span>
-                                            <span class=""><img src="img/noix-check.png"></span>
-                                            <span class=""><img src="img/noix-check.png"></span>
+                                        {% if last_recette.note > 0 %}                              
+                                            {% set nb_etoiles = 5 %}
+                                            {% for i in 1..nb_etoiles %}
+                                                {% if last_recette.note >= i %}
+                                                    <img src="{{asset('img/noix-check.png')}}">
+                                                {% else %}
+                                                    <img src="{{asset('img/noix.png')}}">
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
                                     </div>
                                     <p class="card-text">{{last_recette.description | slice (0,80)}}...</p>
                                 </div>
-                                <div class="col">
+                                <div class="col mx-auto">
                                     <div class="card-footer bg-transparent border-warning mt-auto align-self-end">
                                         <a href="{{ path('recette_show', {slug: last_recette.slug}) }}" class="btn btn-amber btn-block ">Voir </a>
                                     </div>
+                                </div>
+                                <div class="col mx-auto">
+                                    {% for diet in last_recette.diet %}
+                                        <span class="badge badge-success mx-auto">{{diet.name}}</span>  
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
@@ -116,19 +126,24 @@
                     {% for bestRecette in bestRecettes %}
                         <div class="col-sm d-flex align-items-stretch">
                             <div class="card mx-auto">
-                                <img class="card-img-top img-fluid mx-auto" src="{{asset(bestRecette.photo)}}" alt="Card image cap" style="width: 260px; height: 250px">
+                                <img class="card-img-top img-fluid mx-auto" src="{{asset(bestRecette.photo)}}" style="width:254.6px; height:247px" alt="Card image cap" >
                                 <div class="card-body d-flex flex-column">
-                                    <h4 class="card-title"><a href="{{ path('recette_show', {slug: bestRecette.slug}) }}" title="{{bestRecette.title}}">{{bestRecette.title | slice (0,23)}}...</a></h4>
+                                    <h4 class="card-title"><a href="{{ path('recette_show', {slug: bestRecette.slug}) }}" title="{{bestRecette.title}}">{{bestRecette.title | slice (0,80) | trim(0123456789)}}</a></h4>
                                     <div class="user-synop">
-                                        <img class="icon-user" src="img/wonder_icon.png" alt="Card image cap">
-                                        <p class="user-name"> {{bestRecette.user.firstname}}</p>
+                                        <img class="icon-user" src="{{asset(bestRecette.user.image)}}" alt="Card image cap">
+                                        <a class="user-name" href="{{ path('fooder_show', {'firstname':bestRecette.user.firstname,'id':bestRecette.user.id}) }}">{{bestRecette.user.firstname}}</a>
                                     </div>
                                     <div class="rating">
-                                        <span class=""><img src="img/noix-check.png"></span>
-                                        <span class=""><img src="img/noix-check.png"></span>
-                                        <span class=""><img src="img/noix-check.png"></span>
-                                        <span class=""><img src="img/noix-check.png"></span>
-                                        <span class=""><img src="img/noix-check.png"></span>
+                                        {% if bestRecette.note > 0 %}                              
+                                            {% set nb_etoiles = 5 %}
+                                            {% for i in 1..nb_etoiles %}
+                                                {% if bestRecette.note >= i %}
+                                                    <img src="{{asset('img/noix-check.png')}}">
+                                                {% else %}
+                                                    <img src="{{asset('img/noix.png')}}">
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
                                     </div>
                                     <p class="card-text">{{bestRecette.description | slice (0,80)}}...</p>
                                 </div>
@@ -136,6 +151,11 @@
                                     <div class="card-footer bg-transparent border-warning mt-auto align-self-end">
                                         <a href="{{ path('recette_show', {slug: bestRecette.slug}) }}" class="btn btn-amber btn-block ">Voir </a>
                                     </div>
+                                </div>
+                                <div class="col mx-auto">
+                                    {% for diet in bestRecette.diet %}
+                                        <span class="badge badge-success mx-auto">{{diet.name}}</span>  
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>

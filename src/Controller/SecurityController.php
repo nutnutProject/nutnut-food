@@ -158,9 +158,16 @@ class SecurityController extends AbstractController
         
         if ($error)
         {
-            $this->addFlash('alert', 'Votre mot de passe est incorrect.');
+            if($error->getMessageKey() == "Invalid credentials.")
+            {
+                $errorMessage = "Le mot de passe entré est incorrect!";
+            }
+            else
+            {
+                $errorMessage = "Aucun compte n'a pu être trouvé avec cette adresse email";                
+            }
+            $this->addFlash('alert', $errorMessage);
         }
-        
         
         return $this->redirectToRoute('home');
     }

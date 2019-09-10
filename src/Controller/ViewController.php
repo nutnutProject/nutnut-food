@@ -25,10 +25,16 @@ class ViewController extends AbstractController
     /**
      * @Route("/recettes/{page}", name="recettes_list", requirements={"page"="\d+"})
      */
-    public function list(RecetteRepository $recetteRepository, CategoryRepository $categoryRepository, DietRepository $dietRepository, $page = 1)
+    public function list(Request $request, RecetteRepository $recetteRepository, CategoryRepository $categoryRepository, DietRepository $dietRepository, $page = 1)
     {
+
+        $request = isset($_GET["query"]) ? trim($_GET["query"]) : null;
         // Trouver toutes les recettes
-        $recettes = $recetteRepository->findAll();
+        if ($request == null){
+        $recettes = $recetteRepository->findValidateOnlineRecettes();
+        } else {
+        $recettes = $recetteRepository->findByRequest($request);    
+        }
 
         $max_pages= ceil(count($recettes)/6);
         $debut = ($page -1 )*6;
@@ -48,7 +54,7 @@ class ViewController extends AbstractController
         $diets = $dietRepository->findAll();
 
         return $this->render('view/list.html.twig', [
-            'recettes' => $recette,
+            'recettes' => $recettes,
             'categories' => $categories,
             'diets' => $diets,
             'current_category' => false,
@@ -168,6 +174,7 @@ class ViewController extends AbstractController
         }
 
         return $this->render('view/show_recette.html.twig', [
+            'user' => $user,
             'recette' => $recette,
             'recette_apprise' => $recette_apprise,
             'notes' => $notes,
@@ -175,14 +182,37 @@ class ViewController extends AbstractController
     }
 
     /**
-     * @Route("/fooder/{firstname}-{id}", name="fooder_show")
+     * @Route("/fooder/{firstname}-{id}/{page}", name="fooder_show")
      * 
      * permet d'aller sur le profil d'un fooder
      */
-    public function showFooder(User $user)
+    public function showFooder(User $user, $id, $page=1)
     {
+        $recetteRepository = $this->getDoctrine()->getRepository(Recette::class);
+        $recettes = $recetteRepository->findBy(['user' => $id]);
+
+        // Récupération des commentaires
+        $noteRepository = $this->getDoctrine()->getRepository(Note::class);
+        $notes = $noteRepository->findBy(['user' => $id]);
+        
+        $max_pages= ceil(count($recettes)/8);
+        $debut = ($page -1 )*8;
+        $fin = $debut+8;
+        if ($page * 8 > count($recettes))
+        {
+            $fin = count($recettes);
+        }
+        $recette=[];
+        for ($i = $debut; $i < $fin; $i++)
+        {
+            $recette[] = $recettes[$i];
+        }
         return $this->render('view/show_fooder.html.twig', [
+            'recettes' => $recette,
             'user' => $user,
+            'max_pages' => $max_pages,
+            'current_page' => $page,
+            'notes' => $notes,
         ]);
     }
 

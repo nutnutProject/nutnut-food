@@ -36,7 +36,7 @@
 
             <div class="col ">
                 <div class="card mx-auto w-75">
-                    <img src="{{asset('img/wonder_icon.png')}}" class="card-img-top-user" style="width: 40%;" alt="...">
+                    <img src="{{asset(user.image)}}" class="card-img-top-user"  alt="...">
                     <div class="rating">
                         <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
                         <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
@@ -63,34 +63,39 @@
 
                     <div class="card">
                         <div class="row">
-                        {% for recette in user.recettes %}
-                            <div class="col-sm d-flex align-items-stretch">
+                        {% for recette in recettes %}
+                            <div class="col-3 d-flex align-items-stretch">
                                 <div class="card">
-                                        <img class="card-img-top img-fluid" src="{{asset('img/quiche.jpg')}}" alt="Card image cap">
-                                        <div class="card-body d-flex flex-column">
-                                            <h4 class="card-title">
-                                                <a href="{{ path('recette_show', {slug: recette.slug}) }}" title="View Product">{{recette.title}}</a>
-                                            </h4>
-                                            <div class="user-synop">
-                                                <img class="icon-user" src="{{asset('img/wonder_icon.png')}}" alt="Card image cap">
-                                                <p class="user-name">
-                                                    {{user.firstname}}</p>
-                                            </div>
-                                            <div class="rating">
-                                                <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
-                                                <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
-                                                <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
-                                                <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
-                                                <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
-                                            </div>
-                                            <p class="card-text">{{recette.description}}</p>
+                                    <img class="card-img-top img-fluid mx-auto" src="{{asset(recette.photo)}}"  alt="Card image cap">
+                                    <div class="card-body d-flex flex-column">
+                                        <h4 class="card-title">
+                                            <a href="{{ path('recette_show', {slug: recette.slug}) }}" title="View Product">{{recette.title | slice (0,80) | trim(0123456789102030405060)}}</a>
+                                        </h4>
+                                        <div class="user-synop">
+                                            <img class="icon-user" src="{{asset('img/wonder_icon.png')}}" alt="Card image cap">
+                                            <p class="user-name">
+                                                {{user.firstname}}</p>
                                         </div>
-                                        <div class="col">
-                                            <div class="card-footer bg-transparent border-warning mt-auto align-self-end">
-                                                <a href="cart.html" class="btn btn-amber btn-block ">Apprendre
-                                                </a>
-                                            </div>
-                                        </div>                                   
+                                        <div class="rating">
+                                        {% if recette.note > 0 %}                              
+                                            {% set nb_etoiles = 5 %}
+                                            {% for i in 1..nb_etoiles %}
+                                                {% if recette.note >= i %}
+                                                    <img src="{{asset('img/noix-check.png')}}">
+                                                {% else %}
+                                                    <img src="{{asset('img/noix.png')}}">
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                        </div>
+                                        <p class="card-text">{{recette.description}}</p>
+                                    </div>
+                                    <div class="col">
+                                        <div class="card-footer bg-transparent border-warning mt-auto align-self-end">
+                                            <a href="{{ path('recette_show', {slug: recette.slug}) }}" class="btn btn-amber btn-block ">Voir
+                                            </a>
+                                        </div>
+                                    </div>                                   
                                 </div>
                             </div>
                         {% endfor %}
@@ -98,94 +103,65 @@
                     </div>
                 </div>
             </div>
+
+            <nav>
+                <ul class="pagination justify-content-center">
+                    {% if current_page != 1 %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ path('fooder_show', {'firstname':user.firstname,'id':user.id, 'page': current_page - 1}) }}">Précédent</a>
+                        </li>
+                    {% endif %}
+
+                    {% for p in range(max(current_page-3, 1), min(current_page+3, max_pages)) %}
+                        <li class="page-item {{ (current_page == p) ? 'active' : '' }}">
+                            <a class="page-link" href="{{ path('fooder_show', {'firstname':user.firstname,'id':user.id, 'page': p}) }}">{{ p }}</a>
+                        </li>
+                    {% endfor %}
+
+                    {% if current_page != max_pages %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ path('fooder_show', {'firstname':user.firstname,'id':user.id, 'page': current_page + 1}) }}">Suivant</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
         </div>
 
-
         <div class="container mt-3">
-
             <h1 class="category">AVIS :
             </h1>
-
             <div class="row">
-                <div class="col-sm">
-                    <div class="card">
-                        <div class="card-body d-flex flex-column">
-                            <div class="user-synop">
-                                <img class="icon-user" src="img/wonder_icon.png" alt="Card image cap">
-                                <p class="user-name">
-                                    Wonder Woman</p>
-                            </div>
-                            <div class="rating">
-                                <span class=""><img src="img/noix-check.png"></span>
-                                <span class=""><img src="img/noix-check.png"></span>
-                                <span class=""><img src="img/noix-check.png"></span>
-                                <span class=""><img src="img/noix-check.png"></span>
-                                <span class=""><img src="img/noix-check.png"></span>
-                            </div>
-                            <p class="card-text">Je fait des quiches au saumon depuis que je suis enfant, recette de ma grand-mere..</p>
+                {% if notes %}  
+                    {% for note in notes %}
+                    <div class="col-3">
+                        <div class="card">
+                            <div class="card-body d-flex flex-column">
+                                <div class="user-synop">
+                                    <img class="icon-user" src="img/wonder_icon.png" alt="Card image cap">
+                                    <p class="user-name">{{note.user.firstname}} {{note.user.lastname|slice(0, 1)}}</p>       
+                                </div>
+                                <div class="rating">
+                                    {% set nb_etoiles = 5 %}
+                                    {% for i in 1..nb_etoiles %}
+                                        {% if note.note >= i %}
+                                            <img src="{{asset('img/noix-check.png')}}">
+                                        {% else %}
+                                            <img src="{{asset('img/noix.png')}}">
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                <p class="card-text">{{note.commentaire}}</p>
+                                <p>Ajouté le {{note.creationDate|date("m/d/Y")}}</p> 
+                            </div>           
                         </div>
                     </div>
-                </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="col-6 offset-3 text-center">
+                        <p>L'utilisateur n'a pas encore eu d'avis.</p>
+                    </div>       
+                {% endif %}
 
-                <div class="col-sm">
-                    <div class="card">
-                        <div class="card-body d-flex flex-column">
-                            <div class="user-synop">
-                                <img class="icon-user" src="img/wonder_icon.png" alt="Card image cap">
-                                <p class="user-name">
-                                    Wonder Woman</p>
-                            </div>
-                            <div class="rating">
-                                <span class=""><img src="img/noix-check.png"></span>
-                                <span class=""><img src="img/noix-check.png"></span>
-                                <span class=""><img src="img/noix-check.png"></span>
-                                <span class=""><img src="img/noix-check.png"></span>
-                                <span class=""><img src="img/noix-check.png"></span>
-                            </div>
-                            <p class="card-text">Je fait des quiches au saumon depuis que je suis enfant, recette de ma grand-mere..</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm">
-                    <div class="card">
-                        <div class="card-body d-flex flex-column">
-                            <div class="user-synop">
-                                <img class="icon-user" src="img/wonder_icon.png" alt="Card image cap">
-                                <p class="user-name">
-                                    Wonder Woman</p>
-                            </div>
-                            <div class="rating">
-                                <span class=""><img src="img/noix-check.png"></span>
-                                <span class=""><img src="img/noix-check.png"></span>
-                                <span class=""><img src="img/noix-check.png"></span>
-                                <span class=""><img src="img/noix-check.png"></span>
-                                <span class=""><img src="img/noix-check.png"></span>
-                            </div>
-                            <p class="card-text">Je fait des quiches au saumon depuis que je suis enfant, recette de ma grand-mere..</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm">
-                    <div class="card">
-                        <div class="card-body d-flex flex-column">
-                            <div class="user-synop">
-                                <img class="icon-user" src="img/wonder_icon.png" alt="Card image cap">
-                                <p class="user-name">
-                                    Wonder Woman</p>
-                            </div>
-                            <div class="rating">
-                                <span class=""><img src="img/noix-check.png"></span>
-                                <span class=""><img src="img/noix-check.png"></span>
-                                <span class=""><img src="img/noix-check.png"></span>
-                                <span class=""><img src="img/noix-check.png"></span>
-                                <span class=""><img src="img/noix-check.png"></span>
-                            </div>
-                            <p class="card-text">Je fait des quiches au saumon depuis que je suis enfant, recette de ma grand-mere..</p>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
