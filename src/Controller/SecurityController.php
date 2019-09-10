@@ -35,6 +35,7 @@ class SecurityController extends AbstractController
     {    
         if(!$this->getUser())
         {
+
             $user = new User();
             $form = $this->createForm(UserType::class, $user);
             $form->handleRequest($request);
@@ -214,6 +215,10 @@ class SecurityController extends AbstractController
 
     public function forgetPassword(Request $request, \Swift_Mailer $mailer)
     {
+
+
+
+        
         if ($request->isMethod('POST'))
         {
             $username = $request->request->get('username');
