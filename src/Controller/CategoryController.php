@@ -6,6 +6,7 @@ use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
 use App\Repository\DietRepository;
+use App\Repository\RecetteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,11 +23,18 @@ class CategoryController extends AbstractController
      * 
      * Route servant a afficher les catégories en même temps que les recettes
      */
-    public function categoryShow(Category $category,
-        CategoryRepository $categoryRepository, DietRepository $dietRepository,$page=1) 
+    public function categoryShow(Request $request, Category $category,
+        CategoryRepository $categoryRepository, DietRepository $dietRepository, RecetteRepository $recetteRepository ,$page=1) 
         {
+        //Récupère dans request les données envoyées dans le formulaire de recherche
+        $request = isset($_GET["query"]) ? trim($_GET["query"]) : null;
+
+        if ($request == null){
         // Permet d'avoir les recettes par catégories
-        $recettes = $category->getRecettes();
+            $recettes = $category->getRecettes();
+        } else {
+            $recettes = $recetteRepository->findCategoryRecettesByRequest($request);
+        }
 
         $max_pages= ceil(count($recettes)/6);
         $debut = ($page -1 )*6;
