@@ -33,7 +33,17 @@
                                         <div class="card-body">
                                             <h4 class="card-title">{{recette[0].title}}</h4>
                                             <div class="rating">
-                                                <span class=""><img src="{{asset('img/noix-check.png')}}">{{recette[0].note}}</span>
+                                                {% if recette[0].note > 0 %}                              
+                                                    {% set nb_etoiles = 5 %}
+                                                    {% set message = "" %}
+                                                    {% for i in 1..nb_etoiles %}
+                                                        {% if recette[0].note >= i %}
+                                                            <img src="{{asset('img/noix-check.png')}}">
+                                                        {% else %}
+                                                            <img src="{{asset('img/noix.png')}}">
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endif %}
                                             </div>
                                             <p class="card-text">{{recette[0].description}}</p>
                                         </div>
@@ -68,8 +78,8 @@
                             </ul>
                         </nav>
                     {% else %}
-                        <div class="row mt-0">
-                            <p>Vous n'avez pas créé de recettes.</p>
+                        <div class="row-6 text-center mt-0">
+                            <p>Aucune recette ne vous interesse. Pour voir les recettes proposées, rendez vous sur <a href="{{ path('recettes_list') }}">cette page<a></p>
                         </div>
                     {% endif %}
                     
