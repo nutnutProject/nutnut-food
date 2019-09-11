@@ -134,8 +134,8 @@
                                 <div class="card-body d-flex flex-column">
                                     <div class="user-synop">
                                         <img class="rounded-circle icon-user" src="{{asset(note.user.image)}}" alt="Card image cap">
-                                        <p class="user-name" href="{{ path('fooder_show', {'firstname':recette.user.firstname,'id':recette.user.id}) }}>{{note.user.firstname}}
-                                            {{note.user.lastname|slice(0, 1)}}</p>
+                                        <a class="user-name" href="{{ path('fooder_show', {'firstname':user.firstname,'id':user.id}) }}">{{note.user.firstname}}
+                                            {{ note.user.lastname|slice(0, 1) }}</a>
                                     </div>
                                     <div class="rating">
                                         {% set nb_etoiles = 5 %}
