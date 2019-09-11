@@ -96,6 +96,11 @@ class Recette
      */
     private $note;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $ingredientsList;
+
     public function __construct()
     {
         $this->diet = new ArrayCollection();
@@ -357,6 +362,18 @@ class Recette
     public function __toString()
     {
         return $this->title;
+    }
+
+    public function getIngredientsList(): ?string
+    {
+        return $this->ingredientsList;
+    }
+
+    public function setIngredientsList(string $ingredientsList): self
+    {
+        $this->ingredientsList = $ingredientsList;
+
+        return $this;
     }
 
 

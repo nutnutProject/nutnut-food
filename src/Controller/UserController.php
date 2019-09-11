@@ -127,6 +127,7 @@ class UserController extends AbstractController
                 $recette->setNote(0);
                 $recette->setCreationDate(new \DateTime());
                 $recette->setValidate(true);
+                $recette->setingredientsList($request->get('listIngredient'));
 
                 // Enregistrement de la recette
                 $entityManager = $this->getDoctrine()->getManager();
