@@ -27,27 +27,56 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         
-        $users = [];
+      
+
+
         // Génération des prénoms et noms
-        $firstnameUsers = ['Gabriel', 'Mohammed', 'Salim', 'Lucas', 'Pierre', 'Leo', 'Raphael', 'Ethan', 'Louise', 'Emma', 'Chloe', 'Juliette', 'Alice', 'Lina', 'Lea', 'Camille', 'Theo', 'Axel', 'Jacques', 'Monique', 'Ibrahim', 'Fathia', 'Oscar', 'Oumar', 'Alpha'];
-        $lastnameUsers = ['Fleury', 'Leclerc', 'Diallo', 'Boucher', 'Berger', 'Carpentier', 'Dumas', 'Lacroix', 'Sanchez', 'Vasseur', 'Reynault', 'Hugo', 'Hobb', 'Asimov', 'Gavras', 'Adid', 'Faure', 'Morel', 'Daoud', 'Azel', 'Makhlouf', 'El-Ghoziane', 'Ali']; 
+        // $firstnameUsers =   'Chloe',    'Juliette', 'Alice', 'Lina', 'Salim',  'Mescipa', 'Theo',  'Axel', 'Jacques', 'Monique', 'Ibrahim', 'Fathia', 'Arnauld', 'Oumar',    'Alpha', 'Abdjiel', 'Abdel',    'Salek',    'Akira', 'Rick',    'Akito'  ]; 31
+        // $lastnameUsers = [ 'Reynault', 'Hugo',    'Hobb', 'Asimov', 'Gavras', 'Adid',     'Faure', 'Morel', 'Daoud', 'Azel', 'Makhlouf', 'El-Ghoziane', 'Ali', 'Fontaine', 'Hervo', 'Gosselin', 'Nagasaki', 'Riboux', 'Cateau', 'Martin', 'Hiroshige']; 31
         // Génération des adresses 
         $adresseUsers = ['62  Chemin Challet', '126  Place du Jeu de Paume', '1 Rue du Ballon', '150 Rue Solférino', '36 Rue de Gand', "81 Rue d'Angleterre", '107 Rue Saint-André', '106 Avenue Henri Delecaux', '368 Avenue du Maréchal de Lattre de Tassigny', '23 Allée Vauban'    ];
-        $cityUsers = ['Lille', 'Lille', 'Lille', 'Lille', 'Lambersart', 'Saint-André-lez-Lille', 'La Madeleine' ];
+        $cityUsers = ['Lille', 'Lille', 'Lille', 'Lille', 'Lambersart', 'Saint-André-lez-Lille', 'La Madeleine', 'Saint-Maurice Pelvoision', 'Lille-Moulin', ];
         $cpUsers = ['59800', '59800','59800','59800','59000','59000', '59130', '59350', '59110' ]; 
         // Génération des numéros de Téléphone
         $phoneUsers = ['0320458963', '0625789623', '0658962312', '0652894512', '0320568941', '0320896632', '0689451203', '0320985633', '0756894512' ];
         // Génération des descriptions
-        $descriptionUsers = [ 'La journée je sauve le monde avec mon slip en lycra et mes collants vert et le soir, pour me detendre, je fais des petits plats.', 
-        "Je joue du tuba depuis maintenant 10 ans. A la recherche de nouvelles expériences, je souhaite me lancer dans cette nouvelle aventure qu'est NutNut Food pour m'améliorer en cuisine et pourquoi pas me faire des amis", 
-        "Je suis arrivée sur Lille depuis seulement quelques mois. N'ayant trouvé personne qui pourrait m'aider socialement dans mon club de bilboquet, je me suis inscrite sur ce site. J'adore faire la cuisine et mon péché mignon c'est le sorbet aux fraises. On goûte ensemble ?", 
-        "Amoureux culinaire depuis ma plus tendre enfance, j'aime l'idée de partager et de faire partager son savoir autour d'un bon pigeon en sauce. Infirmier de profession, j'aime me retrouver dans ma cuisine pour me détendre et enfin faire le vide dans ma tête. Je vous attends !",
-         "Eleveur de sanglier le jour et chef étoilé la nuit, j'ai hâte de vous faire découvrir mes spécialités ! Par contre je vous préviens, j'aime et ne cuisine que le samedi soir à partir de minuit",
-        "Ancienne Cantatrice, je chantais dans le poulailler de mes parents pour qu'elles fassent des oeufs. Depuis ma récente opération des sphincters, je ne peux malheureusement plus chanter mais apprécie maintenant mettre les poulets dans la cocotte !",
-        "Je fais du patinage artistique depuis mes douzes ans et suis actuellement champion Français en la matière. Par contre, je suis végétarien et vous propose de vous partager mes plus belles recettes ! Avec moi vous oublierez la viande... ",
-        "On a décidé de s'inscrire sur ce site pour doper nos mornes soirées familiales. Chez nous, ce sera cuisine en famille ! "];
+        // $descriptionUsers = [ 'La journée je sauve le monde avec mon slip en lycra et mes collants vert et le soir, pour me detendre, je fais des petits plats.', 
+        // "Je joue du tuba depuis maintenant 10 ans. A la recherche de nouvelles expériences, je souhaite me lancer dans cette nouvelle aventure qu'est NutNut Food pour m'améliorer en cuisine et pourquoi pas me faire des amis", 
+        // "Je suis arrivée sur Lille depuis seulement quelques mois. N'ayant trouvé personne qui pourrait m'aider socialement dans mon club de bilboquet, je me suis inscrite sur ce site. J'adore faire la cuisine et mon péché mignon c'est le sorbet aux fraises. On goûte ensemble ?", 
+        // "Amoureux culinaire depuis ma plus tendre enfance, j'aime l'idée de partager et de faire partager son savoir autour d'un bon pigeon en sauce. Infirmier de profession, j'aime me retrouver dans ma cuisine pour me détendre et enfin faire le vide dans ma tête. Je vous attends !",
+        //  "Eleveur de sanglier le jour et chef étoilé la nuit, j'ai hâte de vous faire découvrir mes spécialités ! Par contre je vous préviens, j'aime et ne cuisine que le samedi soir à partir de minuit",
+        // "Ancienne Cantatrice, je chantais dans le poulailler de mes parents pour qu'elles fassent des oeufs. Depuis ma récente opération des sphincters, je ne peux malheureusement plus chanter mais apprécie maintenant mettre les poulets dans la cocotte !",
+        // "Je fais du patinage artistique depuis mes douzes ans et suis actuellement champion Français en la matière. Par contre, je suis végétarien et vous propose de vous partager mes plus belles recettes ! Avec moi vous oublierez la viande... ",
+        // "On a décidé de s'inscrire sur ce site pour doper nos mornes soirées familiales. Chez nous, ce sera cuisine en famille ! ",
+        // "Je me suis inscrit car au début je préférait le sport, mais comme j'ai payé mon abonnement pour rien et que je continuais à manger comme 4, autant partager. Je pense que Nutnut Food va même réussir à me muscler",
+        // "Je n'irais pas pas 4 chemins, je cherche l'amour, le grand, qu'on pourra partager autour d'une bonne quiche au saumon.",
+        // "Etant de la génération 4.0, je me suis toujours dis que j'aimerai réussir de manière numérique à fédérer autour d'un bon coq au vin. Grace à ce site, c'est parti ! Sachez par contre qu'il est or de question de me faire cuisiner une tarte, ça me fait vomir",
+        // " Je ne sais pas ce que je fais ici, c'est mon tonton qui m'a conseillé de m'inscrire pour que je joue moins au jeux vidéos. Si quelqu'un est chaud à prendre pour prétexte de faire une tourte pour me permettre de faire une lan chez lui, je suis chaud bouillant",
+        // "Depuis tout petit j'aime la soupe. C'est comme ça je n'y peut rien. Mais comme je ne sais pas cuisiner autre chose, j'attends beaucoup des fooders pour me faire évoluer dans mon alimentation. En échange je suis de super bonne compagnie.",
+        // "Je pourrais dire que je me suis inscrit pour passer du bon temps, ce qui est vrai, mais bon. Je suis nul en description, venez chez moi faire mes recettes et on se connaitra mieux.",
+        // "Bonjour, je fais super bien la cuisine. J'en profite pour passer une annonce, je vends mon scooter pas cher. Si intéressez, venez apprendre une recette chez moi, je vous le montrerais. Des bises, merci",
+        // "J'ai le don particulier de changer un vieux sandwich en mine d'or pour patachon. Du coup n'hésitez pas, je vais vous montrer ce que c'est la bonne cuisine, bande de vilains.",
+        
+        // 'La journée je sauve le monde avec mon slip en lycra et mes collants vert et le soir, pour me detendre, je fais des petits plats.', 
+        // "Je joue du tuba depuis maintenant 10 ans. A la recherche de nouvelles expériences, je souhaite me lancer dans cette nouvelle aventure qu'est NutNut Food pour m'améliorer en cuisine et pourquoi pas me faire des amis", 
+        // "Je suis arrivée sur Lille depuis seulement quelques mois. N'ayant trouvé personne qui pourrait m'aider socialement dans mon club de bilboquet, je me suis inscrite sur ce site. J'adore faire la cuisine et mon péché mignon c'est le sorbet aux fraises. On goûte ensemble ?", 
+        // "Amoureux culinaire depuis ma plus tendre enfance, j'aime l'idée de partager et de faire partager son savoir autour d'un bon pigeon en sauce. Infirmier de profession, j'aime me retrouver dans ma cuisine pour me détendre et enfin faire le vide dans ma tête. Je vous attends !",
+        //  "Eleveur de sanglier le jour et chef étoilé la nuit, j'ai hâte de vous faire découvrir mes spécialités ! Par contre je vous préviens, j'aime et ne cuisine que le samedi soir à partir de minuit",
+        // "Ancienne Cantatrice, je chantais dans le poulailler de mes parents pour qu'elles fassent des oeufs. Depuis ma récente opération des sphincters, je ne peux malheureusement plus chanter mais apprécie maintenant mettre les poulets dans la cocotte !",
+        // "Je fais du patinage artistique depuis mes douzes ans et suis actuellement champion Français en la matière. Par contre, je suis végétarien et vous propose de vous partager mes plus belles recettes ! Avec moi vous oublierez la viande... ",
+        // "On a décidé de s'inscrire sur ce site pour doper nos mornes soirées familiales. Chez nous, ce sera cuisine en famille ! ",
+        // "Je me suis inscrit car au début je préférait le sport, mais comme j'ai payé mon abonnement pour rien et que je continuais à manger comme 4, autant partager. Je pense que Nutnut Food va même réussir à me muscler",
+        // "Je n'irais pas pas 4 chemins, je cherche l'amour, le grand, qu'on pourra partager autour d'une bonne quiche au saumon.",
+        // "Etant de la génération 4.0, je me suis toujours dis que j'aimerai réussir de manière numérique à fédérer autour d'un bon coq au vin. Grace à ce site, c'est parti ! Sachez par contre qu'il est or de question de me faire cuisiner une tarte, ça me fait vomir",
+        // " Je ne sais pas ce que je fais ici, c'est mon tonton qui m'a conseillé de m'inscrire pour que je joue moins au jeux vidéos. Si quelqu'un est chaud à prendre pour prétexte de faire une tourte pour me permettre de faire une lan chez lui, je suis chaud bouillant",
+        // "Depuis tout petit j'aime la soupe. C'est comme ça je n'y peut rien. Mais comme je ne sais pas cuisiner autre chose, j'attends beaucoup des fooders pour me faire évoluer dans mon alimentation. En échange je suis de super bonne compagnie.",
+        // "Je pourrais dire que je me suis inscrit pour passer du bon temps, ce qui est vrai, mais bon. Je suis nul en description, venez chez moi faire mes recettes et on se connaitra mieux.",
+        // "Bonjour, je fais super bien la cuisine. J'en profite pour passer une annonce, je vends mon scooter pas cher. Si intéressez, venez apprendre une recette chez moi, je vous le montrerais. Des bises, merci"];
         // Génération des photos d'users
-        $imageUsers = ['img/user/tuyaux.png', 'img/user/permanente.jpg', 'img/user/grimace.jpg', 'img/user/heros.jpg', 'img/user/peucheuse.jpg', 'img/user/costume.jpg', 'img/user/scaphandre2.jpg', 'img/user/telephone.png', 'img/user/telephone.png', 'img/user/chauvesouris.png', 'img/user/tulipe.png', 'img/user/antennes.png', 'img/user/scaphandre.png', 'img/user/passoire.png', 'img/user/lunette.png', 'img/user/caque.png'];
+        // $imageUsers = ['img/user/tuyaux.png', 'img/user/permanente.jpg', 'img/user/grimace.jpg', 'img/user/heros.jpg', 'img/user/peucheuse.jpg', 'img/user/costume.jpg', 'img/user/scaphandre2.jpg', 'img/user/telephone.png', 'img/user/chauvesouris.png', 'img/user/tulipe.png', 'img/user/antennes.png', 'img/user/scaphandre.png', 'img/user/passoire.png', 'img/user/lunette.png', 'img/user/caque.png', 'img/user/tourbillon.jpg', 'img/user/pull.jpg', 'img/user/pull2.jpg', 'img/user/barbe.jpg', 'img/user/barbe2.jpg', 'img/user/maison.jpg',
+    
+        // 'img/user/tuyaux.png', 'img/user/permanente.jpg', 'img/user/grimace.jpg', 'img/user/heros.jpg', 'img/user/peucheuse.jpg', 'img/user/costume.jpg', 'img/user/scaphandre2.jpg', 'img/user/telephone.png', 'img/user/chauvesouris.png', 'img/user/tulipe.png']; 21
+        $users = [];
         for($i=0; $i<15;$i++)
         {           
             $user = new User();
@@ -55,9 +84,9 @@ class AppFixtures extends Fixture
             $roles = (1 === $i) ? 'ROLE_ADMIN' : 'ROLE_USER';
             $user->setUsername($username);
             $user->setRoles($roles);
-            $user->setImage($imageUsers[rand(0,14)]);
-            $user->setFirstname($firstnameUsers[rand(0,24)]);
-            $user->setLastname($lastnameUsers[rand(0,22)]);
+            $user->setImage('img/user/tuyaux.png', 'img/user/permanente.jpg', 'img/user/grimace.jpg', 'img/user/heros.jpg', 'img/user/peucheuse.jpg', 'img/user/costume.jpg', 'img/user/scaphandre2.jpg', 'img/user/telephone.png', 'img/user/chauvesouris.png', 'img/user/tulipe.png', 'img/user/antennes.png', 'img/user/scaphandre.png', 'img/user/passoire.png', 'img/user/lunette.png', 'img/user/caque.png', 'img/user/tourbillon.jpg', 'img/user/pull.jpg', 'img/user/pull2.jpg', 'img/user/barbe.jpg', 'img/user/barbe2.jpg', 'img/user/maison.jpg');
+            $user->setFirstname('Chloe',    'Juliette', 'Alice', 'Lina', 'Salim',  'Mescipa', 'Theo',  'Axel', 'Jacques', 'Monique', 'Ibrahim', 'Fathia', 'Arnauld', 'Oumar',    'Alpha', 'Abdjiel', 'Abdel',    'Salek',    'Akira', 'Rick',    'Akito');
+            $user->setLastname('Reynault', 'Hugo',    'Hobb', 'Asimov', 'Gavras', 'Adid',     'Faure', 'Morel', 'Daoud', 'Azel', 'Makhlouf', 'El-Ghoziane', 'Ali', 'Fontaine', 'Hervo', 'Gosselin', 'Nagasaki', 'Riboux', 'Cateau', 'Martin', 'Hiroshige');
             // Générateur de birthdates aléatoires
             $eigtheenYear = time() - 60 * 60 * 24 * 7 * 53 * 18 ;
             $eigthy = time() - 60 * 60 * 24 * 7 * 53 * 80;
@@ -66,11 +95,33 @@ class AppFixtures extends Fixture
             $user->setPassword(
                 $this->passwordEncoder->encodePassword($user, 'testtest')
             );
+            $user->setValidate(true);
             $user->setAdresse($adresseUsers[rand(0,9)]);
             $user->setCity($cityUsers[rand(0,6)]);
             $user->setCp($cpUsers[rand(0,8)]);
             $user->setTelephone($phoneUsers[rand(0,8)]);
-            $user->setDescription($descriptionUsers[rand(0,7)]);            
+            $user->setDescription('La journée je sauve le monde avec mon slip en lycra et mes collants vert et le soir, pour me detendre, je fais des petits plats.', 
+            "Je joue du tuba depuis maintenant 10 ans. A la recherche de nouvelles expériences, je souhaite me lancer dans cette nouvelle aventure qu'est NutNut Food pour m'améliorer en cuisine et pourquoi pas me faire des amis", 
+            "Je suis arrivée sur Lille depuis seulement quelques mois. N'ayant trouvé personne qui pourrait m'aider socialement dans mon club de bilboquet, je me suis inscrite sur ce site. J'adore faire la cuisine et mon péché mignon c'est le sorbet aux fraises. On goûte ensemble ?", 
+            "Amoureux culinaire depuis ma plus tendre enfance, j'aime l'idée de partager et de faire partager son savoir autour d'un bon pigeon en sauce. Infirmier de profession, j'aime me retrouver dans ma cuisine pour me détendre et enfin faire le vide dans ma tête. Je vous attends !",
+             "Eleveur de sanglier le jour et chef étoilé la nuit, j'ai hâte de vous faire découvrir mes spécialités ! Par contre je vous préviens, j'aime et ne cuisine que le samedi soir à partir de minuit",
+            "Ancienne Cantatrice, je chantais dans le poulailler de mes parents pour qu'elles fassent des oeufs. Depuis ma récente opération des sphincters, je ne peux malheureusement plus chanter mais apprécie maintenant mettre les poulets dans la cocotte !",
+            "Je fais du patinage artistique depuis mes douzes ans et suis actuellement champion Français en la matière. Par contre, je suis végétarien et vous propose de vous partager mes plus belles recettes ! Avec moi vous oublierez la viande... ",
+            "On a décidé de s'inscrire sur ce site pour doper nos mornes soirées familiales. Chez nous, ce sera cuisine en famille ! ",
+            "Je me suis inscrit car au début je préférait le sport, mais comme j'ai payé mon abonnement pour rien et que je continuais à manger comme 4, autant partager. Je pense que Nutnut Food va même réussir à me muscler",
+            "Je n'irais pas pas 4 chemins, je cherche l'amour, le grand, qu'on pourra partager autour d'une bonne quiche au saumon.",
+            "Etant de la génération 4.0, je me suis toujours dis que j'aimerai réussir de manière numérique à fédérer autour d'un bon coq au vin. Grace à ce site, c'est parti ! Sachez par contre qu'il est or de question de me faire cuisiner une tarte, ça me fait vomir",
+            " Je ne sais pas ce que je fais ici, c'est mon tonton qui m'a conseillé de m'inscrire pour que je joue moins au jeux vidéos. Si quelqu'un est chaud à prendre pour prétexte de faire une tourte pour me permettre de faire une lan chez lui, je suis chaud bouillant",
+            "Depuis tout petit j'aime la soupe. C'est comme ça je n'y peut rien. Mais comme je ne sais pas cuisiner autre chose, j'attends beaucoup des fooders pour me faire évoluer dans mon alimentation. En échange je suis de super bonne compagnie.",
+            "Je pourrais dire que je me suis inscrit pour passer du bon temps, ce qui est vrai, mais bon. Je suis nul en description, venez chez moi faire mes recettes et on se connaitra mieux.",
+            "Bonjour, je fais super bien la cuisine. J'en profite pour passer une annonce, je vends mon scooter pas cher. Si intéressez, venez apprendre une recette chez moi, je vous le montrerais. Des bises, merci",
+            "J'ai le don particulier de changer un vieux sandwich en mine d'or pour patachon. Du coup n'hésitez pas, je vais vous montrer ce que c'est la bonne cuisine, bande de vilains.",
+            'La journée je sauve le monde avec mon slip en lycra et mes collants vert et le soir, pour me detendre, je fais des petits plats.', 
+            "Je joue du tuba depuis maintenant 10 ans. A la recherche de nouvelles expériences, je souhaite me lancer dans cette nouvelle aventure qu'est NutNut Food pour m'améliorer en cuisine et pourquoi pas me faire des amis", 
+            "Je suis arrivée sur Lille depuis seulement quelques mois. N'ayant trouvé personne qui pourrait m'aider socialement dans mon club de bilboquet, je me suis inscrite sur ce site. J'adore faire la cuisine et mon péché mignon c'est le sorbet aux fraises. On goûte ensemble ?", 
+            "Amoureux culinaire depuis ma plus tendre enfance, j'aime l'idée de partager et de faire partager son savoir autour d'un bon pigeon en sauce. Infirmier de profession, j'aime me retrouver dans ma cuisine pour me détendre et enfin faire le vide dans ma tête. Je vous attends !",
+             "Eleveur de sanglier le jour et chef étoilé la nuit, j'ai hâte de vous faire découvrir mes spécialités ! Par contre je vous préviens, j'aime et ne cuisine que le samedi soir à partir de minuit",
+            );            
             $user->setPwdToken('xxxxxxxx'.$i);
             $user->setActivateToken('xxxxxxxxx'.$i);
             $user->setPwdTokenExpire(time()+3600);
