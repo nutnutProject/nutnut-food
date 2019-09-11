@@ -1,17 +1,16 @@
 {% extends 'base.html.twig' %}
 
 
-
 {% block body %}
 
-   <header class="v-header-all containeur">
-        <div class="fullscreen-image-wrap-all">
-        </div>
-        <div class="header-overlay-all">
-        </div>
+    <header class="v-header-all containeur">
+        <div class="fullscreen-image-wrap-all"></div>
+        <div class="header-overlay-all"></div>
         <div class="header-content-all">
             <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-            <h1> {{ current_category ? current_category.name : 'Recettes' }} </h1>
+            <h1>
+                {{ current_category ? current_category.name : 'Recettes' }}
+            </h1>
         </div>
     </header>
 
@@ -19,10 +18,12 @@
         <div class="row">
             <div class="col-sm">
                 <div class="card mx-auto" id="search-box">
-                    <h1 class="search-home">On cuisine quoi aujourd'hui ? </h1>
-                    <div id="search" class="card-body  mx-auto text-center">
+                    <h1 class="search-home">On cuisine quoi aujourd'hui ?
+                    </h1>
+                    <div
+                        id="search" class="card-body  mx-auto text-center">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="get" >
+                        <form class="form-inline mr-auto" method="get">
                             <div class="autocomplete" style="position: relative; display: inline-block;">
                                 <input class="form-control form-control-lg mr-sm-2 center" type="text" placeholder="Rechercher une recette" aria-label="Rechercher" name="query" id="title">
                                 <div div class="dropdown-menu" id="recetteList" style="position: absolute">
@@ -30,7 +31,7 @@
                                         'App\\Controller\\AjaxSearchController::ajaxBar'
                                     ))}}
                                 </div>
-                            </div>    
+                            </div>
                             <button class="btn blue-gradient btn-rounded  btn-lg my-0" type="submit">Rechercher</button>
                         </form>
                     </div>
@@ -42,13 +43,19 @@
             <div class="col">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ path('home') }}">Accueil</a></li>
+                        <li class="breadcrumb-item">
+                            <a href="{{ path('home') }}">Accueil</a>
+                        </li>
                         {# if we are on /category/{slug} or /products ? #}
                         {% if current_category %}
-                            <li class="breadcrumb-item"><a href="{{ path('recettes_list') }}">Recettes</a></li>
+                            <li class="breadcrumb-item">
+                                <a href="{{ path('recettes_list') }}">Recettes</a>
+                            </li>
                             <li class="breadcrumb-item active">{{ current_category.name }}</li>
                         {% elseif current_diet %}
-                            <li class="breadcrumb-item"><a href="{{ path('recettes_list') }}">Recettes</a></li>
+                            <li class="breadcrumb-item">
+                                <a href="{{ path('recettes_list') }}">Recettes</a>
+                            </li>
                             <li class="breadcrumb-item active">{{ current_diet.name }}</li>
                         {% else %}
                             <li class="breadcrumb-item active">Recettes</li>
@@ -60,12 +67,15 @@
     </div>
 
     <div class="container">
-        <div class="row">
+        <div
+            class="row">
 
             {# Affichage menu catégorie et régime #}
             <div class="col-12 col-sm-3">
                 <div class="card border-warning bg-grey mb-3">
-                    <div class="card-header bg-light text-uppercase"><i class="fa fa-list"></i> Catégories</div>
+                    <div class="card-header bg-light text-uppercase">
+                        <i class="fa fa-list"></i>
+                        Catégories</div>
                     <ul class="list-group list-group-flush category_block">
                         {% for category in categories %}
                             <li class="list-group-item {{ current_category == category ? 'active' : '' }}">
@@ -75,7 +85,9 @@
                     </ul>
                 </div>
                 <div class="card border-warning bg-grey mb-3">
-                    <div class="card-header bg-light text-uppercase"><i class="fa fa-list"></i> Tag</div>
+                    <div class="card-header bg-light text-uppercase">
+                        <i class="fa fa-list"></i>
+                        Tag</div>
                     <ul class="list-group list-group-flush category_block">
                         {% for diet in diets %}
                             <li class="list-group-item {{ current_diet == diet ? 'active' : '' }}">
@@ -83,43 +95,45 @@
                             </li>
                         {% endfor %}
                     </ul>
-                </div>                
+                </div>
             </div>
-            
+
             {# Affichage des recettes #}
             <div class="col">
                 <div class="row mt-0">
                     {% for recette in recettes %}
                         <div class="col-12 col-sm-6 col-lg-4" id="result-search">
                             <div class="card mx-auto">
-                                <a href="{{ path('recette_show', {slug: recette.slug}) }}"><img class="card-img-top img-fluid mx-auto" src="{{asset(recette.photo)}}" style="width:254.6px; height:236px" alt="Card image cap"  ></a>
+                                <a href="{{ path('recette_show', {slug: recette.slug}) }}"><img class="card-img-top img-fluid mx-auto" src="{{asset(recette.photo)}}" style="width:254.6px; height:236px" alt="Card image cap"></a>
                                 <div class="card-body d-flex flex-column">
-                                    <h4 class="card-title"><a href="{{ path('recette_show', {slug: recette.slug}) }}" title="View Product">{{ recette.title |slice (0,30) | trim(01234567891020304050607090)}}...</a></h4>
+                                    <h4 class="card-title">
+                                        <a href="{{ path('recette_show', {slug: recette.slug}) }}" title="View Product">{{ recette.title |slice (0,30) | trim(01234567891020304050607090)}}...</a>
+                                    </h4>
                                     <div class="user-synop">
                                         <img class="icon-user" src="{{asset(recette.user.image)}}" alt="Card image cap">
                                         <a class="user-name" href="{{ path('fooder_show', {'firstname':recette.user.firstname,'id':recette.user.id}) }}">{{recette.user.firstname}}</a>
                                     </div>
                                     <div class="rating">
-                                    {% if recette.note > 0 %}                              
-                                        {% set nb_etoiles = 5 %}
-                                        {% for i in 1..nb_etoiles %}
-                                            {% if recette.note >= i %}
-                                                <img src="{{asset('img/noix-check.png')}}">
-                                            {% else %}
-                                                <img src="{{asset('img/noix.png')}}">
-                                            {% endif %}
-                                        {% endfor %}
-                                    {% endif %}
+                                        {% if recette.note > 0 %}
+                                            {% set nb_etoiles = 5 %}
+                                            {% for i in 1..nb_etoiles %}
+                                                {% if recette.note >= i %}
+                                                    <img src="{{asset('img/noix-check.png')}}">
+                                                {% else %}
+                                                    <img src="{{asset('img/noix.png')}}">
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
                                     </div>
                                     <p class="card-text">{{ recette.description | slice (0,80)}}..</p>
                                 </div>
-                                 <div class="col mb-2">
+                                <div class="col mb-2">
                                     {% for diet in recette.diet %}
-                                        <span class="badge badge-success mx-auto">{{diet.name}}</span>  
-                                        <span class="badge badge-success mx-auto">{{recette.category.name}}</span>  
+                                        <span class="badge badge-success mx-auto">{{diet.name}}</span>
+                                        <span class="badge badge-success mx-auto">{{recette.category.name}}</span>
 
                                     {% endfor %}
-                                    
+
                                 </div>
 
                                 <div class="col">
@@ -179,37 +193,38 @@
                 </nav>
             </div>
         </div>
-    </div> 
+    </div>
 
- 
-        {% block javascripts %}
-            {{ parent() }}
-    <script>
-        $(document).ready(function(){
-            $('#title').keyup(function(){
-                var query = $(this).val();
-                 console.log(query);
-                if(query.length >= 4){
-                    var data = {query:query};
-                    $.ajax({
-                        url: "{{path('ajax_search')}}",
-                        type: "GET",
-                        dataType: "json",
-                        data: data,
-                        timeout : 3000,
-                        success : function(response){
 
-                            $('#recetteList').fadeIn();
-                            $('#recetteList').html(response.content);
+    {% block javascripts %}
+        {{ parent() }}
+        <script>
+            $(document).ready(function () {
+                $('#title').keyup(function () {
+                    var query = $(this).val();
+                    console.log(query);
+                    if (query.length >= 4) {
+                        var data = {
+                            query: query
+                        };
+                        $.ajax({
+                            url: "{{ path('ajax_search') }}",
+                            type: "GET",
+                            dataType: "json",
+                            data: data,
+                            timeout: 3000,
+                            success: function (response) {
 
-                        }
+                                $('#recetteList').fadeIn();
+                                $('#recetteList').html(response.content);
+
+                            }
 
                         });
-                }
+                    }
+                });
             });
-        });
-    </script>
-        {% endblock %}
+        </script>
+    {% endblock %}
 
 {% endblock %}
-
