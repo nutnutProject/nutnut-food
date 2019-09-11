@@ -3,11 +3,30 @@
 {% block title %}Edit Recette{% endblock %}
 
 {% block body %}
-    <h1>Edit Recette</h1>
+    <div class="container mt-5 mb-3" id="board">
+        <h2>Tableau de bord</h2>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="list-group" id="list-tab">
+                    <a class="list-group-item list-group-item-action" id="list-home-list" href="{{path('user')}}">Tableau de bord</a>
+                    <a class="list-group-item list-group-item-action active" id="list-profile-list" href="{{path('user_edit' )}}">Modifier mon profil</a>
+                    <a class="list-group-item list-group-item-action" id="list-creation-list" href="{{path('user_recettes')}}">Mes recettes</a>
+                    <a class="list-group-item list-group-item-action" id="list-interest-list" href="{{path('user_interests')}}">Intêrets</a>
+                    <a class="list-group-item list-group-item-action" id="list-interest-list" href="{{path('user_mod_mdp')}}">Modifier mon mot de passe</a>
 
-    {{ include('recette/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="">back to list</a>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="card mx-auto p-3 mb-3">
+                    {{ form_start(form, {'attr': {'class': 'px-5'}} ) }}
+                        <h2 class="mb-4 text-center">Modifier la recette</h2>
+                        {{ include('recette/_form.html.twig') }}
+                        <button type="submit" class="btn btn-amber">Modifier</button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 {% endblock %}

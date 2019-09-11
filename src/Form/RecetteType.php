@@ -9,6 +9,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 class RecetteType extends AbstractType
 {
@@ -16,7 +18,6 @@ class RecetteType extends AbstractType
     {
         $builder
             ->add('title',TextType::class)
-            ->add('photo',FileType::class)
             ->add('category', null, [
                 'choice_label' => 'name',
             ])
@@ -27,6 +28,18 @@ class RecetteType extends AbstractType
             ->add('description', TextareaType::class)
             ->add('online')
         ;
+
+        // Si nouvelle utlisateur, on affiche le champ password
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            $form = $event->getForm();
+            $recette = $event->getData();
+
+            if(!$recette || null === $recette->getId())
+            {
+                $form->add('photo',FileType::class);
+
+            }
+        });
 
     }
 

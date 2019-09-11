@@ -24,17 +24,14 @@ class UserController extends AbstractController
 {
 
     /**
-     * @Route ("/moncompte/{id}/", name="user")
+     * @Route ("/moncompte", name="user")
      */
-    public function userShow(User $user)
+    public function userShow()
     {
         if ($this->getUser()) {
-            if ($this->getUser() != $user) {
-                $user = $this->getUser();
-            }
 
             return $this->render('user/show.html.twig', [
-                'user' => $user,
+                'user' => $this->getUser(),
             ]);
         }
         return $this->redirectToRoute('home');
@@ -42,14 +39,12 @@ class UserController extends AbstractController
 
 
     /**
-     * @Route ("/moncompte/{id}/mes-recettes/{page}", name="user_recettes", requirements={"page"="\d+"})
+     * @Route ("/moncompte/mes-recettes/{page}", name="user_recettes", requirements={"page"="\d+"})
      */
-    public function userRecette(User $user, RecetteRepository $recetteRepository, $page = 1)
+    public function userRecette(RecetteRepository $recetteRepository, $page = 1)
     {
         if ($this->getUser()) {
-            if ($this->getUser() != $user) {
-                $user = $this->getUser();
-            }
+            $user = $this->getUser();
 
             $recettes = $recetteRepository->findBy(['user' => $user]);
 
@@ -75,14 +70,12 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/moncompte/{id}/mes-recettes/new", name="recette_new", methods={"GET","POST"})
+     * @Route("/moncompte/mes-recettes/new", name="recette_new", methods={"GET","POST"})
      */
-    public function newRecette(User $user, Request $request): Response
+    public function newRecette(Request $request): Response
     {
         if ($this->getUser()) {
-            if ($this->getUser() != $user) {
-                $user = $this->getUser();
-            }
+            $user = $this->getUser();
 
             $recette = new Recette();
             $form = $this->createForm(RecetteType::class, $recette);
@@ -153,14 +146,12 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/moncompte/{id}/mes-recettes/{slug}/edit", name="recette_edit", methods={"GET","POST"})
+     * @Route("/moncompte/mes-recettes/{id}/edit", name="recette_edit", methods={"GET","POST"})
      */
-    public function editRecette(Request $request, User $user, Recette $recette): Response
+    public function editRecette(Request $request, Recette $recette): Response
     {
         if ($this->getUser()) {
-            if ($this->getUser() != $user) {
-                $user = $this->getUser();
-            }
+            $user = $this->getUser();
 
             $form = $this->createForm(RecetteType::class, $recette);
             $form->handleRequest($request);
@@ -168,9 +159,7 @@ class UserController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                 $this->getDoctrine()->getManager()->flush();
 
-                return $this->render('user/user_mes_recettes.html.twig', [
-                    'user' => $user,
-                ]);
+                return $this->redirectToRoute('user_recettes');
             }
 
             return $this->render('recette/edit.html.twig', [
@@ -183,14 +172,12 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/moncompte/{id}/edit", name="user_edit", methods={"GET","POST"})
+     * @Route("/moncompte/edit", name="user_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, User $user): Response
+    public function edit(Request $request): Response
     {
         if ($this->getUser()) {
-            if ($this->getUser() != $user) {
-                $user = $this->getUser();
-            }
+            $user = $this->getUser();
 
             $form = $this->createForm(UserType::class, $user);
             $form->handleRequest($request);
@@ -212,14 +199,12 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/moncompte/{id}/interests/{page}", name="user_interests")
+     * @Route("/moncompte/interests/{page}", name="user_interests")
      */
-    public function interests(UserRequestRepository $userRequestRepository, User $user, $page = 1): Response
+    public function interests(UserRequestRepository $userRequestRepository, $page = 1): Response
     {
         if ($this->getUser()) {
-            if ($this->getUser() != $user) {
-                $user = $this->getUser();
-            }
+            $user = $this->getUser();
 
             // Récupération des mes intérets, on récupère toutes les recettes interessées
             $userRequests = $userRequestRepository->findBy([
@@ -257,15 +242,12 @@ class UserController extends AbstractController
 
 
     /**
-     * @Route ("/moncompte/{id}/mod_mdp", name="user_mod_mdp")
+     * @Route ("/moncompte/mod_mdp", name="user_mod_mdp")
      */
     public function mdp(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
-
-        $user = $this->getUser();
-
-        if ($user) {
-
+        if ($this->getUser()) {
+            $user = $this->getUser();
             if ($request->isMethod('POST')) {
 
                 $old_pwd = $request->get('old_password');
