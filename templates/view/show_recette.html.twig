@@ -7,40 +7,48 @@
         <div class="header-overlay-all"></div>
         <div class="header-content-all">
             <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-            <h1> {{recette.title}} - {{recette.user.firstname}} </h1>
+            <h1>
+                {{recette.title}}
+                -
+                {{recette.user.firstname}}
+            </h1>
         </div>
     </header>
 
     <div class="container" id="main-recette">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ path('home') }}">Accueil</a></li>
-                    <li class="breadcrumb-item"><a href="{{ path('category_show', {slug: recette.category.slug}) }}">{{ recette.category.name }}</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ recette.title }}</li>
+                <li class="breadcrumb-item">
+                    <a href="{{ path('home') }}">Accueil</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ path('category_show', {slug: recette.category.slug}) }}">{{ recette.category.name }}</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">{{ recette.title }}</li>
             </ol>
         </nav>
 
         <div class="row">
             <div class="col-md-8">
-                <div class="card" >
-                    <img src="{{asset(recette.photo)}}" class="card-img-top" alt="{{recette.title}}" >
+                <div class="card">
+                    <img src="{{asset(recette.photo)}}" class="card-img-top" alt="{{recette.title}}">
                     <div class="card-body">
-                        <h1 class="card-title">{{recette.title}}  </h1>
+                        <h1 class="card-title">{{recette.title}}
+                        </h1>
                         <p class="card-text">{{recette.description}}</p>
                         {% for diet in recette.diet %}
-                            <span class="badge badge-success">{{diet.name}}</span>  
+                            <span class="badge badge-success">{{diet.name}}</span>
                         {% endfor %}
-                        <span class="badge badge-success mx-auto">{{recette.category}}</span>  
+                        <span class="badge badge-success mx-auto">{{recette.category}}</span>
 
-                        <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myContactModalLabel"
-                            aria-hidden="true">
+                        <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myContactModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <form method="POST">
                                     <div class="modal-content">
                                         <div class="modal-header text-center">
                                             <h4 class="modal-title w-100 font-weight-bold">Ecris au FOODER</h4>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
+                                                <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-body mx-3">
@@ -49,19 +57,19 @@
                                                 <input type="text" id="form34" class="form-control validate" name="name">
                                                 <label data-error="wrong" data-success="right" for="form34">Votre prénom</label>
                                             </div>
-                            
+
                                             <div class="md-form mb-5">
                                                 <i class="fas fa-envelope prefix grey-text"></i>
                                                 <input type="email" id="form29" class="form-control validate" name="email">
                                                 <label data-error="wrong" data-success="right" for="form29">Your email</label>
                                             </div>
-                                    
+
                                             <div class="md-form mb-5">
                                                 <i class="fas fa-tag prefix grey-text"></i>
                                                 <input type="text" id="form32" class="form-control validate" name="subject">
                                                 <label data-error="wrong" data-success="right" for="form32">Subject</label>
                                             </div>
-                                    
+
                                             <div class="md-form">
                                                 <i class="fas fa-pencil prefix grey-text"></i>
                                                 <textarea type="text" id="form8" class="md-textarea form-control" rows="4" name="message"></textarea>
@@ -69,14 +77,16 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer d-flex justify-content-center">
-                                            <button class="btn btn-unique">Envoyer <i class="fas fa-paper-plane-o ml-1"></i></button>
+                                            <button class="btn btn-unique">Envoyer
+                                                <i class="fas fa-paper-plane-o ml-1"></i>
+                                            </button>
                                         </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
-                    
+
 
                     <div class="modal fade" id="modalNoteForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -85,7 +95,7 @@
                                     <div class="modal-header text-center">
                                         <h4 class="modal-title w-100 font-weight-bold">Noter la recette</h4>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
+                                            <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body mx-3">
@@ -98,7 +108,7 @@
                                                 <option>4</option>
                                                 <option>5</option>
                                             </select>
-                                        </div>    
+                                        </div>
                                         <div class="md-form">
                                             <i class="fas fa-pencil prefix grey-text"></i>
                                             <textarea type="text" id="form9" class="md-textarea form-control" rows="4" name="commentaire"></textarea>
@@ -106,7 +116,9 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer d-flex justify-content-center">
-                                        <button class="btn btn-unique">Envoyer <i class="fas fa-paper-plane-o ml-1"></i></button>
+                                        <button class="btn btn-unique">Envoyer
+                                            <i class="fas fa-paper-plane-o ml-1"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </form>
@@ -127,10 +139,10 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card" >
+                <div class="card">
                     <img src="{{ asset(recette.user.image) }}" class="card-img-top-user" alt="{{ recette.user.firstname }}">
                     <div class="rating">
-                        {% if recette.note > 0 %}                              
+                        {% if recette.note > 0 %}
                             {% set nb_etoiles = 5 %}
                             {% for i in 1..nb_etoiles %}
                                 {% if recette.note >= i %}
@@ -140,17 +152,23 @@
                                 {% endif %}
                             {% endfor %}
                         {% endif %}
-                        <p>{{recette.note}} /5 </p>
+                        <p>{{recette.note}}
+                            /5
+                        </p>
                     </div>
                     <div class="card-body">
-                        <h4 class="card-title">{{recette.user.firstname}} {{recette.user.lastname|slice(0, 1)}}</h4>
+                        <h4 class="card-title">{{recette.user.firstname}}
+                            {{recette.user.lastname|slice(0, 1)}}</h4>
                         <h5 class="card-title">{{recette.user.age}}</h5>
                         <h5 class="card-title">{{recette.user.city}}</h5>
                         <p class="card-text">{{recette.user.description}}</p>
-                        <p class="card-text"> Recette postée le {{recette.creationDate|date("m/d/Y")}}
-                    </div> 
+                        <p class="card-text">
+                            Recette postée le{{recette.creationDate|date("m/d/Y")}}
+                        </p>
+                    </div>
                     <div class="card-footer bg-transparent border-warning mx-auto align-self">
-                        <a href="{{ path('fooder_show', {firstname: recette.user.firstname, id: recette.user.id}) }}" class="btn btn-amber btn-block ">Voir le profil de {{recette.user.firstname}}</a>
+                        <a href="{{ path('fooder_show', {firstname: recette.user.firstname, id: recette.user.id}) }}" class="btn btn-amber btn-block ">Voir le profil de
+                            {{recette.user.firstname}}</a>
                     </div>
                 </div>
                 <div class="card" id="list-ingredients">
@@ -158,100 +176,75 @@
                         <li class="list-group-item list-group-item-warning">Ingredients</li>
                         <li class="list-group-item">
                             {% for ingredient in recette.ingredients %}
-                                <li class="list-group-item">{{ingredient.name}}, {{ingredient.quantity}}</li>
+                                <li class="list-group-item">{{ingredient.name}},
+                                    {{ingredient.quantity}}</li>
                             {% endfor %}
                         </li>
                     </ul>
                 </div>
             </div>
-        </div>     
- 
+        </div>
+
         <div class="row">
             <div class="col">
-            <h1 class="category mb-3">AVIS :  </h1>
-            {% if notes %}  
-                {% for note in notes %}
-                <div class="col-sm">
-                    <div class="card">
-                        <div class="card-body d-flex flex-column">
-                            <div class="user-synop">
-                                <img class="icon-user" src="img/wonder_icon.png" alt="Card image cap">
-                                <p class="user-name">{{note.user.firstname}} {{note.user.lastname|slice(0, 1)}}</p>       
+                <h1 class="category mb-3">AVIS :
+                </h1>
+                {% if notes %}
+                    {% for note in notes %}
+                        <div class="col-sm">
+                            <div class="card">
+                                <div class="card-body d-flex flex-column">
+                                    <div class="user-synop">
+                                        <img class="icon-user" src="img/wonder_icon.png" alt="Card image cap">
+                                        <p class="user-name">{{note.user.firstname}}
+                                            {{note.user.lastname|slice(0, 1)}}</p>
+                                    </div>
+                                    <div class="rating">
+                                        {% set nb_etoiles = 5 %}
+                                        {% for i in 1..nb_etoiles %}
+                                            {% if note.note >= i %}
+                                                <img src="{{asset('img/noix-check.png')}}">
+                                            {% else %}
+                                                <img src="{{asset('img/noix.png')}}">
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                    <p class="card-text">{{note.commentaire}}</p>
+                                    <p>Ajouté le
+                                        {{note.creationDate|date("m/d/Y")}}</p>
+                                </div>
                             </div>
-                            <div class="rating">                             
-                                {% set nb_etoiles = 5 %}
-                                {% for i in 1..nb_etoiles %}
-                                    {% if note.note >= i %}
-                                        <img src="{{asset('img/noix-check.png')}}">
-                                    {% else %}
-                                        <img src="{{asset('img/noix.png')}}">
-                                    {% endif %}
-                                {% endfor %}
-                            </div>
-                            <p class="card-text">{{note.commentaire}}</p>
-                            <p>Ajouté le {{note.creationDate|date("m/d/Y")}}</p> 
-                        </div>           
-                    </div>
-                </div>
-                {% endfor %}         
-            {% else %}
-                <p>La recette n'a pas encore était notée, Afin de pouvoir laisser une note, il faut y participer.</p>
-            {% endif %}
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>La recette n'a pas encore était notée, Afin de pouvoir laisser une note, il faut y participer.</p>
+                {% endif %}
             </div>
         </div>
 
     </div>
 </div>
-                       
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <main id="main">
-    <div class="infos" id="infos">
-
-      
-    
-          </div>
-    
+    <div class="infos" id="infos"></div>
 
 
-
-
-<div  class="container mt-3">
-    <div class="row">
-        <div class="col-sm">
-            <div class="card" id="search-box">
-                <h1 class="search-home">On cuisine quoi aujourd'hui ? </h1>
-                <div id="search" class="card-body text-center">
-                    <!-- Search form -->
-                    <form class="form-inline mr-auto">
-                        <button class="btn blue-gradient btn-rounded  btn-lg my-0" type="submit">Rechercher une recette</button>
-                    </form>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-sm">
+                <div class="card" id="search-box">
+                    <h1 class="search-home">On cuisine quoi aujourd'hui ?
+                    </h1>
+                    <div
+                        id="search" class="card-body text-center">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto">
+                            <button class="btn blue-gradient btn-rounded  btn-lg my-0" type="submit">Rechercher une recette</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-</main>
-{% endblock %}
+</main>{% endblock %}
