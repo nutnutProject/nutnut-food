@@ -21,6 +21,11 @@
                     {{ form_start(form, {'attr': {'class': 'px-5'}} ) }}
                         <h2 class="mb-4 text-center">Modifier la recette</h2>
                         {{ include('recette/_form.html.twig') }}
+                        
+                        <div class="form-group">
+                            <label for="list">Les ingrédients : </label>
+                            <textarea class="form-control" id="list" name="listIngredient">{{ recette.ingredientsList }}</textarea>
+                        </div>
                         <button type="submit" class="btn btn-amber">Modifier</button>
                     {{ form_end(form) }}
                 </div>
