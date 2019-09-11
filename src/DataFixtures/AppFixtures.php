@@ -65,7 +65,7 @@ class AppFixtures extends Fixture
         $imageUsers = ['img/user/tuyaux.png', 'img/user/permanente.jpg', 'img/user/grimace.jpg', 'img/user/heros.jpg', 'img/user/peucheuse.jpg', 'img/user/scaphandre2.jpg', 'img/user/telephone.png', 'img/user/chauvesouris.png', 'img/user/tulipe.png', 'img/user/antennes.png', 'img/user/scaphandre.png', 'img/user/passoire.png', 'img/user/lunette.png', 'img/user/caque.png', 'img/user/tourbillon.jpg', 'img/user/pull.jpg', 'img/user/pull2.jpg', 'img/user/barbe.jpg', 'img/user/barbe2.jpg', 'img/user/maison.jpg', 'img/user/costume.jpg'];
     
 
-        for($i=0; $i<21;$i++)
+        for($i=0; $i<=20;$i++)
         {           
             $user = new User();
             $username = (1 === $i) ? 'toto@toto.fr' : 'titi'.$i.'@titi.fr';
@@ -123,10 +123,10 @@ class AppFixtures extends Fixture
             'Dessert'
         ];
         $photo = ['category-aperitif.jpeg',  'category-entree.jpeg', 'category-plat.jpeg', 'category-dessert.jpeg'];
-        for($i=0; $i<3;$i++)
+        for($i=0; $i<=3;$i++)
         {
             $category = new Category();
-            $category->setName($name);
+            $category->setName($names[$i]);
             $category->setPhoto($photo[$i]);
             $manager->persist($category);
             $categories[] = $category;
@@ -170,7 +170,7 @@ class AppFixtures extends Fixture
         "Les sablé spirale à l'apéro c'est le top. Les voisins en sont pas revenu la dernière fois. Je peux vous dire que rené il la prêtait sa tondeuse après ça !"];
 
         $recettes = [];
-        for($i=0; $i<31;$i++)
+        for($i=0; $i<=31;$i++)
         {
             //Creation d'une date entre maintenant et trois mois
             $now = time();
@@ -179,15 +179,15 @@ class AppFixtures extends Fixture
 
             $recette = new Recette();
             $recette->setTitle($recetteTitles[$i]);
-            $recette->setPhoto('img/'.$recettePhoto[$i]);
+            $recette->setPhoto('img/recette/'.$recettePhoto[$i]);
             $recette->setDescription($recetteDescriptions[$i]);
             $recette->setOnline(true);
             $recette->setValidate(true);
             $recette->setCreationDate(new \Datetime('@'.$randomTimestamp));
-            $recette->setCategory($categories[rand(0,3)]);
+            $recette->setCategory($categories[rand(0,2)]);
             $recette->setNote(rand(1,5));
             $recette->setIngredientsList('poireau'. $i);
-            $recette->addDiet($diets[rand(0,3)]);
+            $recette->addDiet($diets[rand(0,2)]);
             $recette->setUser($users[rand(0,9)]);
             $recettes[] = $recette;
             $manager->persist($recette);
@@ -203,7 +203,7 @@ class AppFixtures extends Fixture
             $note->setValidate(true);
             $note->setCreationDate(new \DateTime());
             $note->setUser($users[rand(0,9)]);
-            $note->setRecette($recettes[rand(0,22)]);
+            $note->setRecette($recettes[rand(0,31)]);
             $manager->persist($note);
         }
 
