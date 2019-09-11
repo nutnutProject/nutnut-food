@@ -173,10 +173,7 @@
                     <ul class="list-group">
                         <li class="list-group-item list-group-item-warning">Ingredients</li>
                         <li class="list-group-item">
-                            {% for ingredient in recette.ingredients %}
-                                <li class="list-group-item">{{ingredient.name}},
-                                    {{ingredient.quantity}}</li>
-                            {% endfor %}
+                            {{ recette.ingredientsList|nl2br }}
                         </li>
                     </ul>
                 </div>
