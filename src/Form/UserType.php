@@ -18,6 +18,11 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaType;
+use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\IsTrue as RecaptchaTrue;
+
+
+
 class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -31,7 +36,14 @@ class UserType extends AbstractType
             ->add('city', TextType::class)
             ->add('cp', NumberType::class)
             ->add('telephone', TelType::class)
-            ->add('description', TextareaType::class)            
+            ->add('description', TextareaType::class)  
+            ->add('recaptcha', EWZRecaptchaType::class, array(
+            
+                'mapped'      => false,
+                'constraints' => array(
+                    new RecaptchaTrue()
+                                    )
+                    ))   ; 
         ;
         
         // Si nouvelle utlisateur, on affiche le champ password

@@ -40,5 +40,5 @@ $('input[type=text], input[type=password], input[type=email], input[type=url], i
 
 $('.alert').alert();
 
-var myapikey = config.myapikey;
+
 
