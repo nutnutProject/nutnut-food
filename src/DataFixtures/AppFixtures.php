@@ -64,7 +64,6 @@ class AppFixtures extends Fixture
         // Génération des photos d'users
         $imageUsers = ['img/user/tuyaux.png', 'img/user/permanente.jpg', 'img/user/grimace.jpg', 'img/user/heros.jpg', 'img/user/peucheuse.jpg', 'img/user/scaphandre2.jpg', 'img/user/telephone.png', 'img/user/chauvesouris.png', 'img/user/tulipe.png', 'img/user/antennes.png', 'img/user/scaphandre.png', 'img/user/passoire.png', 'img/user/lunette.png', 'img/user/caque.png', 'img/user/tourbillon.jpg', 'img/user/pull.jpg', 'img/user/pull2.jpg', 'img/user/barbe.jpg', 'img/user/barbe2.jpg', 'img/user/maison.jpg', 'img/user/costume.jpg'];
     
-        // 'img/user/tuyaux.png', 'img/user/permanente.jpg', 'img/user/grimace.jpg', 'img/user/heros.jpg', 'img/user/peucheuse.jpg', 'img/user/costume.jpg', 'img/user/scaphandre2.jpg', 'img/user/telephone.png', 'img/user/chauvesouris.png', 'img/user/tulipe.png']; 21
 
         for($i=0; $i<21;$i++)
         {           
@@ -123,19 +122,21 @@ class AppFixtures extends Fixture
             'Plat',
             'Dessert'
         ];
-        foreach($names as $name)
+        $photo = ['category-aperitif.jpeg',  'category-entree.jpeg', 'category-plat.jpeg', 'category-dessert.jpeg'];
+        for($i=0; $i<3;$i++)
         {
             $category = new Category();
             $category->setName($name);
+            $category->setPhoto($photo[$i]);
             $manager->persist($category);
             $categories[] = $category;
         }
 
-        $recettePhoto = [ 'muffin.jpg', 'pizza.jpg', 'salad.jpg',  'poisson.jpg', 'quiche.jpg',  'ratatouille.jpg', 'dessert.jpg',   'chili.jpg', 'hachis.jpg', 'cheesecake.jpg', 'canard.jpg', 'paella.jpg', 'charlotte.jpg',  'caviar.jpg',  'houmous.jpg', 'tajine.jpg', 'couscous.jpg', 'painauchocolat.jpg', 'corne.jpg', 'moussake.jpg', 'lasagne.jpg', 'carbonara.jpg', 'carbo.jpg', 'junk.jpg' ];
+        $recettePhoto = [ 'muffin.jpg', 'pizza.jpg', 'salad.jpg',  'poisson.jpg', 'quiche.jpg',  'ratatouille.jpg', 'dessert.jpg',   'chili.jpg', 'hachis.jpg', 'cheesecake.jpg', 'canard.jpg', 'paella.jpg', 'charlotte.jpg',  'caviar.jpg',  'houmous.jpg', 'tajine.jpg', 'couscous.jpg', 'painauchocolat.jpg', 'corne.jpg', 'moussake.jpg', 'lasagne.jpg', 'carbonara.jpg', 'carbo.jpg', 'junk.jpg', 'nemvegan.jpg', 'saladefeta.jpg', 'mousse.jpg', 'lasagnebolo.jpg', 'pouletcoco.jpg', 'burgerfeuillete.jpg', 'burgercoquillette.jpg', 'sable.jpg' ]; 
 
-        $recetteTitles = ['Les muffins de tati, championne MuffinTexas 98', 'La pizza aux moules, recette incontournable', "Salade d'été goumande et vegan",'La Sôle au citron, spécial gourmandise', 'Quiche Lorraine poivron fêta', 'Ratatouille provencale au thym et pastis', 'Brownie coulant, recette de miss Belgique 1999' ,"Chili Con Carne comme je l'ai appris lors d'un treck", 'Hachis Permentier du Chef Gonzales de Mirabeau', 'CheeseCake a la française', "Magret de canard grillé sauce menthe framboise. ", "Paella façon José", 'Charlotte aux fraises', "Caviar d'aubergine de la West Coast wesh !", "Houmous de ma Mamie Libanaise, recette rare et unique", 'Tajine Kefta au citron', 'Couscous Tunisien Traditionnel', 'Pain au chocolat de la boulangerie, recette compliquée !', 'Tcharak (Corne de gazelle Algerienne)', 'Moussaka, la vraie recette', 'Lasagne végétarienne', 'Spaghetti Carbonara de ma grand-mère Fiorangela', 'LA Carbonnade Flamande de fou', 'Le burger de la muerte'];
+        $recetteTitles = ["Les muffins de tati, championne MuffinTexas 98", 'La pizza aux moules, recette incontournable', "Salade d'été goumande et vegan",'La Sôle au citron, spécial gourmandise', 'Quiche Lorraine poivron fêta', 'Ratatouille provencale au thym et pastis', 'Brownie coulant, recette de miss Belgique 1999' ,"Chili Con Carne comme je l'ai appris lors d'un treck", 'Hachis Permentier du Chef Gonzales de Mirabeau', 'CheeseCake a la française', "Magret de canard grillé sauce menthe framboise. ", "Paella façon José", 'Charlotte aux fraises', "Caviar d'aubergine de la West Coast wesh !", "Houmous de ma Mamie Libanaise, recette rare et unique", 'Tajine Kefta au citron', 'Couscous Tunisien Traditionnel', 'Pain au chocolat de la boulangerie, recette compliquée !', 'Tcharak (Corne de gazelle Algerienne)', 'Moussaka, la vraie recette', 'Lasagne végétarienne', 'Spaghetti Carbonara de ma grand-mère Fiorangela', 'LA Carbonnade Flamande de fou', 'Le burger de la muerte',"Salade Poivron Grillé-Feta", "Nems", "Mousse au Chocolat Vegan", "Lasagne Bolognese", "Curry Poulet-Coco", 'le Burger Feuilleté', "Burger Coquillette", "Sablé Spirale de l'apéro"]; 
 
-        $recetteDescriptions = ['Super Muffin de la tati Scarlett originaire du Texas. Elle a gagné la médaille du prestige au concours MuffinTexas de 1998, également celle du pâté picard mais je n\'ai pas le droit de la  celle-là . Je vous propose de vous partager cette recette qui ravivera vos papilles et celles de vos invités.. ', 
+        $recetteDescriptions = ['Super Muffin de la tati Scarlett originaire du Texas. Elle a gagné la médaille du prestige au concours MuffinTexas de 1998, également celle du pâté picard mais je n\'ai pas le droit de la  partager celle-là . Je vous propose de vous apprendre cette recette qui ravivera vos papilles et celles de vos invités.. ', 
         "Ma pizza aux moules est la meilleures de dunckerque. La recette vient de mon voyage en italie de l'année dernière que j'ai mis au gout du carnavel",
          "Ma salade d'été ravivera vos papilles. Je vous propose également de vous apprendre en même temps comment laver vos sols sans Javel. Du deux en un !",
         "Ma sole au citron, c'est comme ça que j'ai ravis le coeur de ma femme. Ne ramenez pas vos ingrédients pour la touche de gourmandise, c'est moi qui offre !",
@@ -152,19 +153,24 @@ class AppFixtures extends Fixture
         "Super purée de pois chiche comme vous n'en avez jamais mangé. Par contre si vous aimé bien relevé ramenez le double d'ail.", 
         "Super tajine, même la photo que j'ai faite avec mon appareil photo dernier cri met l'eau à la bouche, avouez ! ",
         "Recette au couscous qui vient de mon grand-père. Vous voulez voyager ? Hé bien venez !",
-
         "le pain au chocolat, c'est facile a manger mais c'est une tannée à fabriquer. Je vous propose d'apprendre à en faire au moins d'aussi bon que ceux qu'on achète à super U dans du plastique",
         "Les petites corne de gazelle, c'est comme les chips, quand on a commencé, tout le paquet part d'un coup !! Ramenez le double d'ingredient si vous souhaitez régaler tout le monde!",
         "J'ai appris la recette lors d'une rainbow. Tout le monde était nu et la moussaka sentait super bon. On a tout mangé et on s'est fait des calins. ",
         "Ma lasagne végé, c'est la meilleure de Lille", 
         "Les spaghettis de ma mamie sont les meilleurs du monde. Vous ne serez pas déçus !",
         "Ma petite carbonnade flamande, recette que je tiens de l'évéché de brugge. Autant vous dire que ça fait des siècles qu'une petite poignée de gens la cuisine. Vous voulez faire partie des heureux élus ?", 
-        " Mon burger de la muerte, c'est qu'il est tellement bon qu'on peut mourir de bonheur."];
-
-
+        " Mon burger de la muerte, c'est qu'il est tellement bon qu'on peut mourir de bonheur.",
+        "Une salade avec des poivron grillé et de la feta. C'est pas ouf mais c'est bon, et ma vinaigrette est super !",
+        "Des petits nems vegans pour ceux qui en ont marre de manger de la grosse viande mal nourrie et défoncée au antibiotique. En plus ,les miens sont sans gluten.",
+        "Une mousse au chocolat végan pour utiliser le fond des pois chiches quand vous faites un Houmous. Je suis un adepte du deux en un et même si ça a un petit arrière gout, vous verrez on s'y fait vite.",
+        "Mes lasagnes c'est de la bebom, même que ça fait la queue chez moi pour y gouter la sauce et moi j'aime pas ça qu'on trempe sa cuillère dans le plat alors que c'est pas fini. C'est vous dire le succès !",
+        "Petit poulet curry coco hallal des familles. N'amenez pas la citronnelle, on prendra celle du jardin !",
+        "Mon burger feuilleté c'est aux petits oignons. C'est ma recette top secret-secret qui a mis la bague au doigt de ma femme. Je la partage uniquement aux célibataires par contre.",
+        "Mon burger Coquillette est fruit d'année de recherche pour trouver cette croute parfaite en coquillette. Par contre c'est pas fait pour les diabétiques je préviens. ",
+        "Les sablé spirale à l'apéro c'est le top. Les voisins en sont pas revenu la dernière fois. Je peux vous dire que rené il la prêtait sa tondeuse après ça !"];
 
         $recettes = [];
-        for($i=0; $i<23;$i++)
+        for($i=0; $i<31;$i++)
         {
             //Creation d'une date entre maintenant et trois mois
             $now = time();
