@@ -37,13 +37,7 @@
             <div class="col ">
                 <div class="card mx-auto w-75">
                     <img src="{{asset(user.image)}}" class="card-img-top-user" alt="...">
-                    <div class="rating">
-                        <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
-                        <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
-                        <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
-                        <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
-                        <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
-                    </div>
+                   
                     <div class="card-body">
                         <h4 class="card-title">{{user.firstname}}</h4>
                         <h5 class="card-title">{{user.age}}</h5>
@@ -140,7 +134,7 @@
                                 <div class="card-body d-flex flex-column">
                                     <div class="user-synop">
                                         <img class="rounded-circle icon-user" src="{{asset(note.user.image)}}" alt="Card image cap">
-                                        <p class="user-name">{{note.user.firstname}}
+                                        <p class="user-name" href="{{ path('fooder_show', {'firstname':recette.user.firstname,'id':recette.user.id}) }}>{{note.user.firstname}}
                                             {{note.user.lastname|slice(0, 1)}}</p>
                                     </div>
                                     <div class="rating">
@@ -184,7 +178,7 @@
                             id="search" class="card-body text-center">
                             <!-- Search form -->
                             <form class="form-inline mr-auto">
-                                <button class="btn blue-gradient btn-rounded  btn-lg my-0" type="submit">Rechercher une recette</button>
+                                <button class="btn blue-gradient btn-rounded  btn-lg my-0" type="submit"> <a href="{{ path('recettes_list') }} ">Rechercher une recette</a></button>
                             </form>
                         </div>
                     </div>
