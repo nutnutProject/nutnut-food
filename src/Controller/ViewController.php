@@ -6,10 +6,12 @@ use App\Entity\Recette;
 use App\Entity\Note;
 use App\Entity\User;
 use App\Entity\UserRequest;
+use App\Entity\Contact;
+use App\Form\ContactType;
 use App\Repository\CategoryRepository;
 use App\Repository\DietRepository;
 use App\Repository\RecetteRepository;
-
+use PhpParser\Builder\Property;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -225,6 +227,8 @@ class ViewController extends AbstractController
             'current_page' => $page,
             'notes' => $notes,
         ]);
+
+
     }
 
 
@@ -246,6 +250,45 @@ class ViewController extends AbstractController
     public function mention()
     {
         return $this->render('view/mentions.html.twig');
+    }
+
+    /**
+     * @Route("/contact", name="contact")
+     * 
+     */
+    public function contact(Request $request, \Swift_Mailer $mailer)
+    {
+        $contact = New Contact();
+        $form = $this->createForm(ContactType::class, $contact);
+        $form->handleRequest($request);
+
+        $email = $contact->getEmail();
+        $sujet = $contact->getSujet();
+        $message = $contact->getMessage();
+
+        if ($this->getUser())
+        {
+            $email = $this->getUser()->getUsername();
+        }
+
+        if ($form->isSubmitted() && $form->isValid()){  
+
+            $mail = (new \Swift_Message($sujet))
+                ->setFrom($email)
+                ->setTo('contact@nutnutfood.fr')
+                ->setBody($message);
+
+            $mailer->send($mail);
+            
+            $this->addFlash('success', 'Votre message a bien été envoyé');
+
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->render('view/contact.html.twig',[
+            'form' => $form->CreateView(),
+            'userEmail' => $this->getUser()->getUsername(),
+        ]);
     }
 
 
