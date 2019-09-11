@@ -94,6 +94,16 @@ class SecurityController extends AbstractController
                     $this->passwordEncoder->encodePassword($user, $user->getPassword())
                 );
 
+                // Calcul de l'age
+                $anneeNaissance = $request->request->get('birthdate');
+
+                $now = new DateTime('now');
+                $difference = $now->diff($anneeNaissance);
+                if ($difference->format('%y ans') < 18 )
+                {
+                    $this->addFlash('danger', 'Vous devez être majeur afin de pouvoir vous inscrire.');
+                    $this->redirectToRoute('home');    
+                }
 
                 // Remplissage du rôle utilisateur
                 $user->setRoles('ROLE_USER');
