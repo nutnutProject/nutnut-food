@@ -285,16 +285,25 @@ class UserController extends AbstractController
 
                         $entityManager->flush();
 
-                        $this->addFlash('alert', 'Votre mot de passe est modifié');
+                        $this->addFlash('success', 'Votre mot de passe est modifié');
                         return $this->redirectToRoute('home');
                     }
-                } else {
+                    else
+                    {
+                        $this->addFlash('danger', 'Les mots de passe saisis ne sont pas identique');            
+                        return $this->redirectToRoute('home');
+                    }
+                }
+                else
+                {
                     $this->addFlash('alert', 'Votre mot de passe est erroné');
                     return $this->redirectToRoute('home');
                 }
             }
             return $this->render('user/mod_mdp.html.twig',);
-        } else {
+        }
+        else
+        {
             return $this->redirectToRoute('home');
         }
     }

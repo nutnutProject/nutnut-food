@@ -47,6 +47,11 @@
                 </div>
 
                 <div class="col-12">
+                    <input type="password" name="pwd_verified" class="form-control mb-4" placeholder="confirmez votre mot de passe">
+                    <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4"></small>
+                </div>
+
+                <div class="col-12">
                     {{ form_widget(form.adresse, {'id':'user_input_autocomplete_address', 'attr': {'class': 'form-control mb-4',  'placeholder':'Adresse'}})}}
                     <small id="user_input_autocomplete_address" class="form-text text-muted mb-4"></small>
                 </div>
