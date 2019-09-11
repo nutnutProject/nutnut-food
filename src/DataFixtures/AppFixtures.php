@@ -131,7 +131,7 @@ class AppFixtures extends Fixture
             $categories[] = $category;
         }
 
-        $recettePhoto = [ 'muffin.jpg', 'pizza.jpg', 'salad.jpg',  'poisson.jpg', 'quiche.jpg',  'ratatouille.jpg', 'dessert.jpg',   'chili.jpg', 'hachis.jpg', 'cheesecake.jpg', 'canard.jpg', 'paella.jpg', 'charlotte.jpg',  'caviar.jpg',  'houmous.jpg', 'tagine-kefta.jpg', 'couscous.jpg', 'painauchocolat.jpg', 'corne.jpg', 'moussake.jpg', 'lasagne.jpg', 'carbonara.jpg', 'carbo.jpg', 'junk.jpg' ];
+        $recettePhoto = [ 'muffin.jpg', 'pizza.jpg', 'salad.jpg',  'poisson.jpg', 'quiche.jpg',  'ratatouille.jpg', 'dessert.jpg',   'chili.jpg', 'hachis.jpg', 'cheesecake.jpg', 'canard.jpg', 'paella.jpg', 'charlotte.jpg',  'caviar.jpg',  'houmous.jpg', 'tajine.jpg', 'couscous.jpg', 'painauchocolat.jpg', 'corne.jpg', 'moussake.jpg', 'lasagne.jpg', 'carbonara.jpg', 'carbo.jpg', 'junk.jpg' ];
 
         $recetteTitles = ['Les muffins de tati, championne MuffinTexas 98', 'La pizza aux moules, recette incontournable', "Salade d'été goumande et vegan",'La Sôle au citron, spécial gourmandise', 'Quiche Lorraine poivron fêta', 'Ratatouille provencale au thym et pastis', 'Brownie coulant, recette de miss Belgique 1999' ,"Chili Con Carne comme je l'ai appris lors d'un treck", 'Hachis Permentier du Chef Gonzales de Mirabeau', 'CheeseCake a la française', "Magret de canard grillé sauce menthe framboise. ", "Paella façon José", 'Charlotte aux fraises', "Caviar d'aubergine de la West Coast wesh !", "Houmous de ma Mamie Libanaise, recette rare et unique", 'Tajine Kefta au citron', 'Couscous Tunisien Traditionnel', 'Pain au chocolat de la boulangerie, recette compliquée !', 'Tcharak (Corne de gazelle Algerienne)', 'Moussaka, la vraie recette', 'Lasagne végétarienne', 'Spaghetti Carbonara de ma grand-mère Fiorangela', 'LA Carbonnade Flamande de fou', 'Le burger de la muerte'];
 
@@ -164,7 +164,7 @@ class AppFixtures extends Fixture
 
 
         $recettes = [];
-        for($i=0; $i<100;$i++)
+        for($i=0; $i<23;$i++)
         {
             //Creation d'une date entre maintenant et trois mois
             $now = time();
@@ -196,7 +196,7 @@ class AppFixtures extends Fixture
             $note->setValidate(true);
             $note->setCreationDate(new \DateTime());
             $note->setUser($users[rand(0,9)]);
-            $note->setRecette($recettes[rand(0,50)]);
+            $note->setRecette($recettes[rand(0,22)]);
             $manager->persist($note);
         }
 
