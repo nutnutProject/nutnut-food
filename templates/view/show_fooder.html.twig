@@ -36,7 +36,7 @@
         <div class="row">
             <div class="col ">
                 <div class="card mx-auto w-75">
-                    <img src="{{asset(user.image)}}" class="card-img-top-user"  alt="...">
+                    <img src="{{asset(user.image)}}" class="card-img-top-user" alt="...">
                     <div class="rating">
                         <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
                         <span class=""><img src="{{asset('img/noix-check.png')}}"></span>
@@ -59,37 +59,36 @@
             <h1 class="category">Ses Recettes :</h1>
             <div class="row">
                 <div class="col-sm">
-                        <div class="row">
+                    <div class="row">
                         {% for recette in recettes %}
                             <div class="col-3">
                                 <div class="card">
-                                    <img class="card-img-top img-fluid mx-auto" src="{{asset(recette.photo)}}"  alt="Card image cap">
+                                    <img class="card-img-top img-fluid mx-auto" src="{{asset(recette.photo)}}" alt="Card image cap">
                                     <div class="card-body d-flex flex-column">
                                         <h4 class="card-title">
                                             <a href="{{ path('recette_show', {slug: recette.slug}) }}" title="View Product">{{recette.title | slice (0,30) | trim(0123456789102030405060)}}...</a>
                                         </h4>
-                                      
+
                                         <div class="rating">
-                                        {% if recette.note > 0 %}                              
-                                            {% set nb_etoiles = 5 %}
-                                            {% for i in 1..nb_etoiles %}
-                                                {% if recette.note >= i %}
-                                                    <img src="{{asset('img/noix-check.png')}}">
-                                                {% else %}
-                                                    <img src="{{asset('img/noix.png')}}">
-                                                {% endif %}
-                                            {% endfor %}
-                                        {% endif %}
+                                            {% if recette.note > 0 %}
+                                                {% set nb_etoiles = 5 %}
+                                                {% for i in 1..nb_etoiles %}
+                                                    {% if recette.note >= i %}
+                                                        <img src="{{asset('img/noix-check.png')}}">
+                                                    {% else %}
+                                                        <img src="{{asset('img/noix.png')}}">
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% endif %}
                                         </div>
                                         <p class="card-text">{{recette.description| slice (0,80)}}...</p>
                                     </div>
 
-                                             <div class="col mb-2">
-                                    {% for diet in recette.diet %}
-                                        <span class="badge badge-success mx-auto">{{diet.name}}</span>  
-                                        <span class="badge badge-success mx-auto">{{recette.category.name}}</span>  
-
-                                    {% endfor %}
+                                    <div class="col mb-2">
+                                        {% for diet in recette.diet %}
+                                            <span class="badge badge-success mx-auto">{{diet.name}}</span>
+                                        {% endfor %}
+                                        <span class="badge badge-success mx-auto">{{recette.category}}</span>
                                     </div>
                                     <div class="col">
                                         <div class="card-footer bg-transparent border-warning mt-auto align-self-end">
@@ -97,9 +96,9 @@
                                             </a>
                                         </div>
 
-                           
-                                    </div>                                   
-                                </div> 
+
+                                    </div>
+                                </div>
                             </div>
                         {% endfor %}
                     </div>
@@ -134,35 +133,37 @@
             <h1 class="category">AVIS :
             </h1>
             <div class="row">
-                {% if notes %}  
+                {% if notes %}
                     {% for note in notes %}
-                    <div class="col-3 d-flex align-items-stretch">
-                        <div class="card">
-                            <div class="card-body d-flex flex-column">
-                                <div class="user-synop">
-                                    <img class="rounded-circle icon-user" src="{{asset(note.user.image)}}" alt="Card image cap">
-                                    <p class="user-name">{{note.user.firstname}} {{note.user.lastname|slice(0, 1)}}</p>       
+                        <div class="col-3 d-flex align-items-stretch">
+                            <div class="card">
+                                <div class="card-body d-flex flex-column">
+                                    <div class="user-synop">
+                                        <img class="rounded-circle icon-user" src="{{asset(note.user.image)}}" alt="Card image cap">
+                                        <p class="user-name">{{note.user.firstname}}
+                                            {{note.user.lastname|slice(0, 1)}}</p>
+                                    </div>
+                                    <div class="rating">
+                                        {% set nb_etoiles = 5 %}
+                                        {% for i in 1..nb_etoiles %}
+                                            {% if note.note >= i %}
+                                                <img src="{{asset('img/noix-check.png')}}">
+                                            {% else %}
+                                                <img src="{{asset('img/noix.png')}}">
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                    <p class="card-text">{{note.commentaire}}</p>
+                                    <p>Ajouté le
+                                        {{note.creationDate|date("m/d/Y")}}</p>
                                 </div>
-                                <div class="rating">
-                                    {% set nb_etoiles = 5 %}
-                                    {% for i in 1..nb_etoiles %}
-                                        {% if note.note >= i %}
-                                            <img src="{{asset('img/noix-check.png')}}">
-                                        {% else %}
-                                            <img src="{{asset('img/noix.png')}}">
-                                        {% endif %}
-                                    {% endfor %}
-                                </div>
-                                <p class="card-text">{{note.commentaire}}</p>
-                                <p>Ajouté le {{note.creationDate|date("m/d/Y")}}</p> 
-                            </div>           
+                            </div>
                         </div>
-                    </div>
                     {% endfor %}
                 {% else %}
                     <div class="col-6 offset-3 text-center">
                         <p>L'utilisateur n'a pas encore eu d'avis.</p>
-                    </div>       
+                    </div>
                 {% endif %}
 
             </div>

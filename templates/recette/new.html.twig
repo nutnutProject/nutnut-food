@@ -21,11 +21,67 @@
                     {{ form_start(form, {'attr': {'class': 'px-5'}} ) }}
                         <h2 class="mb-4 text-center">Ajouter une recette</h2>
                         {{ include('recette/_form.html.twig') }}
-                        <button type="submit" class="btn btn-amber">Ajouter</button>
+                        <div class="card p-3 mt-5">
+                            <h5 class="text-center">Ajouter des ingrédients</h5>
+                            <div class="d-flex flex-row justify-content-center align-items-center">
+                                <div class="col-4">
+                                    <input class="form-control" type="text" id="ingredient" placeholder="Votre ingrédient">
+                                </div>
+                                <div class="col-4">
+                                    <input class="form-control" type="text" id="quantity" placeholder="Quantité ?">
+                                </div>
+                                <div class="col-4">
+                                    <a href="#" id="add_category" class="btn btn-success btn-sm">Ajouter</a>
+                                </div>
+                            </div>
+                                <p id="error"><p>
+                            <div class="form-group">
+                                <textarea class="form-control" id="list" name="listIngredient"></textarea>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-amber">Ajouter la recette</button>
+                        </div>
                     {{ form_end(form) }}
                 </div>
             </div>
         </div>
     </div>   
 </div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+
+    // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
+    $('#add_category').click(function(e) {
+        e.preventDefault();
+        $('#error').text("");
+        if ($('#ingredient').val() == "")
+        {
+            $('#error').text('Le champ ingrédient est vide !');
+        }
+        else
+        {
+            var $textarea = $('#ingredient').val();
+            if ($('#quantity').val().length > 0)
+            {
+                $textarea +=  ' : ' + $('#quantity').val();
+            }
+            
+            $textarea += '\n';
+            $('#list').val($('#list').val() + $textarea);
+            
+            $('#ingredient').val("");
+            $('#quantity').val("");
+        }
+    });
+   
+
+  });
+</script>
+
+
 {% endblock %}

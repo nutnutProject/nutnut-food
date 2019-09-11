@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Entity\Recette;
-use App\Entity\User;
+
 use App\Repository\CategoryRepository;
 use App\Repository\RecetteRepository;
 use App\Repository\UserRepository;
