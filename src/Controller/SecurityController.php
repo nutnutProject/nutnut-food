@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -104,16 +105,15 @@ class SecurityController extends AbstractController
                 );
 
                 // Calcul de l'age
-                $anneeNaissance = $user->getBirthdate();
-
                 $now = new DateTime('now');
-                $difference = $now->diff($anneeNaissance);
-                if ($difference->format('%y ans') < 18 )
+                $age = $user->getBirthdate();
+                $difference = $now->diff($age);
+
+                if ((int)$difference->format('%y') < 18 )
                 {
                     $this->addFlash('danger', 'Vous devez être majeur afin de pouvoir vous inscrire.');
-                    $this->redirectToRoute('home');    
+                    return $this->redirectToRoute('home');    
                 }
-
                 // Remplissage du rôle utilisateur
                 $user->setRoles('ROLE_USER');
 
