@@ -7,6 +7,7 @@ easy_admin:
                     - { property: title }
                     - { property: photo }
                     - { property: description }
+                    - { property: ingredientsList }
                     - { property: validate }
                     - { property: creation_date }
                     - { property: note }
