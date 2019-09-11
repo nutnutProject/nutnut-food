@@ -179,7 +179,7 @@ class AppFixtures extends Fixture
             $recette->setValidate(true);
             $recette->setCreationDate(new \Datetime('@'.$randomTimestamp));
             $recette->setCategory($categories[rand(0,3)]);
-            $recette->setNote(rand(0,5));
+            $recette->setNote(rand(1,5));
             $recette->setIngredientsList('poireau'. $i);
             $recette->addDiet($diets[rand(0,3)]);
             $recette->setUser($users[rand(0,9)]);

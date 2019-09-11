@@ -9,8 +9,6 @@
             <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
             <h1>
                 {{recette.title}}
-                -
-                {{recette.user.firstname}}
             </h1>
         </div>
     </header>
@@ -163,7 +161,7 @@
                         <h5 class="card-title">{{recette.user.city}}</h5>
                         <p class="card-text">{{recette.user.description}}</p>
                         <p class="card-text">
-                            Recette postée le{{recette.creationDate|date("m/d/Y")}}
+                            Recette postée le {{recette.creationDate|date("m/d/Y")}}
                         </p>
                     </div>
                     <div class="card-footer bg-transparent border-warning mx-auto align-self">
@@ -217,7 +215,7 @@
                         </div>
                     {% endfor %}
                 {% else %}
-                    <p>La recette n'a pas encore était notée, Afin de pouvoir laisser une note, il faut y participer.</p>
+                    <p>La recette n'a pas encore été notée. Afin de pouvoir laisser une note, il faut y participer.</p>
                 {% endif %}
             </div>
         </div>
