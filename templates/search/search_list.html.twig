@@ -1,0 +1,6 @@
+
+    {% for recette in response %}
+        <a class="dropdown-item autocomplete-items" href="{{path('recette_show', {slug: recette.slug}) }}">
+            {{recette.title}}
+        </a> 
+    {% endfor %}

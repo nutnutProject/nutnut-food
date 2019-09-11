@@ -20,7 +20,7 @@ class AjaxSearchController extends AbstractController
     /**
      * @Route("/ajax/recettes", name="ajax_search" )
      */
-    public function ajaxBar(Request $request, RecetteRepository $recetteRepository)
+    public function ajaxBar(Request $request, RecetteRepository $recetteRepository, \Twig_Environment $templating)
     {
 
 
@@ -28,14 +28,18 @@ class AjaxSearchController extends AbstractController
             {
                 $query = $request->get('query');
                 $response = $recetteRepository->findByRequest($query);
-                $output = '<ul class="dropdown-menu"
-                    style= "display:block;
-                    position:relative">';
-                foreach($response as $row)
-                {
-                    $output .= '<li> <a href="#">' .$row->getTitle(). '</a> </li>';
-                }
-                $output .= '</ul>';
+                $output = $templating->render('search/search_list.html.twig', array(
+                    'response' => $response,
+                ));
+
+                // '<ul class="dropdown-menu"
+                //     style= "display:block;
+                //     position:relative">';
+                // foreach($response as $recette)
+                // {
+                //     $output .= '<li> <a href="#">' .$row->getTitle(). '</a> </li>';
+                // }
+                // $output .= '</ul>';
 
                 return new JsonResponse( array(
                     'status' => true,
