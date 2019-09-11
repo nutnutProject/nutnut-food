@@ -42,9 +42,16 @@ class SecurityController extends AbstractController
             if ($form->isSubmitted() && $form->isValid())
             {
                 $userRepository = $this->getDoctrine()->getRepository(User::class);
+
                 if ($userRepository->findBy(['username' => $user->getUsername()]))
                 {
                     $this->addFlash('danger', 'Un utilisateur est déjà inscrit avec cette adresse email');            
+                    return $this->redirectToRoute('home');
+                }
+
+                if ($user->getPassword() != $request->get('pwd_confirmed'))
+                {
+                    $this->addFlash('danger', 'Les mots de passe saisis ne sont pas identique');            
                     return $this->redirectToRoute('home');
                 }
                 
@@ -90,10 +97,22 @@ class SecurityController extends AbstractController
                 $user->setPwdTokenExpire(time()+3600);
                 $user->setActivateTokenExpire(time()+3600);
                 $user->setAccountActivate(false);
+
+
                 $user->setPassword(
                     $this->passwordEncoder->encodePassword($user, $user->getPassword())
                 );
 
+                // Calcul de l'age
+                $anneeNaissance = $user->getBirthdate();
+
+                $now = new DateTime('now');
+                $difference = $now->diff($anneeNaissance);
+                if ($difference->format('%y ans') < 18 )
+                {
+                    $this->addFlash('danger', 'Vous devez être majeur afin de pouvoir vous inscrire.');
+                    $this->redirectToRoute('home');    
+                }
 
                 // Remplissage du rôle utilisateur
                 $user->setRoles('ROLE_USER');

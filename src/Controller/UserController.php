@@ -129,7 +129,7 @@ class UserController extends AbstractController
                     $recette->addDiet($diet);
                 }
 
-                //$recette->setPhoto($filepath);
+                $recette->setPhoto($filepath);
                 $recette->setUser($user);
                 $recette->setNote(0);
                 $recette->setCreationDate(new \DateTime());
@@ -285,16 +285,25 @@ class UserController extends AbstractController
 
                         $entityManager->flush();
 
-                        $this->addFlash('alert', 'Votre mot de passe est modifié');
-                        return $this->redirectToRoute('home');
+                        $this->addFlash('success', 'Votre mot de passe est modifié, vous pouvez à présent vous connecter.');
+                        return $this->redirectToRoute('app_logout');
                     }
-                } else {
-                    $this->addFlash('alert', 'Votre mot de passe est erroné');
-                    return $this->redirectToRoute('home');
+                    else
+                    {
+                        $this->addFlash('danger', 'Les mots de passe saisis ne sont pas identique.');            
+                        return $this->redirectToRoute('user_mod_mdp');
+                    }
+                }
+                else
+                {
+                    $this->addFlash('alert', 'Le mot de passe saisi est erroné.');
+                    return $this->redirectToRoute('user_mod_mdp');
                 }
             }
             return $this->render('user/mod_mdp.html.twig',);
-        } else {
+        }
+        else
+        {
             return $this->redirectToRoute('home');
         }
     }
