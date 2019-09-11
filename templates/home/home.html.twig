@@ -87,9 +87,8 @@
                                 <div class="col mb-2">
                                     {% for diet in last_recette.diet %}
                                         <span class="badge badge-success mx-auto">{{diet.name}}</span>  
-                                        <span class="badge badge-success mx-auto">{{last_recette.category.name}}</span>  
-
                                     {% endfor %}
+                                    <span class="badge badge-success mx-auto">{{last_recette.category}}</span>  
                                     
                                 </div>
 
@@ -158,9 +157,8 @@
                             <div class="col mb-2">
                                     {% for diet in bestRecette.diet %}
                                         <span class="badge badge-success mx-auto">{{diet.name}}</span> 
-                                        <span class="badge badge-success mx-auto">{{bestRecette.category.name}}</span>  
-
                                     {% endfor %}
+                                    <span class="badge badge-success mx-auto">{{bestRecette.category}}</span>  
                                 </div>
 
 
