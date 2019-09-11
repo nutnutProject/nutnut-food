@@ -288,7 +288,7 @@ class ViewController extends AbstractController
 
         return $this->render('view/contact.html.twig',[
             'form' => $form->CreateView(),
-            'userEmail' => $this->getUser()->getUsername(),
+            'userEmail' => $email,
         ]);
     }
 
