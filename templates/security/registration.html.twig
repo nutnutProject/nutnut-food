@@ -84,14 +84,31 @@
                 </div>
 
 
+                    {{ form_widget(form.recaptcha, { 'attr': {
+                                        'options' : {
+                                            'theme': 'light',
+                                            'type': 'image',
+                                            'size': 'normal'
+                                        },
+                                    } })
+                                    
+                                     }}
+                    {{ form_errors( form.recaptcha ) }}
+
+
                 <button class="btn btn-info my-4 btn-block" type="submit">Inscription</button>
                 <!-- Terms of service -->
                 <p class="text-center">En cliquant sur 
                     <em>Inscription</em> vous acceptez
                     <a href="" target="_blank">nos conditions générales.</a>
                 </p>
+
+                
+                             
             </div>
+        
         {{ form_end(form)}}
+        
     </div>
 </div>
 

@@ -27,14 +27,14 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=45)
      * @Assert\NotBlank()
-     * @Assert\length(min=3)
+     * @Assert\Length(min=3)
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=45)
      * @Assert\NotBlank()
-     * @Assert\length(min=3)
+     * @Assert\Length(min=3)
      */
     private $lastname;
 
@@ -48,21 +48,21 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank()
-     * @Assert\length(min=8)
+     * @Assert\Length(min=8)
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
-     * @Assert\length(min=5)
+     * @Assert\Length(min=5)
      */
     private $adresse;
 
     /**
      * @ORM\Column(type="string", length=60)
      * @Assert\NotBlank()
-     * @Assert\length(min=2)
+     * @Assert\Length(min=2)
      */
     private $city;
 
@@ -70,7 +70,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=5)
      * @Assert\NotBlank()
      * @Assert\Positive
-     * @Assert\length(min=5)
+     * @Assert\Length(min=5)
      */
     private $cp;
 
@@ -78,14 +78,14 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=15)
      * @Assert\NotBlank()
      * @Assert\Positive
-     * @Assert\length(min=10)
+     * @Assert\Length(min=10)
      */
     private $telephone;
 
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank()
-     * @Assert\length(min=10)
+     * @Assert\Length(min=10)
      */
     private $description;
 
@@ -101,7 +101,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
-     * @Assert\length(min=10)
+     * @Assert\Length(min=10)
      */
     private $username;
 
