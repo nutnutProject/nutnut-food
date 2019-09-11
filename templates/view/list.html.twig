@@ -23,9 +23,15 @@
                     <div id="search" class="card-body  mx-auto text-center">
                         <!-- Search form -->
                         <form class="form-inline mr-auto" method="get" >
-                            <input class="form-control form-control-lg mr-sm-2 center" type="text" placeholder="Rechercher une recette" aria-label="Rechercher" name="query" id="title">
+                            <div class="autocomplete" style="position: relative; display: inline-block;">
+                                <input class="form-control form-control-lg mr-sm-2 center" type="text" placeholder="Rechercher une recette" aria-label="Rechercher" name="query" id="title">
+                                <div div class="dropdown-menu" id="recetteList" style="position: absolute">
+                                    {{render (controller(
+                                        'App\\Controller\\AjaxSearchController::ajaxBar'
+                                    ))}}
+                                </div>
+                            </div>    
                             <button class="btn blue-gradient btn-rounded  btn-lg my-0" type="submit">Rechercher</button>
-                            <div id="recetteList"></div>
                         </form>
                     </div>
                 </div>
