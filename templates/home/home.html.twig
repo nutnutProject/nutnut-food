@@ -58,7 +58,7 @@
                 <div class="row">
                     {% for last_recette in last_recettes %}
                         <div class="col-sm d-flex align-items-stretch">
-                            <div class="card mx-auto">
+                            <div class="card mx-auto" style="height:600px">
                                 <a href="{{ path('recette_show', {slug: last_recette.slug}) }}" title="{{last_recette.title}}"><img class="card-img-top img-fluid mx-auto" src="{{asset(last_recette.photo)}}" style="width:254.6px; height:247px"></a>
                                 <div class="card-body d-flex flex-column">
                                     <h4 class="card-title"><a href="{{ path('recette_show', {slug: last_recette.slug}) }}" title="{{last_recette.title}}">{{last_recette.title | slice (0,30) }}...</a></h4>
@@ -123,7 +123,7 @@
                 <div class="row">
                     {% for bestRecette in bestRecettes %}
                         <div class="col-sm d-flex align-items-stretch">
-                            <div class="card mx-auto">
+                            <div class="card mx-auto" style="height:600px">
                                 <a href="{{ path('recette_show', {slug: bestRecette.slug}) }}" title="{{bestRecette.title}}">
                                     <img class="card-img-top img-fluid mx-auto" src="{{asset(bestRecette.photo)}}" style="width:254.6px; height:247px" alt="{{ bestRecette.title }}" >
                                 </a>
