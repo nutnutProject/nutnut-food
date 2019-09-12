@@ -33,7 +33,7 @@
                                     <div class="card mx-auto">
                                         <img class="card-img-top" src="{{ asset(recette.photo) }}" alt="Card image cap">
                                         <div class="card-body">
-                                            <h4 class="card-title">{{recette.title}}</h4>
+                                            <h4 class="card-title">{{recette.title  | slice (0,25)}}...</h4>
                                             <div class="rating">
                                                 {% if recette.note > 0 %}                              
                                                     {% set nb_etoiles = 5 %}
@@ -46,19 +46,19 @@
                                                     {% endfor %}
                                                 {% endif %}
                                             </div>
-                                            <p class="card-text">{{recette.description}}</p>
+                                            <p class="card-text">{{recette.description | slice (0,80)}}</p>
                                         </div>
+                                                                                 <div class="col mb-2">
+                                            {% for diet in recette.diet %}
+                                                <span class="badge badge-success mx-auto">{{diet.name}}</span>
+                                            {% endfor %}
+                                        <span class="badge badge-success mx-auto">{{recette.category}}</span>
+                                    </div>
                                         <div class="col">
                                             <div class="card-footer bg-transparent border-warning mt-auto align-self-end">
                                                 <a href="{{path('recette_edit', {id: recette.id} ) }}" class="btn btn-amber btn-block">Modifier</a>
                                             </div>
                                         </div>
-                                    </div>
-                                         <div class="col mb-2">
-                                            {% for diet in recette.diet %}
-                                                <span class="badge badge-success mx-auto">{{diet.name}}</span>
-                                            {% endfor %}
-                                        <span class="badge badge-success mx-auto">{{recette.category}}</span>
                                     </div>
                                 </div>
                             {% endfor %}
