@@ -39,9 +39,14 @@ class User implements UserInterface
     private $lastname;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $account_activate;
+
+    /**
      * @ORM\Column(type="date")
      * @Assert\NotBlank()
-     * @Assert\Date
+     * 
      */
     private $birthdate;
 
@@ -130,10 +135,7 @@ class User implements UserInterface
      */
     private $activateToken_expire;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $account_activate;
+
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
