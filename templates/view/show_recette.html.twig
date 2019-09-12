@@ -149,10 +149,10 @@
                                     <img src="{{asset('img/noix.png')}}">
                                 {% endif %}
                             {% endfor %}
-                        {% endif %}
-                        <p>{{recette.note}}
+                            <p>{{recette.note}}
                             /5
-                        </p>
+                            </p>
+                        {% endif %}
                     </div>
                     <div class="card-body">
                         <h4 class="card-title">{{recette.user.firstname}}
@@ -181,44 +181,46 @@
         </div>
 
         <div class="row">
-            <div class="col">
-                <h1 class="category mb-3">AVIS :
-                </h1>
-                {% if notes %}
-                    {% for note in notes %}
-                        <div class="col-sm">
-                            <div class="card">
-                                <div class="card-body d-flex flex-column">
-                                    <div class="user-synop">
-                                        <img class="icon-user" src="{{note.user.image}}" alt="{{note.user.firstname}}">
-                                        <p class="user-name">{{note.user.firstname}}
-                                            {{note.user.lastname|slice(0, 1)}}</p>
-                                    </div>
-                                    <div class="rating">
-                                        {% set nb_etoiles = 5 %}
-                                        {% for i in 1..nb_etoiles %}
-                                            {% if note.note >= i %}
-                                                <img src="{{asset('img/noix-check.png')}}">
-                                            {% else %}
-                                                <img src="{{asset('img/noix.png')}}">
-                                            {% endif %}
-                                        {% endfor %}
-                                    </div>
-                                    <p class="card-text">{{note.commentaire}}</p>
-                                    <p>Ajouté le
-                                        {{note.creationDate|date("m/d/Y")}}</p>
+            <h2 class="category mb-3">AVIS :
+            </h2>
+        </div>
+        <div class="row">
+            {% if notes %}
+                {% for note in notes %}
+                    <div class="col-3 mb-3">
+                        <div class="card" style="height:250px">
+                            <div class="card-body d-flex flex-column">
+                                <div class="user-synop">
+                                    <img class="icon-user" src="{{asset(note.user.image)}}" alt="{{note.user.firstname}}">
+                                    <a class="user-name" href="{{ path('fooder_show', {'firstname':note.user.firstname,'id':note.user.id}) }}">{{note.user.firstname}}
+                                        {{note.user.lastname|slice(0, 1)}}</a>
                                 </div>
+                                <div class="rating mt-2">
+                                    {% set nb_etoiles = 5 %}
+                                    {% for i in 1..nb_etoiles %}
+                                        {% if note.note >= i %}
+                                            <img src="{{asset('img/noix-check.png')}}">
+                                        {% else %}
+                                            <img src="{{asset('img/noix.png')}}">
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                <p class="card-text">{{note.commentaire}}</p>
+                            </div>
+                            <div class="card-footer bg-transparent border-warning">
+                                <em>Ajouté le
+                                    {{note.creationDate|date("m/d/Y")}}</em>
                             </div>
                         </div>
-                    {% endfor %}
-                {% else %}
-                    <p>La recette n'a pas encore été notée. Afin de pouvoir laisser une note, il faut y participer.</p>
-                {% endif %}
-            </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>La recette n'a pas encore été notée. Afin de pouvoir laisser une note, il faut y participer.</p>
+            {% endif %}
         </div>
 
     </div>
-</div>
+
 
 
 <main id="main">

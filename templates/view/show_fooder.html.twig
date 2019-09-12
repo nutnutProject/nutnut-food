@@ -63,10 +63,10 @@
                         {% for recette in recettes %}
                             <div class="col-3">
                                 <div class="card">
-                                    <img class="card-img-top img-fluid mx-auto" src="{{asset(recette.photo)}}" alt="Card image cap">
+                                    <a href="{{ path('recette_show', {slug: recette.slug}) }}" title="{{recette.title}}"><img class="card-img-top img-fluid mx-auto" src="{{asset(recette.photo)}}" alt="{{recette.title}}"></a>
                                     <div class="card-body d-flex flex-column">
                                         <h4 class="card-title">
-                                            <a href="{{ path('recette_show', {slug: recette.slug}) }}" title="View Product">{{recette.title | slice (0,30) | trim(0123456789102030405060)}}...</a>
+                                            <a href="{{ path('recette_show', {slug: recette.slug}) }}" title="{{recette.title}}">{{recette.title | slice (0,30) | trim(0123456789102030405060)}}...</a>
                                         </h4>
 
                                         <div class="rating">
@@ -95,8 +95,6 @@
                                             <a href="{{ path('recette_show', {slug: recette.slug}) }}" class="btn btn-amber btn-block ">Voir
                                             </a>
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div>
@@ -130,20 +128,20 @@
 
         {# Les avis à propos du fooder #}
         <div class="container mt-3">
-            <h1 class="category">AVIS :
-            </h1>
+            <h2 class="category">AVIS :
+            </h2>
             <div class="row">
                 {% if notes %}
                     {% for note in notes %}
-                        <div class="col-3 d-flex align-items-stretch">
-                            <div class="card">
+                        <div class="col-3 mb-3">
+                            <div class="card" style="height:250px">
                                 <div class="card-body d-flex flex-column">
                                     <div class="user-synop">
-                                        <img class="rounded-circle icon-user" src="{{asset(note.user.image)}}" alt="Card image cap">
-                                        <p class="user-name">{{note.user.firstname}}
-                                            {{note.user.lastname|slice(0, 1)}}</p>
+                                        <img class="rounded-circle icon-user" src="{{asset(note.user.image)}}" alt="{{note.user.firstname}}">
+                                        <a class="user-name" href="{{ path('fooder_show', {'firstname':note.user.firstname,'id':note.user.id}) }}">{{note.user.firstname}}
+                                            {{note.user.lastname|slice(0, 1)}}</a>
                                     </div>
-                                    <div class="rating">
+                                    <div class="rating mt-2">
                                         {% set nb_etoiles = 5 %}
                                         {% for i in 1..nb_etoiles %}
                                             {% if note.note >= i %}
@@ -154,8 +152,11 @@
                                         {% endfor %}
                                     </div>
                                     <p class="card-text">{{note.commentaire}}</p>
-                                    <p>Ajouté le
-                                        {{note.creationDate|date("m/d/Y")}}</p>
+                                </div>
+                                <div class="card-footer bg-transparent border-warning">
+                                    <em class="align-right">Ajouté le
+                                        {{note.creationDate|date("m/d/Y")}}
+                                    </em>
                                 </div>
                             </div>
                         </div>
@@ -165,9 +166,9 @@
                         <p>L'utilisateur n'a pas encore eu d'avis.</p>
                     </div>
                 {% endif %}
-
             </div>
         </div>
+
     </div>
 
 
@@ -183,8 +184,8 @@
                         <div
                             id="search" class="card-body text-center">
                             <!-- Search form -->
-                            <form class="form-inline mr-auto">
-                                <button class="btn blue-gradient btn-rounded  btn-lg my-0" type="submit">Rechercher une recette</button>
+                            <form class="form-inline mr-auto" action="{{path('recettes_list')}}">
+                                <button class="btn blue-gradient btn-rounded btn-lg my-0">Rechercher une recette</button>
                             </form>
                         </div>
                     </div>
