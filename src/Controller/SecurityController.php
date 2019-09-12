@@ -210,20 +210,12 @@ class SecurityController extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
-        
+
         if ($error)
         {
-            if($error->getMessageKey() == "Invalid credentials.")
-            {
-                $errorMessage = "Le mot de passe entré est incorrect!";
-            }
-            else
-            {
-                $errorMessage = "Aucun compte n'a pu être trouvé avec cette adresse email";                
-            }
-            $this->addFlash('alert', $errorMessage);
+            $this->addFlash('alert',$error->getMessageKey());
+
         }
-        
         return $this->redirectToRoute('home');
     }
 

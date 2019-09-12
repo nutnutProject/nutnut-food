@@ -99,6 +99,10 @@ class LoginFromAuthenticator extends AbstractFormLoginAuthenticator
             }
             return true;
         }
+        else
+        {
+            throw new CustomUserMessageAuthenticationException('Le mot de passe entré est incorrect.');
+        }
        
         return false;
     }
