@@ -17,6 +17,22 @@ easy_admin:
 
         User:
             class: App\Entity\User
+            form:
+                fields: 
+                    - { property: firstname }
+                    - { property: lastname }
+                    - { property: account_activate }
+                    - { property: birthdate }
+                    - { property: adresse }
+                    - { property: city }
+                    - { property: description }
+                    - { property: username }
+                    - { property: telephone }
+                    - { property: roles }
+                    - { property: recettes }
+                    - { property: image }
+
+
 
         Category:
             class: App\Entity\Category
