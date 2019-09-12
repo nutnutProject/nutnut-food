@@ -277,7 +277,7 @@ class ViewController extends AbstractController
 
             $mail = (new \Swift_Message($sujet))
                 ->setFrom($email)
-                ->setTo('contact@nutnutfood.fr')
+                ->setTo('nutnutfood@gosselin.info')
                 ->setBody($message);
 
             $mailer->send($mail);

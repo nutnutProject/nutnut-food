@@ -132,7 +132,7 @@ class SecurityController extends AbstractController
                 Pour activer votre compte, veuillez cliquer sur le lien ci dessous
                 ou copier/coller dans votre navigateur internet.
 
-                http://votresite.com/activation/'.$activateToken.'
+                http://nutnutfood.gosselin.info/activation/'.$activateToken.'
 
 
                 ---------------
@@ -140,7 +140,7 @@ class SecurityController extends AbstractController
 
                 // Envoi du mail de confiration de souscription
                 $message = (new \Swift_Message($sujet))
-                    ->setFrom('inscription@nutnutfood.fr')
+                    ->setFrom('nutnutfood@gosselin.info')
                     ->setTo($destinataire)
                     ->setBody($body);
                 $mailer->send($message);
@@ -255,7 +255,7 @@ class SecurityController extends AbstractController
             Pour réinitialiser votre mot de passe, veuillez cliquer sur le lien ci dessous
             ou copier/coller dans votre navigateur internet.
 
-            http://votresite.com/reset_password/'.$pwd_token.'
+            http://nutnutfood.gosselin.info/reset_password/'.$pwd_token.'
 
 
             ---------------
@@ -263,7 +263,7 @@ class SecurityController extends AbstractController
 
             // Envoi du mail de confiration de souscription
             $message = (new \Swift_Message($sujet))
-                ->setFrom('inscription@nutnutfood.fr')
+                ->setFrom('nutnutfood@gosselin.info')
                 ->setTo($destinataire)
                 ->setBody($body);
             $mailer->send($message);
