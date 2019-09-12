@@ -283,7 +283,7 @@ class UserController extends AbstractController
                     return $this->redirectToRoute('user_mod_mdp');
                 }
             }
-            return $this->render('user/mod_mdp.html.twig',);
+            return $this->render('user/mod_mdp.html.twig');
         }
         else
         {
