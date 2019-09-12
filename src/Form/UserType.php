@@ -38,7 +38,7 @@ class UserType extends AbstractType
             ->add('telephone', TelType::class)
             ->add('description', TextareaType::class)  
             ->add('recaptcha', EWZRecaptchaType::class, array(
-            
+                'label'       => false,
                 'mapped'      => false,
                 'constraints' => array(
                     new RecaptchaTrue()
