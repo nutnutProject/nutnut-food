@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Recette{% endblock %}
+{% block title %}Modifier la recette{% endblock %}
 
 {% block body %}
     <div class="container mt-5 mb-3" id="board">
@@ -24,7 +24,7 @@
                         
                         <div class="form-group">
                             <label for="list">Les ingrédients : </label>
-                            <textarea class="form-control" id="list" name="listIngredient">{{ recette.ingredientsList }}</textarea>
+                            <textarea class="form-control" id="list" name="listIngredient" rows="5">{{ recette.ingredientsList }}</textarea>
                         </div>
                         <button type="submit" class="btn btn-amber">Modifier</button>
                     {{ form_end(form) }}

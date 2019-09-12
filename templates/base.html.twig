@@ -217,6 +217,7 @@
                     </div>
                 </div>
             </div>
+            <p class="text-center">Fait avec <i class="fas fa-heart" style="color:red"></i> par Juliette, Pierre G, Salim et Pierre H </p>
         </footer>
         {% block javascripts %}
              <script src="https://www.google.com/recaptcha/api.js" async defer></script>
@@ -226,15 +227,14 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" type="text/javascript"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" type="text/javascript"></script>
             <script src="{{ asset('bower_components/Morphext/dist/morphext.min.js')}}"></script>
-            <script src="secret.js"></script>
 
-            <script src="js/style.js"></script>
+            <script src="{{ asset('js/style.js')}}"></script>
 
             <!-- Include Google Maps JS API -->
 
             <script type="text/javascript"  src="https://maps.googleapis.com/maps/api/js?libraries=places&key={{ maps_apikey }}"></script>
 
-            <script type="text/javascript" src="js/autocomplete.js"></script>
+            <script type="text/javascript" src="{{ asset('js/autocomplete.js')}}"></script>
         {% endblock %}
 
 

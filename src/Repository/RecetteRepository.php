@@ -23,6 +23,7 @@ class RecetteRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('p')
             ->orderBy('p.creation_date', 'DESC')
+            ->Where('p.online = true')
             ->setMaxResults($number)
             ->getQuery()
             ->getResult();
@@ -32,6 +33,7 @@ class RecetteRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('p')
         ->orderBy('p.note', 'DESC')
+        ->Where('p.online = true')
         ->setMaxResults($number)
         ->getQuery()
         ->getResult();

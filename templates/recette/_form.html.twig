@@ -2,28 +2,29 @@
 
 {% if app.request.attributes.get('_route') == 'recette_new' %}
     <div class="row-12 mb-4">
-        <label for="photo">Choisir une photo:</label>
+        <label for="photo">Choisir une photo :</label>
         {{ form_widget(form.photo, {'attr': {'class': 'form-control-file','placeholder': 'Illustration'}}) }}
     </div>
 {% endif %}
 <div class="row-12 mb-4">
-    <label for="title">Nom du plat:</label>
+    <label for="title">Nom du plat :</label>
     {{ form_widget(form.title, {'attr': {'class': 'form-control','placeholder': 'Titre du plat'}}) }}
 </div>
-<div class="form-row mb-5 h-auto">
+<div class="form-row mb-4">
     <div class="col-6">
-        <label for="diet">Régime alimentaire</label>
-        {{ form_widget(form.diet, {'attr': {'class': 'form-control'}}) }}
+        <label for="diet">Régime alimentaire :</label>
+        {{ form_widget(form.diet) }}
     </div>
     <div class="col-6">
-        <label for="category">Catégorie</label>
+        <label for="category">Catégorie :</label>
         {{ form_widget(form.category, {'attr': {'class': 'form-control','placeholder': 'Catégorie'}}) }}
     </div>
 </div>
 <div class="row-12 mb-4">
-    <label for="description">Description</label>
-    {{ form_widget(form.description, {'attr': {'class': 'form-control','placeholder': 'Description'}}) }}
+    <label for="description">Description :</label>
+    {{ form_widget(form.description, {'attr': {'class': 'form-control','placeholder': 'Description','rows':'5'}}) }}
 </div>
 <div class="row-12 mb-4">
-    {{ form_widget(form.online, {'attr': {'class': 'form-control'}}) }}
+    <label for="online">Mettre en ligne :</label>
+    {{ form_widget(form.online) }}
 </div>

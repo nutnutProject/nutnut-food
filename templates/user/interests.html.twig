@@ -1,30 +1,29 @@
 {% extends 'base.html.twig' %}
 
-    {% block body %}
+{% block title %}Mes intêrets{% endblock %}
 
-    <!-- Tableau de bord -->
-        <div class="container mt-5 mb-3" id="board">
+{% block body %}
+    <div class="container mt-5 mb-3" id="board">
         <h2>Tableau de bord</h2>
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="row mt-0">
-                        <div class="col ">
-                            <div class="list-group" id="list-tab">
-                                <a class="list-group-item list-group-item-action" id="list-home-list" href="{{path('user')}}">Tableau de bord</a>
-                                <a class="list-group-item list-group-item-action" id="list-profile-list" href="{{path('user_edit')}}">Modifier mon profil</a>
-                                <a class="list-group-item list-group-item-action" id="list-creation-list" href="{{path('user_recettes')}}">Mes recettes</a>
-                                <a class="list-group-item list-group-item-action active" id="list-interest-list" href="{{path('user_interests')}}">Intêrets</a>                    
-                                <a class="list-group-item list-group-item-action" id="list-interest-list" href="{{path('user_mod_mdp')}}">Modifier mon mot de passe</a>
-                            
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3 col-lg-4 col-xl-3 mb-3 mt-3" id="ajout">
-                            <a type="button" class="btn btn-outline-success btn-lg" href="{{path('recette_new')}}">Ajouter une Recette</a> 
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="row mt-0">
+                    <div class="col ">
+                        <div class="list-group" id="list-tab">
+                            <a class="list-group-item list-group-item-action" id="list-home-list" href="{{path('user')}}">Tableau de bord</a>
+                            <a class="list-group-item list-group-item-action" id="list-profile-list" href="{{path('user_edit')}}">Modifier mon profil</a>
+                            <a class="list-group-item list-group-item-action" id="list-creation-list" href="{{path('user_recettes')}}">Mes recettes</a>
+                            <a class="list-group-item list-group-item-action active" id="list-interest-list" href="{{path('user_interests')}}">Intêrets</a>                    
+                            <a class="list-group-item list-group-item-action" id="list-interest-list" href="{{path('user_mod_mdp')}}">Modifier mon mot de passe</a>      
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-12 mt-0" id="ajout">
+                        <button type="button" class="btn btn-amber btn-lg" href="{{path('recette_new')}}">Ajouter une Recette<i class="fas fa-plus fa-2x"></i></button> 
+                    </div>
+                </div>
+            </div>
                 <div class="col-lg-9">
                     {% if recettes != [] %}
                         <div class="row mt-0">

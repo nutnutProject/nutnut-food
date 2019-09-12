@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Les recettes{% endblock %}
 
 {% block body %}
 
@@ -103,14 +104,14 @@
                     {% for recette in recettes %}
                         <div class="col-12 col-sm-6 col-lg-4" id="result-search">
                             <div class="card mx-auto" style="height:600px">
-                                <a href="{{ path('recette_show', {slug: recette.slug}) }}"><img class="card-img-top img-fluid mx-auto" src="{{asset(recette.photo)}}" style="width:254.6px; height:236px" alt="Card image cap"></a>
+                                <a href="{{ path('recette_show', {slug: recette.slug}) }}" title="{{ recette.title }}"><img class="card-img-top img-fluid mx-auto" src="{{asset(recette.photo)}}" style="width:254.6px; height:236px" alt="Card image cap"></a>
                                 <div class="card-body d-flex flex-column">
                                     <h4 class="card-title">
-                                        <a href="{{ path('recette_show', {slug: recette.slug}) }}" title="View Product">{{ recette.title |slice (0,25) }}...</a>
+                                        <a href="{{ path('recette_show', {slug: recette.slug}) }}" title="{{recette.title}}">{{ recette.title |slice (0,25) }}...</a>
                                     </h4>
                                     <div class="user-synop">
                                         <img class="icon-user" src="{{asset(recette.user.image)}}" alt="Card image cap">
-                                        <a class="user-name" href="{{ path('fooder_show', {'firstname':recette.user.firstname,'id':recette.user.id}) }}">{{recette.user.firstname}}</a>
+                                        <a class="user-name" href="{{ path('fooder_show', {'firstname':recette.user.firstname,'id':recette.user.id}) }}" title="Voir le profil">{{recette.user.firstname}}</a>
                                     </div>
                                     <div class="rating">
                                         {% if recette.note > 0 %}

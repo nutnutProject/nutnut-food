@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}{{recette.title}}{% endblock %}
+
 {% block body %}
 
     <header class="v-header-all containeur">
@@ -33,7 +35,7 @@
                     <div class="card-body">
                         <h1 class="card-title">{{recette.title}}
                         </h1>
-                        <p class="card-text">{{recette.description}}</p>
+                        <p class="mt-3">{{recette.description}}</p>
                         {% for diet in recette.diet %}
                             <span class="badge badge-success">{{diet.name}}</span>
                         {% endfor %}

@@ -26,7 +26,9 @@ class RecetteType extends AbstractType
                 'expanded' => 'true', 
             ])
             ->add('description', TextareaType::class)
-            ->add('online')
+            ->add('online',null,[
+                'label' => 'En ligne',
+            ])
         ;
 
         // Si nouvelle utlisateur, on affiche le champ password

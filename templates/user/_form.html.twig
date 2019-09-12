@@ -48,9 +48,18 @@
 
             <div class="col-12">
                 <label for="textarea" class="active text-center">Description :</label>
-                {{ form_widget(form.description, {'attr': {'class': 'form-control mb-4','id': 'textarea','value': user.description }} ) }}
+                {{ form_widget(form.description, {'attr': {'class': 'form-control mb-4','id': 'textarea','value': user.description, 'rows':'5' }} ) }}
             </div> 
-            
+                      {{ form_widget(form.recaptcha, { 'attr': {
+                                        'options' : {
+                                            'theme': 'light',
+                                            'type': 'image',
+                                            'size': 'normal'
+                                        },
+                                    } })
+                                    
+                                     }}
+                    {{ form_errors( form.recaptcha ) }} 
 
             <button class="btn btn-success mx-auto">{{ button_label|default('Save') }}</button>
 
