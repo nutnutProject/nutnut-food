@@ -93,9 +93,9 @@ class ViewController extends AbstractController
 
             // Calcul de la note moyenne de la recette
             $noteRepository = $this->getDoctrine()->getRepository(Note::class);
-            $notes = $noteRepository->findBy(
-                ['recette' => $recette],
-            );
+            $notes = $noteRepository->findBy([
+                'recette' => $recette,
+            ]);
             $moyenne = 0;
             foreach ($notes as $note) {
                 $moyenne += $note->getNote();
