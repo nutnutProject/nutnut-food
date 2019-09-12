@@ -34,13 +34,6 @@ easy_admin:
 
 
 
-
-
-
-
-
-
-
         Category:
             class: App\Entity\Category
 
