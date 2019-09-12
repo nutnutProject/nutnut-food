@@ -23,7 +23,7 @@ class Category
     /**
      * @ORM\Column(type="string", length=45)
      * @Assert\NotBlank()
-     * @Assert\Length(min=5)
+     * @Assert\Length(min=4)
      */
     private $name;
 
