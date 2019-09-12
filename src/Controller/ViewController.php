@@ -199,6 +199,7 @@ class ViewController extends AbstractController
         $recettes = $recetteRepository->findBy(['user' => $id]);
 
         // Pour chaque recette de l'utilisateur, on récupère les commentaires
+        $notes=[];
         foreach ($recettes as $recette) {
             //dd($recette->getId());
             $noteRepository = $this->getDoctrine()->getRepository(Note::class);

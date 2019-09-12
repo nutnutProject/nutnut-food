@@ -57,6 +57,7 @@
         {# Les recettes qu'il propose #}
         <div class="container mt-3">
             <h1 class="category">Ses Recettes :</h1>
+            {% if recettes %}
             <div class="row">
                 <div class="col-sm">
                     <div class="row">
@@ -124,6 +125,11 @@
                     {% endif %}
                 </ul>
             </nav>
+            {% else %}
+                <div class="col-6 offset-3 text-center">
+                    <p>L'utilisateur n'a pas encore posté de recettes.</p>
+                </div>
+            {% endif %}
         </div>
 
         {# Les avis à propos du fooder #}
