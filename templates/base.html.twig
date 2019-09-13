@@ -55,7 +55,7 @@
                     <div class="my-2 my-lg-0">
                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
 
-                            <a href="{{ path('user') }}"><img src="{{ asset(app.user.image) }}" class="rounded-circle icon-user " style="width:50px; height:50px" alt="Mon profil"></a>
+                            <a href="{{ path('user') }}" title="Voir mon profil"><img src="{{ asset(app.user.image) }}" class="rounded-circle icon-user " style="width:50px; height:50px" alt="Mon profil"></a>
 
                             <a class="btn btn-outline-danger btn-sm" href="{{path('app_logout')}}">Déconnexion</a>
                         {% else %}

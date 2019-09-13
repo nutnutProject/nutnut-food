@@ -106,6 +106,10 @@ class ViewController extends AbstractController
             $recette->setNote($moyenne);
             $entityManager->persist($recette);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Votre commentaire a bien été enregistré.');
+            
+            return $this->redirectToRoute("recette_show",array('slug'=> $recette->getSlug()));
         }
         return $this->redirectToRoute("recettes_list");
         
